@@ -1,20 +1,33 @@
-<ion-header [translucent]="true">
+<!-- src/app/home/home.page.html -->
+
+<ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="goBack()"></ion-back-button>
+    </ion-buttons>
     <ion-title>
-      Blank
+      Home
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-input [(ngModel)]="urlInput" placeholder="Enter URL"></ion-input>
+  </ion-item>
+  <ion-button expand="full" (click)="submitUrl()">Submit URL</ion-button>
+  <div *ngIf="responseData">
+    <ion-card>
+      <ion-card-header>
+        {{ responseData.title }}
+      </ion-card-header>
+      <ion-card-content>
+        <img [src]="responseData.fileData" alt="Content Image">
+        <p>{{ responseData.description }}</p>
+        <p>{{ responseData.text }}</p>
+        <a [href]="responseData.link" target="_blank">{{ responseData.link }}</a>
+        <!-- Add more fields as needed -->
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>
