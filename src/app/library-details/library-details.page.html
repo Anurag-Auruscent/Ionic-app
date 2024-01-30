@@ -1,0 +1,46 @@
+<!-- library-details.page.html -->
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      {{ library?.title }}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openSettings($event)">Settings</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      {{ library?.title }}
+    </ion-card-header>
+    <ion-card-content>
+      {{ library?.description }}
+    </ion-card-content>
+  </ion-card>
+
+  <ion-item>
+    <ion-input [(ngModel)]="urlInput" placeholder="Enter URL"></ion-input>
+  </ion-item>
+  <ion-button expand="full" (click)="submitUrl()">Submit URL</ion-button>
+
+  <div *ngIf="responseData">
+    <ion-card>
+      <ion-card-header>
+        {{ responseData.title }}
+      </ion-card-header>
+      <ion-card-content>
+        <img [src]="responseData.fileData" alt="Content Image">
+        <p>{{ responseData.description }}</p>
+        <p>{{ responseData.text }}</p>
+        <a [href]="responseData.link" target="_blank">{{ responseData.link }}</a>
+        <!-- Add more fields as needed -->
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

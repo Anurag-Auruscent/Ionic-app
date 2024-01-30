@@ -8,26 +8,36 @@
     <ion-title>
       Home
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="primary" (click)="createNewLibrary()">Create New</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-item>
-    <ion-input [(ngModel)]="urlInput" placeholder="Enter URL"></ion-input>
-  </ion-item>
-  <ion-button expand="full" (click)="submitUrl()">Submit URL</ion-button>
-  <div *ngIf="responseData">
-    <ion-card>
-      <ion-card-header>
-        {{ responseData.title }}
-      </ion-card-header>
-      <ion-card-content>
-        <img [src]="responseData.fileData" alt="Content Image">
-        <p>{{ responseData.description }}</p>
-        <p>{{ responseData.text }}</p>
-        <a [href]="responseData.link" target="_blank">{{ responseData.link }}</a>
-        <!-- Add more fields as needed -->
-      </ion-card-content>
-    </ion-card>
-  </div>
+  <!-- Display libraries in a grid -->
+  <ion-grid>
+    <ion-row *ngFor="let library of libraries">
+      <ion-col size="6" *ngIf="isEvenIndex(library)">
+        <ion-card (click)="viewLibraryDetails(library)">
+          <ion-card-header>
+            {{ library.title }}
+          </ion-card-header>
+          <ion-card-content>
+            {{ library.description }}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" *ngIf="!isEvenIndex(library) && libraries.length > 1">
+        <ion-card (click)="viewLibraryDetails(library)">
+          <ion-card-header>
+            {{ library.title }}
+          </ion-card-header>
+          <ion-card-content>
+            {{ library.description }}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

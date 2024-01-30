@@ -17,6 +17,10 @@ const routes: Routes = [
     path: 'home',
     component : HomePage
   },
+  {
+    path: 'library-details',
+    loadChildren: () => import('./library-details/library-details.module').then( m => m.LibraryDetailsPageModule)
+  },
 ];
 
 @NgModule({
