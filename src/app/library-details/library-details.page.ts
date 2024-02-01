@@ -51,28 +51,7 @@ export class LibraryDetailsPage {
 
     await popover.present();
   }
-
   
-
-  submitUrl() {
-    // Make an HTTP POST request with Axios
-    axios.post(`http://localhost:9092/content/save-metadata?link=${encodeURIComponent(this.urlInput)}`)
-      .then((response) => {
-        // Handle the response from the server
-        this.responseData = response.data;
-
-        // Show success toast
-        this.presentToast('URL submitted successfully');
-      })
-      .catch((error) => {
-        // Handle any errors that occurred during the HTTP request
-        console.error('Error:', error);
-
-        // Show error toast
-        this.presentToast('Failed to submit URL');
-      });
-  }
-
   async presentToast(message: string) {
     const toast = await this.toastController.create({
       message: message,

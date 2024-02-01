@@ -15,17 +15,32 @@ export class HomePage {
   urlInput: string = '';
   responseData: any;
   libraries: any[] = [];
-
+  selectedLibrary: any;  // Property to store the selected library in the dropdown
+  allLibraries!: any[];   // Property to store all libraries for "See All Libraries" button
+  
   constructor(
     private router: Router,
     private toastController: ToastController,
     private alertController: AlertController
-  ) {}
+  ) {
+    this.allLibraries = [...this.libraries];  // Copy of libraries for "See All Libraries" button
+  }
+
+  librarySelected() {
+    // Handle the selected library, you can display details or perform any action
+  }
+
+  seeAllLibraries() {
+    // Navigate to a page or perform any action to show all libraries
+    // For now, we are just resetting the libraries to show all in the grid
+    // this.libraries = [...this.allLibraries];
+    this.router.navigate(['/libraries']);
+  }
 
   submitUrl() {
     // ... existing code for URL submission
 
-    axios.post(`https://smart-clouds-beg.loca.lt/content/save-metadata?link=${encodeURIComponent(this.urlInput)}`)
+    axios.post(`http://localhost:9092/content/save-metadata?link=${encodeURIComponent(this.urlInput)}`)
       .then((response) => {
         // Handle the response from the server
         this.responseData = response.data;
@@ -119,6 +134,7 @@ export class HomePage {
 
     await alert.present();
   }
+  
 
   goBack() {
     this.router.navigate(['/login']);

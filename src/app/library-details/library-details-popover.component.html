@@ -1,0 +1,15 @@
+library-details-popover.component.html
+
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Edit {{ editType === 'name' ? 'Name' : 'Description' }}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <ion-item>
+        <ion-input [(ngModel)]="newValue" name="newValue" required></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" (click)="saveChanges()">Save Changes</ion-button>
+</ion-content>

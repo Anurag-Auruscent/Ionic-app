@@ -15,26 +15,65 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <!-- Display libraries in a grid -->
+
+  <!-- Row 1: Dropdown Menu -->
+  <ion-row>
+    <ion-col size="12">
+      <ion-item>
+        <ion-label>Select Library</ion-label>
+        <ion-select [(ngModel)]="selectedLibrary" (ionChange)="librarySelected()">
+          <ion-select-option *ngFor="let library of libraries" [value]="library">
+            {{ library.title }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
   <ion-grid>
-    <ion-row *ngFor="let library of libraries">
-      <ion-col size="6" *ngIf="isEvenIndex(library)">
-        <ion-card (click)="viewLibraryDetails(library)">
+    <!-- Row 2: URL Input and Submit Button -->
+    <ion-row>
+      <ion-col size="12">
+        <ion-item>
+          <ion-input [(ngModel)]="urlInput" placeholder="Enter URL"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12">
+        <ion-button expand="full" (click)="submitUrl()">Submit URL</ion-button>
+      </ion-col>
+    </ion-row>
+
+
+    <!-- Row 3: Display Libraries and "See All Libraries" Button -->
+    <ion-row *ngIf="!selectedLibrary">
+      <ion-col size="12">
+        <ion-card *ngFor="let library of libraries" (click)="viewLibraryDetails(library)">
           <ion-card-header>
             {{ library.title }}
           </ion-card-header>
           <ion-card-content>
-            {{ library.description }}
+            <img [src]="library.fileData" alt="Content Image">
+            <p>{{ library.description }}</p>
           </ion-card-content>
         </ion-card>
       </ion-col>
-      <ion-col size="6" *ngIf="!isEvenIndex(library) && libraries.length > 1">
-        <ion-card (click)="viewLibraryDetails(library)">
+      <ion-col size="12">
+        <ion-button expand="full" (click)="seeAllLibraries()">See All Libraries</ion-button>
+      </ion-col>
+    </ion-row>
+
+    <!-- Row 4: Display Selected Library -->
+    <ion-row *ngIf="selectedLibrary">
+      <ion-col size="12">
+        <ion-card>
           <ion-card-header>
-            {{ library.title }}
+            {{ selectedLibrary.title }}
           </ion-card-header>
           <ion-card-content>
-            {{ library.description }}
+            <img [src]="selectedLibrary.fileData" alt="Content Image">
+            <p>{{ selectedLibrary.description }}</p>
+            <p>{{ selectedLibrary.text }}</p>
+            <a [href]="selectedLibrary.link" target="_blank">{{ selectedLibrary.link }}</a>
           </ion-card-content>
         </ion-card>
       </ion-col>

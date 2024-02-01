@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="goBack()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Libraries</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <!-- Display libraries in a grid -->
+  <ion-grid>
+    <ion-row *ngFor="let library of libraries">
+      <ion-col size="12" size-md="6">
+        <ion-card (click)="viewLibraryDetails(library)">
+          <ion-card-header>
+            {{ library.title }}
+          </ion-card-header>
+          <ion-card-content>
+            {{ library.description }}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
