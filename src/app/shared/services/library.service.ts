@@ -12,7 +12,7 @@ export class LibraryService {
     private http: HttpClient
   ) { }
 
-  getAllLibraries(): Observable<Library[]> {
-    return this.http.get<Library[]>(this.libraryUrl);
+  getAllLibraries(apiURL: string): Observable<Library[]> {
+    return this.http.get<Library[]>(apiURL);
   }
 }

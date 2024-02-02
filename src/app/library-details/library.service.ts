@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class LibraryService {
+export class LibraryDetailsService {
   private libraries: any[] = [];
 
   // Method to get all libraries

@@ -3,9 +3,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import axios from 'axios';
-import {PopoverController, ToastController } from '@ionic/angular';
+import { PopoverController, ToastController } from '@ionic/angular';
 import { LibraryDetailsPopoverComponent } from './library-details-popover.component'; // Import the Popover component
-import { LibraryService } from './library.service';
+import { LibraryDetailsService } from './library.service';
 
 
 @Component({
@@ -23,8 +23,8 @@ export class LibraryDetailsPage {
     private activatedRoute: ActivatedRoute,
     private toastController: ToastController,
     private popoverController: PopoverController,
-    private libraryService: LibraryService
-  ) {}
+    private libraryService: LibraryDetailsService
+  ) { }
 
   ionViewDidEnter() {
     // Fetch the library details from the route parameters
@@ -51,7 +51,7 @@ export class LibraryDetailsPage {
 
     await popover.present();
   }
-  
+
   async presentToast(message: string) {
     const toast = await this.toastController.create({
       message: message,

@@ -1,9 +1,19 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+// import { Library } from '../../model/library.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class HomeService {
+  constructor(
+    private http: HttpClient
+  ) { }
 
-  constructor() { }
+  createNewLibrary(payload: any, apiURL: string): Observable<any[]> {
+    return this.http.post<any[]>(payload, apiURL);
+  }
+
+  fetchAllLibrary(apiURL: string, payload: any = {}): Observable<any[]> {
+    return this.http.put<any[]>(apiURL, payload);
+  }
 }

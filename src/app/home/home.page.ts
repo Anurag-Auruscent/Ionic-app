@@ -6,6 +6,10 @@ import axios from 'axios';
 import { ToastController, AlertController } from '@ionic/angular';
 import { AuthService } from '../auth.service';
 import { environment } from 'src/environments/environment';
+import { HomeService } from '../shared/services/home.service';
+
+import { Library } from '../model/library.model';
+import { LibraryService } from '../shared/services/library.service';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +28,9 @@ export class HomePage {
     private router: Router,
     private toastController: ToastController,
     private alertController: AlertController,
-    private authService: AuthService
+    private authService: AuthService,
+    private homeService: HomeService,
+    private libraryService: LibraryService
   ) {
     this.allLibraries = [...this.libraries];  // Copy of libraries for "See All Libraries" button
   }
@@ -35,23 +41,30 @@ export class HomePage {
   }
 
   getLibraries() {
-    const jwtToken = this.authService.getAccessToken();
+    // const jwtToken = this.authService.getAccessToken();
     const apiUrl = environment.getLibrariesApiUrl;
 
-    // Make the API call using Axios
-    axios.get(apiUrl, {
-      headers: {
-        'Authorization': `Bearer ${jwtToken}`
-      }
-    })
-      .then((response) => {
-        // Update the libraries array with the received data
-        this.libraries = response.data;
-      })
-      .catch((error) => {
-        console.error('Error fetching libraries:', error);
-        // Handle the error as needed
+    const apiURL = 'http://localhost:9000/library/get-libraries-with-weblinks';
+    this.libraryService.getAllLibraries(apiURL).subscribe(
+      (data: Library[]) => {
+        console.log(data);
+        this.libraries = data;
       });
+
+    // Make the API call using Axios
+    // axios.get(apiUrl, {
+    //   headers: {
+    //     'Authorization': `Bearer ${jwtToken}`
+    //   }
+    // })
+    //   .then((response) => {
+    //     // Update the libraries array with the received data
+    //     this.libraries = response.data;
+    //   })
+    //   .catch((error) => {
+    //     console.error('Error fetching libraries:', error);
+    //     // Handle the error as needed
+    //   });
   }
 
   librarySelected() {
@@ -59,7 +72,6 @@ export class HomePage {
   }
 
   seeAllLibraries() {
-    // Navigate to a page or perform any action to show all libraries
     // For now, we are just resetting the libraries to show all in the grid
     this.router.navigate(['/libraries']);
   }
@@ -86,25 +98,43 @@ export class HomePage {
       webLinks: [this.urlInput]  // Add the URL to the webLinks array
     };
     console.log("This is the library id : ", this.selectedLibrary.id);
-    const jwtToken = this.authService.getAccessToken();
-    axios.put(`http://localhost:9000/library/update?id=${libraryId}`, payload,
-      {
-        headers: {
-          'Authorization': `Bearer ${jwtToken}`
-        }
-      }).then((response) => {
-        // Handle the response from the server
-        this.responseData = response.data;
-        console.log(this.responseData)
-        // Show success toast
-        this.presentToast('Link added to library successfully');
-      })
-      .catch((error) => {
-        // Handle any errors that occurred during the HTTP request
+    const apiURL = `http://localhost:9000/library/update?id=${libraryId}`
+
+    this.homeService.fetchAllLibrary(apiURL, payload).subscribe((responseData) => {
+      // Handle the response from the server
+      console.log(responseData);
+      // Show success toast
+      this.presentToast('Link added to library successfully');
+    },
+      (error) => {
+        // Handle error
         console.error('Error:', error);
         // Show error toast
-        this.presentErrorToast('Failed to add link to the library');
-      });
+        this.presentErrorToast('Failed to add link to library');
+      }
+    );
+
+
+
+    // const jwtToken = this.authService.getAccessToken();
+    // axios.put(`http://localhost:9000/library/update?id=${libraryId}`, payload,
+    //   {
+    //     headers: {
+    //       'Authorization': `Bearer ${jwtToken}`
+    //     }
+    //   }).then((response) => {
+    //     // Handle the response from the server
+    //     this.responseData = response.data;
+    //     console.log(this.responseData)
+    //     // Show success toast
+    //     this.presentToast('Link added to library successfully');
+    //   })
+    //   .catch((error) => {
+    //     // Handle any errors that occurred during the HTTP request
+    //     console.error('Error:', error);
+    //     // Show error toast
+    //     this.presentErrorToast('Failed to add link to the library');
+    //   });
   }
 
   isEvenIndex(library: any): boolean {
@@ -193,15 +223,25 @@ export class HomePage {
       // Include other properties as needed
     };
 
-    // Step 3: Fetch the JWT token (replace 'your-jwt-token' with the actual token retrieval logic)
-    const jwtToken = this.authService.getAccessToken();  // Replace this with your actual token retrieval logic
+    try {
+      // Step 3: Call the service method to save the library to the database
+      this.homeService.createNewLibrary(payload, apiUrl);
+      console.log('Library saved to the database successfully');
+    } catch (error) {
+      // Step 4: Handle errors
+      console.error('Failed to save library to the database:', error);
+    }
 
-    // Step 4: Make an HTTP POST request to save the new library data with JWT token in the header
-    return axios.post(apiUrl, payload, {
-      headers: {
-        'Authorization': `Bearer ${jwtToken}`
-      }
-    });
+
+    // // Step 3: Fetch the JWT token (replace 'your-jwt-token' with the actual token retrieval logic)
+    // const jwtToken = this.authService.getAccessToken();  // Replace this with your actual token retrieval logic
+
+    // // Step 4: Make an HTTP POST request to save the new library data with JWT token in the header
+    // return axios.post(apiUrl, payload, {
+    //   headers: {
+    //     'Authorization': `Bearer ${jwtToken}`
+    //   }
+    // });
   }
 
 
