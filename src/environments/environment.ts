@@ -3,7 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  keycloakUrl: 'http://localhost:8080/realms/angular-oauth/protocol/openid-connect/token',
+  clientId: 'ionic-angular-gateway',
+  clientSecret: 'dNcB1Tl0N5p1H3rDpIPRH7LAyrDuu4RD',
+  saveLibraryToDatabaseApiUrl: 'http://localhost:9000/library/create',
+  getLibrariesApiUrl: 'http://localhost:9000/library/get-libraries-with-weblinks',
+
 };
 
 /*
