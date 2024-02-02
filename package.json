@@ -32,7 +32,7 @@
     "axios": "^1.6.5",
     "cordova-plugin-inappbrowser": "^6.0.0",
     "ionicons": "^7.0.0",
-    "rxjs": "^6.6.7",
+    "rxjs": "^7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"
   },

@@ -8,6 +8,8 @@ import { LibrariesPageRoutingModule } from './libraries-routing.module';
 
 import { LibrariesPage } from './libraries.page';
 
+import { LibraryService } from '../library-details/library.service';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +17,7 @@ import { LibrariesPage } from './libraries.page';
     IonicModule,
     LibrariesPageRoutingModule
   ],
-  declarations: [LibrariesPage]
+  declarations: [LibrariesPage],
+  providers: [LibraryService]
 })
-export class LibrariesPageModule {}
+export class LibrariesPageModule { }

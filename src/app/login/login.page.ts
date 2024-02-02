@@ -7,6 +7,8 @@ import { ToastController } from '@ionic/angular';
 import { AuthService } from '../auth.service';
 import { environment } from '../../environments/environment';
 
+import { TokenService } from '../shared/services/token.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -20,7 +22,7 @@ export class LoginPage {
     private router: Router,
     private inAppBrowser: InAppBrowser, // Inject InAppBrowser
     private toastController: ToastController,
-    private authService: AuthService
+    private tokenService: TokenService
   ) { }
 
   async presentToast(message: string) {
@@ -76,7 +78,7 @@ export class LoginPage {
         this.presentToast('Authentication successful');
         // You may want to store the tokens or perform additional actions
         // Sets token inside the authService
-        this.authService.setAccessToken(response.data.access_token);
+        this.tokenService.setToken(response.data.access_token);
         // Navigate to a different page after successful login
         this.router.navigate(['/login', { skipLocationChange: true }]);
         this.router.navigate(['/home']);
