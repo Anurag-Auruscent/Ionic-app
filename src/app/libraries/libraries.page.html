@@ -10,11 +10,11 @@
 <ion-content [fullscreen]="true" class="ion-padding">
   <!-- Display libraries in a grid -->
   <ion-grid>
-    <ion-row *ngFor="let library of libraries">
+    <ion-row *ngFor="let library of allLibraries">
       <ion-col size="12" size-md="6">
         <ion-card (click)="viewLibraryDetails(library)">
           <ion-card-header>
-            {{ library.title }}
+            {{ library.name }}
           </ion-card-header>
           <ion-card-content>
             {{ library.description }}

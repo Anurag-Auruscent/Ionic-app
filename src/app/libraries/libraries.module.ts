@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { LibrariesPageRoutingModule } from './libraries-routing.module';
 
 import { LibrariesPage } from './libraries.page';
+import { LibraryService } from '../shared/services/library.service';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { LibrariesPage } from './libraries.page';
     IonicModule,
     LibrariesPageRoutingModule
   ],
-  declarations: [LibrariesPage]
+  declarations: [LibrariesPage],
+  providers: [LibraryService]
 })
 export class LibrariesPageModule {}

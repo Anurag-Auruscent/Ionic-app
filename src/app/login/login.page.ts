@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx'; // Import InAppBrowser
 import axios from 'axios';
 import { ToastController } from '@ionic/angular';
+import { TokenService } from '../shared/services/token.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginPage {
   constructor(
     private router: Router,
     private inAppBrowser: InAppBrowser, // Inject InAppBrowser
-    private toastController: ToastController
+    private toastController: ToastController,
+    private tokenService: TokenService
   ) {}
 
   async presentToast(message: string) {
@@ -55,11 +57,11 @@ export class LoginPage {
       grant_type: 'password',
       username: this.username,
       password: this.password,
-      client_secret: 'dNcB1Tl0N5p1H3rDpIPRH7LAyrDuu4RD',
+      client_secret: 'jLR1ZZF3XOsOxKTDt7IrA4DqA9nsoq95',
     };
 
     // Replace 'your-keycloak-server' with the actual URL of your Keycloak server
-    const keycloakUrl = 'http://localhost:8080/realms/angular-oauth/protocol/openid-connect/token';
+    const keycloakUrl = 'http://localhost:8080/realms/angular-auth/protocol/openid-connect/token';
 
     const headers = {
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -72,8 +74,12 @@ export class LoginPage {
         console.log('Authentication successful', response.data);
         this.presentToast('Authentication successful');
         // Handle the authentication response as needed
-        // You may want to store the tokens or perform additional actions
 
+        // You may want to store the tokens or perform additional actions
+        // console.log(response.data.access_token);
+        
+        this.tokenService.setToken(response.data.access_token);
+        
         // Navigate to a different page after successful login
         this.router.navigate(['/login', { skipLocationChange: true }]);
         this.router.navigate(['/home']);

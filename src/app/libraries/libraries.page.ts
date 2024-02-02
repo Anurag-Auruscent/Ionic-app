@@ -1,24 +1,35 @@
 // libraries/libraries.page.ts
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LibraryService } from '../shared/services/library.service';
+import { Library } from '../model/library.model';
 
 @Component({
   selector: 'app-libraries',
   templateUrl: './libraries.page.html',
   styleUrls: ['./libraries.page.scss'],
 })
-export class LibrariesPage {
-  libraries: any[] = []; // Fetch your library data here
+
+export class LibrariesPage implements OnInit {
+  allLibraries: Library[] = []; 
   selectedLibrary: any;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private libraryService: LibraryService
+    ) {
     // For example:
-    this.libraries = [
-      { title: 'Library 1', description: 'Description 1' },
-      { title: 'Library 2', description: 'Description 2' },
-      // Add more libraries as needed
-    ];
+    // this.libraries = [
+    //   { title: 'Library 1', description: 'Description 1' },
+    //   { title: 'Library 2', description: 'Description 2' },
+    //   // Add more libraries as needed
+    // ];
+
+  }
+
+  ngOnInit () {
+    this.seeAllLibraries();
   }
 
   goBack() {
@@ -45,6 +56,11 @@ export class LibrariesPage {
   // Add this function to fix the compilation error
   seeAllLibraries() {
     // Implement the logic to navigate to a page displaying all libraries
-    console.log('See All Libraries Clicked');
+    this.libraryService.getAllLibraries().subscribe(
+      (data:Library[]) => {
+        console.log(data);
+        
+        this.allLibraries = data;
+      });
   }
 }
