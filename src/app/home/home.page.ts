@@ -36,7 +36,11 @@ export class HomePage {
   }
 
   ngOnInit() {
-    // Call the API to get libraries when the component initializes
+
+  }
+
+  ionViewWillEnter() {
+    // This method will be called every time the page is about to enter.
     this.getLibraries();
   }
 
@@ -225,7 +229,7 @@ export class HomePage {
 
     try {
       // Step 3: Call the service method to save the library to the database
-      this.homeService.createNewLibrary(payload, apiUrl);
+      this.homeService.createNewLibrary(apiUrl, payload);
       console.log('Library saved to the database successfully');
     } catch (error) {
       // Step 4: Handle errors

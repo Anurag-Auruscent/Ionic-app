@@ -23,9 +23,16 @@ export class LibrariesPage {
     this.seeAllLibraries();
   }
 
+  ionViewWillEnter() {
+    // This method will be called every time the page is about to enter.
+    this.seeAllLibraries();
+  }
+
   goBack() {
     this.router.navigate(['/home']); // Adjust the route accordingly
   }
+
+
 
   // Define your functions here
 
@@ -34,9 +41,8 @@ export class LibrariesPage {
     return index % 2 === 0;
   }
 
-  viewLibraryDetails(library: any) {
-    // Implement the logic to view library details
-    console.log('View Library Details:', library);
+  viewLibraryDetails(library: Library) {
+    this.router.navigate(['/library-details', library.id]); // Adjust the route and parameter accordingly
   }
 
   librarySelected() {

@@ -11,8 +11,6 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { LibraryDetailsPopoverComponent, } from './library-details/library-details-popover.component';
-import { LibraryDetailsService } from './library-details/library.service';
 import { SHInterceptor } from './shared/interceptor/sh.interceptor';
 
 @NgModule({
@@ -22,7 +20,7 @@ import { SHInterceptor } from './shared/interceptor/sh.interceptor';
     provide: HTTP_INTERCEPTORS,
     useClass: SHInterceptor,
     multi: true
-  }, LibraryDetailsService],
+  },],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

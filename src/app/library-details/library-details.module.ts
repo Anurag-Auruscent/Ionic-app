@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { LibraryDetailsPageRoutingModule } from './library-details-routing.module';
 
 import { LibraryDetailsPage } from './library-details.page';
-import { LibraryDetailsPopoverComponent } from './library-details-popover.component';
+import { LibraryService } from '../shared/services/library.service';
 
 @NgModule({
   imports: [
@@ -16,6 +16,7 @@ import { LibraryDetailsPopoverComponent } from './library-details-popover.compon
     IonicModule,
     LibraryDetailsPageRoutingModule
   ],
-  declarations: [LibraryDetailsPage, LibraryDetailsPopoverComponent]
+  declarations: [LibraryDetailsPage],
+  providers: [LibraryService]
 })
-export class LibraryDetailsPageModule {}
+export class LibraryDetailsPageModule { }

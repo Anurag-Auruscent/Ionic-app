@@ -15,4 +15,16 @@ export class LibraryService {
   getAllLibraries(apiURL: string): Observable<Library[]> {
     return this.http.get<Library[]>(apiURL);
   }
+
+  getLibraryById(apiURL: string): Observable<Library> {
+    return this.http.get<Library>(apiURL);
+  }
+
+  updateLibrary(apiURL: string, payload: any = {}): Observable<any[]> {
+    return this.http.put<any[]>(apiURL, payload);
+  }
+
+  deleteLibrary(apiURL: string): Observable<any[]> {
+    return this.http.delete<any[]>(apiURL);
+  }
 }

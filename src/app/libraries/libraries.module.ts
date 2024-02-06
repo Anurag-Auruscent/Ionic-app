@@ -8,7 +8,6 @@ import { LibrariesPageRoutingModule } from './libraries-routing.module';
 
 import { LibrariesPage } from './libraries.page';
 
-import { LibraryDetailsService } from '../library-details/library.service';
 import { LibraryService } from '../shared/services/library.service';
 
 @NgModule({
@@ -19,6 +18,6 @@ import { LibraryService } from '../shared/services/library.service';
     LibrariesPageRoutingModule
   ],
   declarations: [LibrariesPage],
-  providers: [LibraryDetailsService, LibraryService,]
+  providers: [LibraryService,]
 })
 export class LibrariesPageModule { }

@@ -5,23 +5,23 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'login',
-    pathMatch:'full'
+    pathMatch: 'full'
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: 'home',
-    loadChildren : () => import('./home/home.module').then( m => m.HomePageModule)
-  },
-  {
-    path: 'library-details',
-    loadChildren: () => import('./library-details/library-details.module').then( m => m.LibraryDetailsPageModule)
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
     path: 'libraries',
-    loadChildren: () => import('./libraries/libraries.module').then( m => m.LibrariesPageModule)
+    loadChildren: () => import('./libraries/libraries.module').then(m => m.LibrariesPageModule)
+  },
+  {
+    path: 'library-details/:id',
+    loadChildren: () => import('./library-details/library-details.module').then(m => m.LibraryDetailsPageModule)
   },
 ];
 
