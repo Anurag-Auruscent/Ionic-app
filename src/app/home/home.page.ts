@@ -46,29 +46,12 @@ export class HomePage {
 
   getLibraries() {
     // const jwtToken = this.authService.getAccessToken();
-    const apiUrl = environment.getLibrariesApiUrl;
-
-    const apiURL = 'http://localhost:9000/library/get-libraries-with-weblinks';
+    const apiURL = environment.getAllLibrariesApiUrl;
     this.libraryService.getAllLibraries(apiURL).subscribe(
       (data: Library[]) => {
         console.log(data);
         this.libraries = data;
       });
-
-    // Make the API call using Axios
-    // axios.get(apiUrl, {
-    //   headers: {
-    //     'Authorization': `Bearer ${jwtToken}`
-    //   }
-    // })
-    //   .then((response) => {
-    //     // Update the libraries array with the received data
-    //     this.libraries = response.data;
-    //   })
-    //   .catch((error) => {
-    //     console.error('Error fetching libraries:', error);
-    //     // Handle the error as needed
-    //   });
   }
 
   librarySelected() {
@@ -198,7 +181,6 @@ export class HomePage {
               this.saveLibraryToDatabase(data.name, data.description)
                 .then(() => {
                   this.presentToast('Library created successfully');
-                  this.getLibraries();
                 })
                 .catch((error) => {
                   console.error('Failed to save library to the database:', error);
@@ -229,8 +211,14 @@ export class HomePage {
 
     try {
       // Step 3: Call the service method to save the library to the database
-      this.homeService.createNewLibrary(apiUrl, payload);
-      console.log('Library saved to the database successfully');
+      this.libraryService.createNewLibrary(apiUrl, payload).subscribe(
+        (data: Library[]) => {
+          console.log(data);
+
+          this.allLibraries = data;
+          console.log('Library saved to the database successfully');
+          this.getLibraries();
+        });
     } catch (error) {
       // Step 4: Handle errors
       console.error('Failed to save library to the database:', error);

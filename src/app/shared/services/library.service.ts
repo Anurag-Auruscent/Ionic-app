@@ -27,4 +27,9 @@ export class LibraryService {
   deleteLibrary(apiURL: string): Observable<any[]> {
     return this.http.delete<any[]>(apiURL);
   }
+
+  createNewLibrary(apiURL: string, payload: any = {}): Observable<any[]> {
+    console.log(payload, '/n', apiURL);
+    return this.http.post<any[]>(apiURL, payload);
+  }
 }
