@@ -1,0 +1,92 @@
+<!-- src/app/home/home.page.html -->
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="goBack()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Home
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="primary" (click)="createNewLibrary()">Create New</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-grid>
+    <!-- Row 1: URL Input -->
+    <ion-row>
+      <ion-col size="12">
+        <ion-item>
+          <ion-input [(ngModel)]="urlInput" placeholder="Enter URL"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <!-- Row 2: Dropdown Menu -->
+    <ion-row>
+      <ion-col size="12">
+        <ion-item>
+          <ion-label>Select Library</ion-label>
+          <ion-select [(ngModel)]="selectedLibrary">
+            <ion-select-option *ngFor="let library of libraries" [value]="library">
+              {{ library.name }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+
+    <!-- Row 3: Submit Button -->
+    <ion-row>
+      <ion-col size="12">
+        <ion-button expand="full" (click)="submitUrl()">Submit URL</ion-button>
+      </ion-col>
+    </ion-row>
+
+    <!-- Row 4: Display Libraries and "See All Libraries" Button -->
+    <!-- <ion-row *ngIf="!selectedLibrary">
+      <ion-col size="12">
+        <ion-card *ngFor="let library of libraries" (click)="viewLibraryDetails(library)">
+          <ion-card-header>
+            {{ library.title }}
+          </ion-card-header>
+          <ion-card-content>
+            <img [src]="library.fileData" alt="Content Image">
+            <p>{{ library.description }}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="12">
+        <ion-button expand="full" (click)="seeAllLibraries()">See All Libraries</ion-button>
+      </ion-col>
+    </ion-row> -->
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-button expand="full" (click)="seeAllLibraries()">See All Libraries</ion-button>
+      </ion-col>
+    </ion-row>
+
+    <!-- Row 5: Display Selected Library -->
+    <!-- <ion-row *ngIf="selectedLibrary">
+      <ion-col size="12">
+        <ion-card>
+          <ion-card-header>
+            {{ selectedLibrary.title }}
+          </ion-card-header>
+          <ion-card-content>
+            <img [src]="selectedLibrary.fileData" alt="Content Image">
+            <p>{{ selectedLibrary.description }}</p>
+            <p>{{ selectedLibrary.text }}</p>
+            <a [href]="selectedLibrary.link" target="_blank">{{ selectedLibrary.link }}</a>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row> -->
+  </ion-grid>
+</ion-content>

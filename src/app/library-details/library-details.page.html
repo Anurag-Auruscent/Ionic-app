@@ -1,0 +1,74 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="goBack()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ libraryName }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="editLibrary()">
+        Edit
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <!-- <ion-card *ngIf="libraryData">
+    <ion-card-header>
+      Library Details
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{ libraryData.description }}</p>
+      <ion-list *ngIf="libraryData.content && libraryData.content.length > 0">
+        <ion-item *ngFor="let contentItem of libraryData.content">
+          <ion-label>{{ contentItem.title }}</ion-label>
+          <ion-text>{{ contentItem.fileData }}</ion-text>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card> -->
+
+  <ion-card *ngIf="libraryData">
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let contentItem of libraryData.content">
+          <!-- Make the entire card clickable and navigate to the external link -->
+          <a [href]="contentItem.link" target="_blank" rel="noopener noreferrer">
+            <ion-grid>
+              <ion-row>
+                <!-- Left side: Display the image -->
+                <ion-col size="12" size-md="4">
+                  <ion-img [src]="contentItem.fileData" alt="Image"></ion-img>
+                </ion-col>
+
+                <!-- Right side: Display title and description -->
+                <ion-col size="12" size-md="8">
+                  <ion-card-title>{{ contentItem.title }}</ion-card-title>
+                  <ion-card-subtitle>{{ contentItem.description }}</ion-card-subtitle>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </a>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+
+
+
+  <!-- Render ion-select dynamically -->
+  <ion-select *ngIf="showEditOptions" #editSelect (ionChange)="editOptionSelected($event)"
+    placeholder="Select an option">
+    <ion-select-option value="Name">Edit Name</ion-select-option>
+    <ion-select-option value="Description">Edit Description</ion-select-option>
+    <!-- <ion-select-option value="deleteLibrary">Delete Library</ion-select-option> -->
+  </ion-select>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed"
+    style="margin-bottom: 16px; margin-right: 16px; z-index: 100;">
+    <ion-fab-button color="danger" (click)="promptDeleteConfirmation()">
+      <ion-icon name="trash"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>
