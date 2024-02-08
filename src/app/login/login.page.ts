@@ -23,7 +23,9 @@ export class LoginPage {
     private inAppBrowser: InAppBrowser, // Inject InAppBrowser
     private toastController: ToastController,
     private tokenService: TokenService
-  ) { }
+  ) {
+    this.tokenService.clearToken()
+  }
 
   async presentToast(message: string) {
     const toast = await this.toastController.create({
@@ -71,14 +73,20 @@ export class LoginPage {
     };
 
     console.log(keycloakCredentials, keycloakUrl, headers);
+
+
     axios.post(keycloakUrl, this.toFormUrlEncoded(keycloakCredentials), { headers: headers })
       .then((response) => {
         // Authentication successful
+
         console.log('Authentication successful', response.data);
         this.presentToast('Authentication successful');
         // You may want to store the tokens or perform additional actions
         // Sets token inside the authService
-        this.tokenService.setToken(response.data.access_token);
+        const token = response.data.access_token;
+        console.log(token)
+        this.tokenService.setToken(token);
+
         // Navigate to a different page after successful login
         this.router.navigate(['/login', { skipLocationChange: true }]);
         this.router.navigate(['/home']);
