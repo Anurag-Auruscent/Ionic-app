@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Library } from '../model/library.model';
 import { LibraryService } from '../shared/services/library.service';
@@ -25,6 +25,7 @@ export class LibraryDetailsPage implements OnInit {
     private router: Router,
     private popoverController: PopoverController,
     private alertController: AlertController,
+    private cdr: ChangeDetectorRef
   ) {
 
   }
@@ -40,10 +41,10 @@ export class LibraryDetailsPage implements OnInit {
       (data: any) => {
         // console.log('Library details response:', data);
         this.libraryData = data;
-        this.libraryName = data.library.name;
+        // this.libraryName = data.library.name;
         console.log('Assigned library object:', JSON.stringify(this.libraryData));
         console.log('Library id:', this.libraryData.library.id);
-
+        this.libraryName = this.libraryData.library.name;
       },
       (error) => {
         console.error('Error in fetching library details for ID:', error);
@@ -51,6 +52,10 @@ export class LibraryDetailsPage implements OnInit {
     );
   }
 
+  ngAfterViewInit() {
+    // The view has been initialized, now you can safely access the editSelect
+    // If you have logic that needs to be executed after view initialization, put it here
+  }
 
   async editLibrary() {
     console.log('Edit Library clicked');
@@ -72,6 +77,8 @@ export class LibraryDetailsPage implements OnInit {
       }
     }
   }
+
+
 
   private async waitForOptionSelection(): Promise<string | null> {
     return new Promise((resolve) => {
@@ -155,6 +162,10 @@ export class LibraryDetailsPage implements OnInit {
         .subscribe(
           (response) => {
             console.log('Library updated successfully', response);
+
+            this.libraryData.library.name = newValue;
+            this.libraryName = newValue;
+            this.cdr.detectChanges();
             // Handle success (e.g., show a success toast)
           },
           (error) => {
