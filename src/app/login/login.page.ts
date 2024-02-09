@@ -24,7 +24,6 @@ export class LoginPage {
     private toastController: ToastController,
     private tokenService: TokenService
   ) {
-    this.tokenService.clearToken()
   }
 
   async presentToast(message: string) {
