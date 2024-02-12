@@ -8,6 +8,10 @@ import { AuthService } from '../auth.service';
 import { environment } from '../../environments/environment';
 
 import { TokenService } from '../shared/services/token.service';
+import OneSignal from 'onesignal-cordova-plugin';
+
+import { jwtDecode } from 'jwt-decode';
+
 
 @Component({
   selector: 'app-login',
@@ -77,13 +81,14 @@ export class LoginPage {
     axios.post(keycloakUrl, this.toFormUrlEncoded(keycloakCredentials), { headers: headers })
       .then((response) => {
         // Authentication successful
-
-        console.log('Authentication successful', response.data);
         this.presentToast('Authentication successful');
+        const decodedToken = jwtDecode(response.data.access_token);
+        const external_id = decodedToken.sub
+        console.log('External id : ' + external_id);
+        // OneSignal.login(external_id)
         // You may want to store the tokens or perform additional actions
         // Sets token inside the authService
         const token = response.data.access_token;
-        console.log(token)
         this.tokenService.setToken(token);
 
         // Navigate to a different page after successful login
