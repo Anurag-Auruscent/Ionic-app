@@ -8,16 +8,28 @@
 
 <ion-content [fullscreen]="true" class="ion-padding">
   <!-- Display notifications in tiles (design done by another developer) -->
-
+  <ion-grid>
+    <ion-row *ngFor="let notification of notifications">
+      <ion-col size="6">
+      <ion-card-content class="card-outer">
+        <!-- Display notification details -->
+        <div class="notification-item-container">
+          <div class="notification-item-details">
+            <p class="p2">{{ notification.libraryName }}</p>
+            <p class="p2">{{ notification.userName }}</p>
+            <p class="p2">{{ notification.permissionType }}</p>
+          </div>
+        </div>
+  
+        <!-- Approve and Reject buttons -->
+        <div class="notification-item-actions">
+          <ion-button (click)="approveNotification(notification.id)" color="primary">Approve</ion-button>
+          <ion-button (click)="rejectNotification(notification.id)" color="danger">Reject</ion-button>
+        </div>
+      </ion-card-content>
+    </ion-col>
+    </ion-row>
+  </ion-grid>
   <!-- Example tile structure -->
-  <ion-card *ngFor="let notification of notifications">
-    <ion-card-content>
-      <!-- Display notification details -->
-      <p>{{ notification.message }}</p>
-
-      <!-- Approve and Reject buttons -->
-      <ion-button (click)="approveNotification(notification.id)">Approve</ion-button>
-      <ion-button (click)="rejectNotification(notification.id)">Reject</ion-button>
-    </ion-card-content>
-  </ion-card>
+ 
 </ion-content>
