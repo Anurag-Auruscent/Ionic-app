@@ -8,7 +8,7 @@ import { AuthService } from '../auth.service';
 import { environment } from '../../environments/environment';
 
 import { TokenService } from '../shared/services/token.service';
-import OneSignal from 'onesignal-cordova-plugin';
+// import OneSignal from 'onesignal-cordova-plugin';
 
 import { jwtDecode } from 'jwt-decode';
 

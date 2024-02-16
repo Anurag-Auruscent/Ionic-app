@@ -12,7 +12,7 @@ export class NotificationsService {
 
   getAllNotifications(): Observable<any[]> {
     // Assuming you have an endpoint to fetch all notifications
-    return this.http.get<any[]>(`${this.baseUrl}/notifications`);
+    return this.http.get<any[]>(`${this.baseUrl}/get-pending-requests`);
   }
 
   approveNotification(requestId: string): Observable<any> {
