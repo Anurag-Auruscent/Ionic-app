@@ -9,7 +9,7 @@ export const environment = {
   clientId: 'ionic-angular-gateway',
   clientSecret: 'jLR1ZZF3XOsOxKTDt7IrA4DqA9nsoq95',
   saveLibraryToDatabaseApiUrl: 'http://localhost:9000/library/create',
-  getAllLibrariesApiUrl: 'https://every-moose-serve.loca.lt/library/get-libraries-with-weblinks',
+  getAllLibrariesApiUrl: 'http://localhost:9000/library/get-libraries-with-weblinks',
   readAccessRequestApiUrl: 'http://localhost:9000/library/request/read'
   // readAccessRequestApiUrl: 'https://every-moose-serve.loca.lt/library/request/read'
 
