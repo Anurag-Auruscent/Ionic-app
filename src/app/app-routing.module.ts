@@ -23,6 +23,16 @@ const routes: Routes = [
     path: 'library-details/:id',
     loadChildren: () => import('./library-details/library-details.module').then(m => m.LibraryDetailsPageModule)
   },
+  {
+    path: 'home/:id',
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+  },
+  {
+    path: 'demo',
+    loadChildren: () => import('./demo/demo.module').then( m => m.DemoPageModule)
+  },
+
+
 ];
 
 @NgModule({

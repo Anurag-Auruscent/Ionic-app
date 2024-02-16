@@ -46,8 +46,8 @@ export class LoginPage {
   }
 
   login() {
-    console.log('Username:', this.username);
-    console.log('Password:', this.password);
+    // console.log('Username:', this.username);
+    // console.log('Password:', this.password);
 
     if (!this.username || !this.password) {
       console.error('Username and password are required');
@@ -57,24 +57,27 @@ export class LoginPage {
 
     const keycloakCredentials = {
       client_id: environment.clientId,
+      // client_id: '',
       grant_type: 'password',
       username: this.username,
       password: this.password,
       client_secret: environment.clientSecret,
+      // client_secret: '',
     };
 
     // Replace 'your-keycloak-server' with the actual URL of your Keycloak server
     const keycloakUrl = environment.keycloakUrl;
+    // const keycloakUrl = '';
 
     const headers = {
       'Content-Type': 'application/x-www-form-urlencoded',
     };
 
-    console.log(keycloakCredentials, keycloakUrl, headers);
+    // console.log(keycloakCredentials, keycloakUrl, headers);
     axios.post(keycloakUrl, this.toFormUrlEncoded(keycloakCredentials), { headers: headers })
       .then((response) => {
         // Authentication successful
-        console.log('Authentication successful', response.data);
+        // console.log('Authentication successful', response.data.access_token);
         this.presentToast('Authentication successful');
         // You may want to store the tokens or perform additional actions
         // Sets token inside the authService
@@ -86,7 +89,8 @@ export class LoginPage {
       .catch((error) => {
         // Handle authentication failure
         console.error('Authentication failed', error);
-        this.presentErrorToast('Authentication failed');
+        this.presentErrorToast('Authentication failed s');
+
         // Display an error message or perform other actions as needed
       });
   }
@@ -99,7 +103,7 @@ export class LoginPage {
       const encodedValue = encodeURIComponent(obj[property]);
       formBody.push(encodedKey + '=' + encodedValue);
     }
-    console.log(formBody);
+    // console.log(formBody);
     return formBody.join('&');
   }
 }

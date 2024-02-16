@@ -1,7 +1,7 @@
 // home.page.ts
 
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import axios from 'axios';
 import { ToastController, AlertController } from '@ionic/angular';
 import { AuthService } from '../auth.service';
@@ -10,14 +10,18 @@ import { HomeService } from '../shared/services/home.service';
 
 import { Library } from '../model/library.model';
 import { LibraryService } from '../shared/services/library.service';
+import { TokenService } from '../shared/services/token.service';
+
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
+  token:any;
+  libraryId!:number;
   urlInput: string = '';
   responseData: any;
   libraries: any[] = [];
@@ -26,9 +30,10 @@ export class HomePage {
 
   constructor(
     private router: Router,
+    private activatedRoute: ActivatedRoute,
     private toastController: ToastController,
     private alertController: AlertController,
-    private authService: AuthService,
+    private tokenService: TokenService,
     private homeService: HomeService,
     private libraryService: LibraryService
   ) {
@@ -36,20 +41,21 @@ export class HomePage {
   }
 
   ngOnInit() {
-
+   this.getLibraryIdFromUrl();
   }
 
   ionViewWillEnter() {
     // This method will be called every time the page is about to enter.
-    this.getLibraries();
+     this.getLibraries();
   }
 
   getLibraries() {
     // const jwtToken = this.authService.getAccessToken();
+    this.token = this.tokenService.getToken();
     const apiURL = environment.getAllLibrariesApiUrl;
+    // const apiURL = '';
     this.libraryService.getAllLibraries(apiURL).subscribe(
       (data: Library[]) => {
-        console.log(data);
         this.libraries = data;
       });
   }
@@ -84,7 +90,7 @@ export class HomePage {
       isPrivate: this.selectedLibrary.isPrivate,  // Assuming 'isPrivate' is the property representing the library privacy status
       webLinks: [this.urlInput]  // Add the URL to the webLinks array
     };
-    console.log("This is the library id : ", this.selectedLibrary.id);
+    // console.log("This is the library id : ", this.selectedLibrary.id);
     const apiURL = `http://localhost:9000/library/update?id=${libraryId}`
 
     this.homeService.fetchAllLibrary(apiURL, payload).subscribe((responseData) => {
@@ -199,6 +205,7 @@ export class HomePage {
   async saveLibraryToDatabase(name: string, description: string): Promise<void> {
     // Step 1: Change the API URL
     const apiUrl = environment.saveLibraryToDatabaseApiUrl;
+    // const apiUrl = '';
 
     // Step 2: Update the payload structure
     const payload = {
@@ -236,9 +243,6 @@ export class HomePage {
     // });
   }
 
-
-
-
   goBack() {
     this.router.navigate(['/login']);
   }
@@ -246,5 +250,25 @@ export class HomePage {
   // Navigating to LibraryDetailsPage when a library is clicked
   viewLibraryDetails(library: any) {
     this.router.navigate(['/library-details'], { queryParams: library });
+  }
+
+  // extract library id from url
+  getLibraryIdFromUrl():void {
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    if(id){
+      this.libraryId = +id;
+      this.readRequestAccessLibrary(this.libraryId);
+    }
+  }
+  // api call to make library access request for read
+  readRequestAccessLibrary(libraryId: number){
+    this.libraryService.readRequestAccessLibrary(libraryId).subscribe(
+      (response: any) => {
+        console.log(response.status);
+        if(response.status === 200){
+          this.presentToast('Library access request sent to the owner');
+        }
+      }
+    )
   }
 }
