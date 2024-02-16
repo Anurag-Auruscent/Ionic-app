@@ -1,12 +1,12 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ViewallnotificationsPage } from './viewallnotifications.page';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { ViewAllNotificationsPage } from './viewallnotifications.page';
 
 describe('ViewallnotificationsPage', () => {
-  let component: ViewallnotificationsPage;
-  let fixture: ComponentFixture<ViewallnotificationsPage>;
+  let component: ViewAllNotificationsPage;
+  let fixture: ComponentFixture<ViewAllNotificationsPage>;
 
   beforeEach(async(() => {
-    fixture = TestBed.createComponent(ViewallnotificationsPage);
+    fixture = TestBed.createComponent(ViewAllNotificationsPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
