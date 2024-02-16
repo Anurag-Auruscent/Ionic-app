@@ -36,7 +36,7 @@ export class HomePage {
   }
 
   ngOnInit() {
-
+    // this.getLibraries();
   }
 
   ionViewWillEnter() {

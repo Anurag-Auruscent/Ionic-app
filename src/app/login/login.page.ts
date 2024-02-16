@@ -28,6 +28,8 @@ export class LoginPage {
     private toastController: ToastController,
     private tokenService: TokenService
   ) {
+    const externalId = "123456789123456789"
+    OneSignal.login(externalId) // TODO move to after sucessfull login
   }
 
   async presentToast(message: string) {
@@ -85,7 +87,7 @@ export class LoginPage {
         const decodedToken = jwtDecode(response.data.access_token);
         const external_id = decodedToken.sub
         console.log('External id : ' + external_id);
-        // OneSignal.login(external_id)
+
         // You may want to store the tokens or perform additional actions
         // Sets token inside the authService
         const token = response.data.access_token;
@@ -97,6 +99,7 @@ export class LoginPage {
       })
       .catch((error) => {
         // Handle authentication failure
+        console.log("hello")
         console.error('Authentication failed', error);
         this.presentErrorToast('Authentication failed');
         // Display an error message or perform other actions as needed
