@@ -247,4 +247,9 @@ export class HomePage {
   viewLibraryDetails(library: any) {
     this.router.navigate(['/library-details'], { queryParams: library });
   }
+
+  // navigate to notifications page
+  gotoNotification(){
+    this.router.navigate(['/viewallnotifications']);
+  }
 }

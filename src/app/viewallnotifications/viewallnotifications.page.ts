@@ -51,13 +51,15 @@ export class ViewAllNotificationsPage implements OnInit {
   private refreshNotifications() {
     // Optionally, fetch and update the list of notifications after an action (approve/reject)
     this.notificationsService.getAllNotifications()
-      .subscribe(
-        (data: any[]) => {
+      .subscribe({
+        next: (data: any[]) => {
+          console.log(data);
+          
           this.notifications = data;
         },
-        (error) => {
+        error: (error) => {
           console.error('Error refreshing notifications:', error);
         }
-      );
+      });
   }
 }
