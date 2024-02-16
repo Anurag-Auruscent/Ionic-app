@@ -22,7 +22,11 @@ const routes: Routes = [
   {
     path: 'library-details/:id',
     loadChildren: () => import('./library-details/library-details.module').then(m => m.LibraryDetailsPageModule)
+  },  {
+    path: 'viewallnotifications',
+    loadChildren: () => import('./viewallnotifications/viewallnotifications.module').then( m => m.ViewallnotificationsPageModule)
   },
+
 ];
 
 @NgModule({

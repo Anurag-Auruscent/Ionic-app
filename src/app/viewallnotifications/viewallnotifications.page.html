@@ -1,0 +1,23 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      View All Notifications
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <!-- Display notifications in tiles (design done by another developer) -->
+
+  <!-- Example tile structure -->
+  <ion-card *ngFor="let notification of notifications">
+    <ion-card-content>
+      <!-- Display notification details -->
+      <p>{{ notification.message }}</p>
+
+      <!-- Approve and Reject buttons -->
+      <ion-button (click)="approveNotification(notification.id)">Approve</ion-button>
+      <ion-button (click)="rejectNotification(notification.id)">Reject</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
