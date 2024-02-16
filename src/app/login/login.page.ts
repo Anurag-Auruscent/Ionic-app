@@ -12,6 +12,8 @@ import OneSignal from 'onesignal-cordova-plugin';
 
 import { jwtDecode } from 'jwt-decode';
 
+import { ToastService } from '../shared/services/toast.service';
+
 
 @Component({
   selector: 'app-login',
@@ -26,7 +28,8 @@ export class LoginPage {
     private router: Router,
     private inAppBrowser: InAppBrowser, // Inject InAppBrowser
     private toastController: ToastController,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private ts: ToastService
   ) {
   }
 
@@ -81,7 +84,7 @@ export class LoginPage {
     axios.post(keycloakUrl, this.toFormUrlEncoded(keycloakCredentials), { headers: headers })
       .then((response) => {
         // Authentication successful
-        this.presentToast('Authentication successful');
+        this.ts.presentToast('Authentication successful', 3000, 'success');
         const decodedToken = jwtDecode(response.data.access_token);
         const external_id = decodedToken.sub
         console.log('External id : ' + external_id);
@@ -98,7 +101,7 @@ export class LoginPage {
       .catch((error) => {
         // Handle authentication failure
         console.error('Authentication failed', error);
-        this.presentErrorToast('Authentication failed');
+        this.ts.presentToast('Authentication failed', 2000);
         // Display an error message or perform other actions as needed
       });
   }
