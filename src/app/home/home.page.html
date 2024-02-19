@@ -31,13 +31,14 @@
         <ion-item>
           <ion-label>Select Library</ion-label>
           <ion-select [(ngModel)]="selectedLibrary">
-            <ion-select-option *ngFor="let library of libraries" [value]="library">
+            <ion-select-option *ngFor="let library of allLibraries" [value]="library">
               {{ library.name }}
             </ion-select-option>
           </ion-select>
         </ion-item>
       </ion-col>
     </ion-row>
+
 
 
     <!-- Row 3: Submit Button -->

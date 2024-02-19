@@ -8,7 +8,7 @@ import { AuthService } from '../auth.service';
 import { environment } from 'src/environments/environment';
 import { HomeService } from '../shared/services/home.service';
 
-import { Library } from '../model/library.model';
+import { Library, LibraryListServerResponse } from '../model/library.model';
 import { LibraryService } from '../shared/services/library.service';
 
 @Component({
@@ -22,7 +22,7 @@ export class HomePage {
   responseData: any;
   libraries: any[] = [];
   selectedLibrary: any;  // Property to store the selected library in the dropdown
-  allLibraries!: any[];   // Property to store all libraries for "See All Libraries" button
+  allLibraries: Library[] = [];   // Property to store all libraries for "See All Libraries" button
 
   constructor(
     private router: Router,
@@ -44,14 +44,24 @@ export class HomePage {
     this.getLibraries();
   }
 
-  getLibraries() {
-    // const jwtToken = this.authService.getAccessToken();
-    const apiURL = environment.getAllLibrariesApiUrl;
-    this.libraryService.getAllLibraries(apiURL).subscribe(
-      (data: Library[]) => {
+  onChangeLibrary(event: any) {
+    console.log('Selected Library:', this.selectedLibrary[0]);
+  }
+
+  private getLibraries() {
+    this.libraryService.getAllLibraries().subscribe(
+      (data: LibraryListServerResponse) => {
         console.log(data);
-        this.libraries = data;
-      });
+        console.log(data.content[0].name);
+        this.allLibraries = data.content;
+        console.log(this.selectedLibrary)
+
+      },
+      (error) => {
+        console.error('Error fetching libraries:', error);
+        // Handle error as needed
+      }
+    );
   }
 
   librarySelected() {
@@ -65,6 +75,8 @@ export class HomePage {
 
   submitUrl() {
     // Check if the URL is entered
+
+    console.log("This is the selected library ", this.selectedLibrary)
     if (!this.urlInput) {
       this.presentErrorToast('Please enter a URL before submitting');
       return;
@@ -249,7 +261,7 @@ export class HomePage {
   }
 
   // navigate to notifications page
-  gotoNotification(){
+  gotoNotification() {
     this.router.navigate(['/viewallnotifications']);
   }
 }

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Library } from '../../model/library.model';
+import { Library, LibraryListServerResponse } from '../../model/library.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class LibraryService {
@@ -12,8 +13,13 @@ export class LibraryService {
     private http: HttpClient
   ) { }
 
-  getAllLibraries(apiURL: string): Observable<Library[]> {
-    return this.http.get<Library[]>(apiURL);
+  // getAllLibraries(apiURL: string): Observable<Library[]> {
+  //   return this.http.get<Library[]>(apiURL);
+  // }
+
+  getAllLibraries(): Observable<LibraryListServerResponse> {
+    const apiURL = environment.getAllLibrariesApiUrl;
+    return this.http.get<LibraryListServerResponse>(apiURL);
   }
 
   getLibraryById(apiURL: string): Observable<Library> {
