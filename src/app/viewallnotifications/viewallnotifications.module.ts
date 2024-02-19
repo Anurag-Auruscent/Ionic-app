@@ -15,6 +15,6 @@ import { ViewAllNotificationsPage } from './viewallnotifications.page';
     IonicModule,
     ViewallnotificationsPageRoutingModule
   ],
-  declarations: [ViewAllNotificationsPage]
+  declarations: [ViewAllNotificationsPage],
 })
 export class ViewallnotificationsPageModule { }

@@ -1,5 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="goBack()"></ion-back-button>
+    </ion-buttons>
     <ion-title>
       View All Notifications
     </ion-title>
@@ -10,26 +13,35 @@
   <!-- Display notifications in tiles (design done by another developer) -->
   <ion-grid>
     <ion-row *ngFor="let notification of notifications">
-      <ion-col size="6">
-      <ion-card-content class="card-outer">
-        <!-- Display notification details -->
-        <div class="notification-item-container">
-          <div class="notification-item-details">
-            <p class="p2">{{ notification.libraryName }}</p>
-            <p class="p2">{{ notification.userName }}</p>
-            <p class="p2">{{ notification.permissionType }}</p>
-          </div>
-        </div>
-  
-        <!-- Approve and Reject buttons -->
-        <div class="notification-item-actions">
-          <ion-button (click)="approveNotification(notification.id)" color="primary">Approve</ion-button>
-          <ion-button (click)="rejectNotification(notification.id)" color="danger">Reject</ion-button>
-        </div>
-      </ion-card-content>
-    </ion-col>
+      <ion-col size-md="6" offset-md="3">
+        <ion-card-content class="card-outer">
+          <!-- Display notification details horizontally -->
+          <ion-row>
+            <ion-col size="12">
+              <div class="notification-item-details">
+                <ion-text class="p2">{{ notification.libraryName }}</ion-text>
+                <ion-text class="p2">{{ notification.userName }}</ion-text>
+                <ion-text class="p2">{{ notification.permissionType }}</ion-text>
+
+              </div>
+            </ion-col>
+          </ion-row>
+
+          <!-- Approve and Reject buttons below details -->
+          <ion-row>
+            <ion-col size="12">
+              <ion-button (click)="approveNotification(notification.requestId)" color="success" expand="full">
+                <ion-icon name="checkmark-circle"></ion-icon>
+              </ion-button>
+            </ion-col>
+            <ion-col size="12">
+              <ion-button (click)="rejectNotification(notification.requestId)" color="danger" expand="full">
+                <ion-icon name="close-circle"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-col>
     </ion-row>
   </ion-grid>
-  <!-- Example tile structure -->
- 
 </ion-content>

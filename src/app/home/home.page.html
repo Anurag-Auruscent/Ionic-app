@@ -15,13 +15,6 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-row>
-    <ion-col size="3">
-      <ion-item>
-        <ion-button (click) = "gotoNotification()">Notifications</ion-button>
-      </ion-item>
-    </ion-col>
-  </ion-row>
   <ion-grid>
     <!-- Row 1: URL Input -->
     <ion-row>
@@ -75,6 +68,13 @@
     <ion-row>
       <ion-col size="12">
         <ion-button expand="full" (click)="seeAllLibraries()">See All Libraries</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size-md="3" size-xs="12">
+        <ion-item>
+          <ion-button (click)="gotoNotification()">Notifications</ion-button>
+        </ion-item>
       </ion-col>
     </ion-row>
 

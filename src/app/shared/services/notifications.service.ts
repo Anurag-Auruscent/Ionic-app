@@ -17,11 +17,11 @@ export class NotificationsService {
 
   approveNotification(requestId: string): Observable<any> {
     const approveUrl = `${this.baseUrl}/approve?requestId=${requestId}`;
-    return this.http.post(approveUrl, {});
+    return this.http.post(approveUrl, {}, { responseType: 'text' }); //@TODO : Remove responseType after API header fix 
   }
 
   rejectNotification(requestId: string): Observable<any> {
     const rejectUrl = `${this.baseUrl}/reject?requestId=${requestId}`;
-    return this.http.post(rejectUrl, {});
+    return this.http.post(rejectUrl, {}, { responseType: 'text' }); //@TODO : Remove responseType after API header fix 
   }
 }

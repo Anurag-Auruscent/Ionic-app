@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationsService } from '../shared/services/notifications.service';
+import { Router } from '@angular/router';
+import { PopoverController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-viewallnotifications',
@@ -9,11 +12,15 @@ import { NotificationsService } from '../shared/services/notifications.service';
 export class ViewAllNotificationsPage implements OnInit {
   notifications: any[] = [];
 
-  constructor(private notificationsService: NotificationsService) { }
+  constructor(private notificationsService: NotificationsService, private router: Router) { }
 
   ngOnInit() {
     // Fetch notifications using a service method (design and functionality done by another developer)
     this.refreshNotifications()
+  }
+
+  goBack() {
+    this.router.navigate(['/home']);
   }
 
   approveNotification(notificationId: string) {
@@ -34,6 +41,7 @@ export class ViewAllNotificationsPage implements OnInit {
 
   rejectNotification(notificationId: string) {
     // Call the reject API
+    console.log('Rejecting notification', notificationId);
     this.notificationsService.rejectNotification(notificationId)
       .subscribe({
         next: (response) => {
@@ -54,7 +62,7 @@ export class ViewAllNotificationsPage implements OnInit {
       .subscribe({
         next: (data: any[]) => {
           console.log(data);
-          
+
           this.notifications = data;
         },
         error: (error) => {
