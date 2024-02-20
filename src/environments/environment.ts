@@ -10,9 +10,9 @@ export const environment = {
   clientSecret: 'jLR1ZZF3XOsOxKTDt7IrA4DqA9nsoq95',
   saveLibraryToDatabaseApiUrl: 'http://localhost:9000/library/create',
   getAllLibrariesApiUrl: 'http://localhost:9000/library/get-libraries-with-weblinks',
-  readAccessRequestApiUrl: 'http://localhost:9000/library/request/read'
+  readAccessRequestApiUrl: 'http://localhost:9000/library/request/read',
   // readAccessRequestApiUrl: 'https://every-moose-serve.loca.lt/library/request/read'
-
+  OneSignalAppId: '9294ab72-bf35-47cb-87dc-761e8528203a'
 };
 
 /*

@@ -2,8 +2,33 @@ export interface Library {
     id: number;
     name: string;
     description: string;
-    user_id: string;
-    is_private: boolean;
-    create_date: Date;
-    update_date: Date;
+    userId: string;
+    createDate: Date;
+    updateDate: Date;
+    contents: Content[];
+    isOwner: boolean;
+    permissionType: string;
+}
+
+export interface Content {
+    id: number;
+    title: string;
+    link: string;
+    tags: string[] | null;
+    userId: string;
+    text: string;
+    description: string;
+    fileData: string;
+    contentType: string | null;
+    libraryId: number;
+}
+
+export interface LibraryListServerResponse {
+    content: Library[];
+    last: boolean;
+    totalElements: number;
+    size: number;
+    first: boolean;
+    numberOfElements: number;
+    empty: boolean;
 }

@@ -1,6 +1,8 @@
 import { Component, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { App, URLOpenListenerEvent } from '@capacitor/app';
+import OneSignal from 'onesignal-cordova-plugin';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +12,15 @@ import { App, URLOpenListenerEvent } from '@capacitor/app';
 export class AppComponent {
   constructor(private router: Router, private zone: NgZone) {
     this.initializeApp();
+    // // OneSignal.Debug.setLogLevel(6)
+    // OneSignal.initialize(environment.OneSignalAppId);
+    // OneSignal.Notifications.addEventListener('click', async (e) => {
+    //   let clickData = await e.notification;
+    //   console.log("Notification Clicked : " + clickData);
+    // })
+    // OneSignal.Notifications.requestPermission(true).then((success: Boolean) => {
+    //   console.log("Notification permission granted " + success);
+    // })
   }
 
   initializeApp(){
@@ -28,5 +39,5 @@ export class AppComponent {
         }
       })
     })
-  }
+}
 }

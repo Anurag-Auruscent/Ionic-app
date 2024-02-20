@@ -1,18 +1,34 @@
+// import { Injectable } from '@angular/core';
+
+// @Injectable({
+//   providedIn: 'root'
+// })
+// export class TokenService {
+
+//   private token: string = '';
+//   constructor() { }
+
+//   setToken(token: string): void {
+//     this.token = token;
+//   }
+
+//   getToken(): string {
+//     return this.token;
+//   }
+// }
+
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TokenService {
   private readonly TOKEN_KEY = 'auth_token';
 
-  private token: string = '';
-  constructor(
-    private storage: Storage
-  ) {
-    this.init();
-   }
+  constructor(private storage: Storage) {
+    this.init()
+  }
 
   private async init(): Promise<void> {
     const storage = await this.storage.create();

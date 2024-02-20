@@ -2,7 +2,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Library } from '../model/library.model';
+import { Library, LibraryListServerResponse } from '../model/library.model';
 import { LibraryService } from '../shared/services/library.service';
 
 @Component({
@@ -53,14 +53,13 @@ export class LibrariesPage {
   // Add this function to fix the compilation error
   seeAllLibraries() {
     // Implement the logic to navigate to a page displaying all libraries
-    const apiURL = 'http://localhost:9000/library/get-libraries-with-weblinks';
     console.log('See All Libraries Clicked');
-    this.libraryService.getAllLibraries(apiURL).subscribe(
-      (data: Library[]) => {
+    this.libraryService.getAllLibraries().subscribe(
+      (data: LibraryListServerResponse) => {
         console.log(data);
-
-        this.allLibraries = data;
-      });
-
+        this.allLibraries = data.content;
+      }
+    );
   }
+
 }

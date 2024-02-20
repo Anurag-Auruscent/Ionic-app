@@ -16,6 +16,10 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
+    path: 'home/:id',
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+  },
+  {
     path: 'libraries',
     loadChildren: () => import('./libraries/libraries.module').then(m => m.LibrariesPageModule)
   },
@@ -24,15 +28,9 @@ const routes: Routes = [
     loadChildren: () => import('./library-details/library-details.module').then(m => m.LibraryDetailsPageModule)
   },
   {
-    path: 'home/:id',
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+    path: 'viewallnotifications',
+    loadChildren: () => import('./viewallnotifications/viewallnotifications.module').then(m => m.ViewallnotificationsPageModule)
   },
-  {
-    path: 'demo',
-    loadChildren: () => import('./demo/demo.module').then( m => m.DemoPageModule)
-  },
-
-
 ];
 
 @NgModule({

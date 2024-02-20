@@ -11,8 +11,6 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
-             // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
-             // Default: https://android.googlesource.com/platform/frameworks/base/+/282e181b58cf72b6ca770dc7ca5f91f135444502/tools/aapt/AaptAssets.cpp#61
             ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
     }
@@ -28,6 +26,7 @@ repositories {
     flatDir{
         dirs '../capacitor-cordova-android-plugins/src/main/libs', 'libs'
     }
+    google() // Add this line
 }
 
 dependencies {
@@ -40,9 +39,14 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
     implementation project(':capacitor-cordova-android-plugins')
+
+    // Add the Firebase BoM and the Analytics dependency
+    implementation platform('com.google.firebase:firebase-bom:32.7.1')
+    implementation 'com.google.firebase:firebase-analytics'
 }
 
 apply from: 'capacitor.build.gradle'
+apply plugin: 'com.google.gms.google-services'
 
 try {
     def servicesJSON = file('google-services.json')

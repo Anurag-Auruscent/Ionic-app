@@ -8,6 +8,12 @@ import { AuthService } from '../auth.service';
 import { environment } from '../../environments/environment';
 
 import { TokenService } from '../shared/services/token.service';
+// import OneSignal from 'onesignal-cordova-plugin';
+
+import { jwtDecode } from 'jwt-decode';
+
+import { ToastService } from '../shared/services/toast.service';
+
 
 @Component({
   selector: 'app-login',
@@ -22,8 +28,10 @@ export class LoginPage {
     private router: Router,
     private inAppBrowser: InAppBrowser, // Inject InAppBrowser
     private toastController: ToastController,
-    private tokenService: TokenService
-  ) { }
+    private tokenService: TokenService,
+    private ts: ToastService
+  ) {
+  }
 
   async presentToast(message: string) {
     const toast = await this.toastController.create({
@@ -73,15 +81,17 @@ export class LoginPage {
       'Content-Type': 'application/x-www-form-urlencoded',
     };
 
-    // console.log(keycloakCredentials, keycloakUrl, headers);
+    console.log(keycloakCredentials, keycloakUrl, headers);
     axios.post(keycloakUrl, this.toFormUrlEncoded(keycloakCredentials), { headers: headers })
       .then((response) => {
         // Authentication successful
-        // console.log('Authentication successful', response.data.access_token);
+        console.log('Authentication successful', response.data);
         this.presentToast('Authentication successful');
         // You may want to store the tokens or perform additional actions
         // Sets token inside the authService
-        this.tokenService.setToken(response.data.access_token);
+        const token = response.data.access_token;
+        this.tokenService.setToken(token);
+
         // Navigate to a different page after successful login
         this.router.navigate(['/login', { skipLocationChange: true }]);
         this.router.navigate(['/home']);
@@ -89,8 +99,7 @@ export class LoginPage {
       .catch((error) => {
         // Handle authentication failure
         console.error('Authentication failed', error);
-        this.presentErrorToast('Authentication failed s');
-
+        this.presentErrorToast('Authentication failed');
         // Display an error message or perform other actions as needed
       });
   }

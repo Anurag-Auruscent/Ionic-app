@@ -2,13 +2,11 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import axios from 'axios';
 import { ToastController, AlertController } from '@ionic/angular';
-import { AuthService } from '../auth.service';
 import { environment } from 'src/environments/environment';
 import { HomeService } from '../shared/services/home.service';
 
-import { Library } from '../model/library.model';
+import { Library, LibraryListServerResponse } from '../model/library.model';
 import { LibraryService } from '../shared/services/library.service';
 import { TokenService } from '../shared/services/token.service';
 
@@ -20,20 +18,19 @@ import { TokenService } from '../shared/services/token.service';
 })
 export class HomePage implements OnInit {
 
-  token:any;
-  libraryId!:number;
+  token: any;
+  libraryId!: number;
   urlInput: string = '';
   responseData: any;
   libraries: any[] = [];
   selectedLibrary: any;  // Property to store the selected library in the dropdown
-  allLibraries!: any[];   // Property to store all libraries for "See All Libraries" button
+  allLibraries: Library[] = [];   // Property to store all libraries for "See All Libraries" button
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private toastController: ToastController,
     private alertController: AlertController,
-    private tokenService: TokenService,
     private homeService: HomeService,
     private libraryService: LibraryService
   ) {
@@ -41,23 +38,28 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
-   this.getLibraryIdFromUrl();
+    this.getLibraryIdFromUrl();
   }
 
   ionViewWillEnter() {
     // This method will be called every time the page is about to enter.
-     this.getLibraries();
+    this.getLibraries();
   }
 
-  getLibraries() {
-    // const jwtToken = this.authService.getAccessToken();
-    this.token = this.tokenService.getToken();
-    const apiURL = environment.getAllLibrariesApiUrl;
-    // const apiURL = '';
-    this.libraryService.getAllLibraries(apiURL).subscribe(
-      (data: Library[]) => {
-        this.libraries = data;
-      });
+  private getLibraries() {
+    this.libraryService.getAllLibraries().subscribe(
+      (data: LibraryListServerResponse) => {
+        console.log(data);
+        console.log(data.content[0].name);
+        this.allLibraries = data.content;
+        console.log(this.selectedLibrary)
+
+      },
+      (error) => {
+        console.error('Error fetching libraries:', error);
+        // Handle error as needed
+      }
+    );
   }
 
   librarySelected() {
@@ -71,6 +73,8 @@ export class HomePage implements OnInit {
 
   submitUrl() {
     // Check if the URL is entered
+
+    console.log("This is the selected library ", this.selectedLibrary)
     if (!this.urlInput) {
       this.presentErrorToast('Please enter a URL before submitting');
       return;
@@ -252,23 +256,29 @@ export class HomePage implements OnInit {
     this.router.navigate(['/library-details'], { queryParams: library });
   }
 
+  // navigate to notifications page
+  gotoNotification() {
+    this.router.navigate(['/viewallnotifications']);
+  }
+
   // extract library id from url
-  getLibraryIdFromUrl():void {
+  getLibraryIdFromUrl(): void {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
-    if(id){
+    if (id) {
       this.libraryId = +id;
       this.readRequestAccessLibrary(this.libraryId);
     }
   }
   // api call to make library access request for read
-  readRequestAccessLibrary(libraryId: number){
+  readRequestAccessLibrary(libraryId: number) {
     this.libraryService.readRequestAccessLibrary(libraryId).subscribe(
       (response: any) => {
         console.log(response.status);
-        if(response.status === 200){
+        if (response.status === 200) {
           this.presentToast('Library access request sent to the owner');
         }
       }
     )
   }
+
 }
