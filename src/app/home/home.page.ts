@@ -47,20 +47,20 @@ export class HomePage implements OnInit {
   }
 
   private getLibraries() {
-    this.libraryService.getAllLibraries().subscribe(
-      (data: LibraryListServerResponse) => {
+    this.libraryService.getAllLibraries().subscribe({
+      next: (data: LibraryListServerResponse) => {
         console.log(data);
         console.log(data.content[0].name);
         this.allLibraries = data.content;
-        console.log(this.selectedLibrary)
-
+        console.log(this.selectedLibrary);
       },
-      (error) => {
+      error: (error) => {
         console.error('Error fetching libraries:', error);
         // Handle error as needed
-      }
-    );
+      },
+    });
   }
+
 
   librarySelected() {
     // Handle the selected library, you can display details or perform any action
@@ -97,19 +97,21 @@ export class HomePage implements OnInit {
     // console.log("This is the library id : ", this.selectedLibrary.id);
     const apiURL = `http://localhost:9000/library/update?id=${libraryId}`
 
-    this.homeService.fetchAllLibrary(apiURL, payload).subscribe((responseData) => {
-      // Handle the response from the server
-      console.log(responseData);
-      // Show success toast
-      this.presentToast('Link added to library successfully');
-    },
-      (error) => {
+    this.homeService.fetchAllLibrary(apiURL, payload).subscribe({
+      next: (responseData) => {
+        // Handle the response from the server
+        console.log(responseData);
+        // Show success toast
+        this.presentToast('Link added to library successfully');
+      },
+      error: (error) => {
         // Handle error
         console.error('Error:', error);
         // Show error toast
         this.presentErrorToast('Failed to add link to library');
-      }
-    );
+      },
+    });
+
 
 
 
@@ -222,29 +224,22 @@ export class HomePage implements OnInit {
 
     try {
       // Step 3: Call the service method to save the library to the database
-      this.libraryService.createNewLibrary(apiUrl, payload).subscribe(
-        (data: Library[]) => {
+      this.libraryService.createNewLibrary(apiUrl, payload).subscribe({
+        next: (data: Library[]) => {
           console.log(data);
-
           this.allLibraries = data;
           console.log('Library saved to the database successfully');
           this.getLibraries();
-        });
+        },
+        error: (error) => {
+          console.error('Error:', error);
+          // Handle error as needed
+        },
+      });
     } catch (error) {
       // Step 4: Handle errors
       console.error('Failed to save library to the database:', error);
     }
-
-
-    // // Step 3: Fetch the JWT token (replace 'your-jwt-token' with the actual token retrieval logic)
-    // const jwtToken = this.authService.getAccessToken();  // Replace this with your actual token retrieval logic
-
-    // // Step 4: Make an HTTP POST request to save the new library data with JWT token in the header
-    // return axios.post(apiUrl, payload, {
-    //   headers: {
-    //     'Authorization': `Bearer ${jwtToken}`
-    //   }
-    // });
   }
 
   goBack() {
@@ -271,14 +266,19 @@ export class HomePage implements OnInit {
   }
   // api call to make library access request for read
   readRequestAccessLibrary(libraryId: number) {
-    this.libraryService.readRequestAccessLibrary(libraryId).subscribe(
-      (response: any) => {
+    this.libraryService.readRequestAccessLibrary(libraryId).subscribe({
+      next: (response: any) => {
         console.log(response.status);
         if (response.status === 200) {
           this.presentToast('Library access request sent to the owner');
         }
-      }
-    )
+      },
+      error: (error) => {
+        console.error('Error:', error);
+        // Handle error and show error toast if needed
+      },
+    });
   }
+
 
 }

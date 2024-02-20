@@ -39,16 +39,29 @@ export class LibraryDetailsPage implements OnInit {
     this.libraryService.getLibraryById(apiURL).subscribe(
       (data: any) => {
         // console.log('Library details response:', data);
-        this.libraryData = data;
-        this.libraryName = data.library.name;
-        console.log('Assigned library object:', JSON.stringify(this.libraryData));
-        console.log('Library id:', this.libraryData.library.id);
 
+        if (data && data.library) {
+          this.libraryData = data;
+
+          if (data.library.name) {
+            this.libraryName = data.library.name;
+            console.log('Library name:', this.libraryName);
+          }
+
+          if (data.library.id) {
+            console.log('Library id:', data.library.id);
+          }
+
+          console.log('Assigned library object:', JSON.stringify(this.libraryData));
+        } else {
+          console.error('Library data or library property not found in the response.');
+        }
       },
       (error) => {
         console.error('Error in fetching library details for ID:', error);
       }
     );
+
   }
 
 
@@ -152,16 +165,17 @@ export class LibraryDetailsPage implements OnInit {
       // const response = await axios.put(apiURL, payload);
       // console.log('API Response:', response.data);
       this.libraryService.updateLibrary(apiURL, payload)
-        .subscribe(
-          (response) => {
+        .subscribe({
+          next: (response) => {
             console.log('Library updated successfully', response);
             // Handle success (e.g., show a success toast)
           },
-          (error) => {
+          error: (error) => {
             console.error('API Error:', error);
             // Handle error (e.g., show an error toast)
-          }
-        );
+          },
+        });
+
       // Handle success (e.g., show a success toast)
     } catch (error) {
       console.error('API Error:', error);
@@ -265,16 +279,14 @@ export class LibraryDetailsPage implements OnInit {
       // const response = await axios.put(apiURL, payload);
       // console.log('API Response:', response.data);
       this.libraryService.deleteLibrary(apiURL)
-        .subscribe(
-          (response) => {
-            console.log('Library updated successfully', response);
-            this.router.navigate(['/libraries']);
+        .subscribe({
+          next: (response) => {
+            console.log(' Deleted library successfully', response.data);
           },
-          (error) => {
-            console.error('API Error:', error);
-            // Handle error (e.g., show an error toast)
+          error: (error) => {
+            console.log('API error:', error);
           }
-        );
+        })
       // Handle success (e.g., show a success toast)
     } catch (error) {
       console.error('API Error:', error);

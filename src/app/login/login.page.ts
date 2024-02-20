@@ -13,6 +13,7 @@ import { TokenService } from '../shared/services/token.service';
 import { jwtDecode } from 'jwt-decode';
 
 import { ToastService } from '../shared/services/toast.service';
+import OneSignal from 'onesignal-cordova-plugin';
 
 
 @Component({
@@ -87,11 +88,16 @@ export class LoginPage {
         // Authentication successful
         console.log('Authentication successful', response.data);
         this.presentToast('Authentication successful');
-        // You may want to store the tokens or perform additional actions
-        // Sets token inside the authService
         const token = response.data.access_token;
         this.tokenService.setToken(token);
-
+        const decodedToken = jwtDecode(response.data.access_token);
+        if (decodedToken.sub !== undefined) {
+          const externalId = decodedToken.sub;
+          OneSignal.login(externalId);
+        } else {
+          // Handle the case where decodedToken.sub is undefined
+          console.error('Decoded token sub is undefined');
+        }
         // Navigate to a different page after successful login
         this.router.navigate(['/login', { skipLocationChange: true }]);
         this.router.navigate(['/home']);

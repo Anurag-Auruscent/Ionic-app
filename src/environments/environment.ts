@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  keycloakUrl: 'http://localhost:8080/realms/angular-auth/protocol/openid-connect/token',
+  keycloakUrl: 'http://localhost:8080/realms/angular-oauth/protocol/openid-connect/token',
   // keycloakUrl: 'https://a0fb-103-221-73-209.ngrok-free.app/realms/angular-auth/protocol/openid-connect/token',
   clientId: 'ionic-angular-gateway',
-  clientSecret: 'jLR1ZZF3XOsOxKTDt7IrA4DqA9nsoq95',
+  clientSecret: 'dNcB1Tl0N5p1H3rDpIPRH7LAyrDuu4RD',
   saveLibraryToDatabaseApiUrl: 'http://localhost:9000/library/create',
   getAllLibrariesApiUrl: 'http://localhost:9000/library/get-libraries-with-weblinks',
   readAccessRequestApiUrl: 'http://localhost:9000/library/request/read',
