@@ -281,7 +281,7 @@ export class LibraryDetailsPage implements OnInit {
       this.libraryService.deleteLibrary(apiURL)
         .subscribe({
           next: (response) => {
-            console.log(' Deleted library successfully', response.data);
+            console.log(' Deleted library successfully', response);
           },
           error: (error) => {
             console.log('API error:', error);
