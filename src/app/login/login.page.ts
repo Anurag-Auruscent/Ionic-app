@@ -93,7 +93,7 @@ export class LoginPage {
         const decodedToken = jwtDecode(response.data.access_token);
         if (decodedToken.sub !== undefined) {
           const externalId = decodedToken.sub;
-          OneSignal.login(externalId);
+          // OneSignal.login(externalId);
         } else {
           // Handle the case where decodedToken.sub is undefined
           console.error('Decoded token sub is undefined');
