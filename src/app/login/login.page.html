@@ -20,5 +20,19 @@
         <ion-button expand="full" type="submit">Login</ion-button>
       </form>
     </ion-card-content>
+    <ion-button expand="full" (click)="signIn()" *ngIf="!user">
+      <ion-icon name="logo-google" slot="start"></ion-icon>Sign in with Google</ion-button>
+    <ion-button expand="full" (click)="signOut()" *ngIf="!user"> Sign Out</ion-button>
+    <ion-button expand="full" (click)="signOut()" *ngIf="!user"> Refresh token</ion-button>
+
+    <!-- <ion-item *ngIf="user">
+      <ion-avatar slot="start">
+        <img [src]="user.imageUrl" alt="">
+      </ion-avatar>
+      <ion-label>
+        {{user.givenName}} {{user.familyName}}
+        <p>{{user.email}}</p>
+      </ion-label>
+    </ion-item> -->
   </ion-card>
 </ion-content>

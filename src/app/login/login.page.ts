@@ -8,12 +8,19 @@ import { AuthService } from '../auth.service';
 import { environment } from '../../environments/environment';
 
 import { TokenService } from '../shared/services/token.service';
-// import OneSignal from 'onesignal-cordova-plugin';
 
 import { jwtDecode } from 'jwt-decode';
 
 import { ToastService } from '../shared/services/toast.service';
 import OneSignal from 'onesignal-cordova-plugin';
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
+
+// use hook after platform dom ready
+// GoogleAuth.initialize({
+//   clientId: '655025045604-okroi8g3i019jd3mqvigt7t5kq4kls63.apps.googleusercontent.com',
+//   scopes: ['profile', 'email'],
+//   grantOfflineAccess: true,
+// });
 
 
 @Component({
@@ -24,6 +31,7 @@ import OneSignal from 'onesignal-cordova-plugin';
 export class LoginPage {
   username: string = '';
   password: string = '';
+  user = null
 
   constructor(
     private router: Router,
@@ -32,6 +40,31 @@ export class LoginPage {
     private tokenService: TokenService,
     private ts: ToastService
   ) {
+    this.initializeApp();
+  }
+  initializeApp() {
+    GoogleAuth.initialize()
+  }
+
+  async signIn() {
+    try {
+      const user = await GoogleAuth.signIn();
+      console.log('user', user);
+    } catch (error) {
+      if (error === "popup_closed_by_user") {
+        this.presentErrorToast(error); return
+      }
+    }
+  }
+
+  async refresh() {
+    const authCode = await GoogleAuth.refresh();
+    console.log('authCode', authCode);
+  }
+
+  async signOut() {
+    await GoogleAuth.signOut();
+    this.user = null;
   }
 
   async presentToast(message: string) {
