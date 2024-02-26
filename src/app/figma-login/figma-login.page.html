@@ -1,0 +1,62 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content [fullscreen]="true">
+  <!-- <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">login</ion-title>
+    </ion-toolbar>
+  </ion-header> -->
+
+  <!-- <app-email-input
+    [label]="'email'"
+    [value]="'abc@gmail.com'"
+    [labelClass]="'custom-label-class'"
+    [inputClass]="'custom-input-class'"
+    [inputStyle]="{ 'background-color': 'lightgray', 'border': '1px solid black' }"
+  ></app-email-input> -->
+  <div class="ParetDiv">
+    <h1>welcome back!</h1>
+    <h6>Enter your email to start exploring!</h6>
+
+    <ion-segment [(ngModel)]="selectedSegment">
+      <ion-segment-button value="email">
+        <ion-label class="segmentLabel">email</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="phone">
+        <ion-label class="segmentLabel">phone</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <ion-segment *ngIf="selectedSegment === 'email'">
+      <ion-item class="userEmailItem" lines="none">
+        <app-email-input [value]="useremail" [placeholder]="'Enter email id'"
+          [icon]="'/assets/Images/mail-icon.svg'"></app-email-input>
+      </ion-item>
+    </ion-segment>
+    <ion-segment *ngIf="selectedSegment === 'phone'">
+      <!-- Content for 'favorites' segment -->
+    </ion-segment>
+
+    <ion-item class="userPasswordItem" lines="none">
+      <app-password-input [label]="" [value]="userpassword" [placeholder]="'Enter Password'"
+        [icon]="'/assets/Images/lock-icon.svg'"></app-password-input>
+    </ion-item>
+
+    <p class="forgetPassword">Forgot your password?</p>
+
+    <app-button label="log in" (clickEvent)="login()"></app-button>
+    <div class="orDiv">
+      <p class="orLabel"><span> or </span></p>
+      <p class="orLine"></p>
+    </div>
+
+    <app-button-social label="Log In with Google" [src]="'flat-color-icons_google.svg'"></app-button-social>
+
+    <app-button-social label="Log In with Facebook" [src]="'cib_facebook-f.svg'"></app-button-social>
+    <p class="haveAccountLabel">Don’t have an account? <span>Register</span></p>
+  </div>
+</ion-content>

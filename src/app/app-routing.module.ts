@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'figma-login',
     pathMatch: 'full'
   },
   {
@@ -30,6 +30,10 @@ const routes: Routes = [
   {
     path: 'viewallnotifications',
     loadChildren: () => import('./viewallnotifications/viewallnotifications.module').then(m => m.ViewallnotificationsPageModule)
+  },
+  {
+    path: 'figma-login',
+    loadChildren: () => import('./figma-login/figma-login.module').then(m => m.FigmaLoginPageModule)
   },
 ];
 
