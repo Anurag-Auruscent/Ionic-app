@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { FigmaLoginPage } from './figma-login.page';
+import { RegisterUserPage } from './register-user.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: FigmaLoginPage
+    component: RegisterUserPage
   }
 ];
 
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class FigmaLoginPageRoutingModule {}
+export class RegisterUserPageRoutingModule {}

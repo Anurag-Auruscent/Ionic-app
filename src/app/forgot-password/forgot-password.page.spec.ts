@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FigmaLoginPage } from './figma-login.page';
+import { ForgotPasswordPage } from './forgot-password.page';
 
-describe('FigmaLoginPage', () => {
-  let component: FigmaLoginPage;
-  let fixture: ComponentFixture<FigmaLoginPage>;
+describe('ForgotPasswordPage', () => {
+  let component: ForgotPasswordPage;
+  let fixture: ComponentFixture<ForgotPasswordPage>;
 
   beforeEach(async(() => {
-    fixture = TestBed.createComponent(FigmaLoginPage);
+    fixture = TestBed.createComponent(ForgotPasswordPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

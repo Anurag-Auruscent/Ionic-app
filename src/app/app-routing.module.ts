@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'figma-login',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
@@ -30,11 +30,19 @@ const routes: Routes = [
   {
     path: 'viewallnotifications',
     loadChildren: () => import('./viewallnotifications/viewallnotifications.module').then(m => m.ViewallnotificationsPageModule)
+  },  {
+    path: 'forgot-password',
+    loadChildren: () => import('./forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
   },
   {
-    path: 'figma-login',
-    loadChildren: () => import('./figma-login/figma-login.module').then(m => m.FigmaLoginPageModule)
+    path: 'register-user',
+    loadChildren: () => import('./register-user/register-user.module').then( m => m.RegisterUserPageModule)
   },
+
+  // {
+  //   path: 'figma-login',
+  //   loadChildren: () => import('./figma-login/figma-login.module').then(m => m.FigmaLoginPageModule)
+  // },
 ];
 
 @NgModule({

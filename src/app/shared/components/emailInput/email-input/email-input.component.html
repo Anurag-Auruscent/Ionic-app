@@ -1,13 +1,10 @@
+<!-- <ion-input labelPlacement="stacked" (change)="setEmail(useremail)" [label]="label" [value]="" [(ngModel)]="useremail"
+  [type]="type" [placeholder]="placeholder" [class]="inputClass">
+  <img [src]="icon" slot="start" alt="Icon" width="24" height="24" />
 
-  <ion-input
-    labelPlacement="stacked"
-    [label]="label"
-    [(ngModel)]="value"
-    [type]="type"
-    [placeholder]="placeholder"
-    [class]="inputClass"
-  >
-    <img [src]="icon" slot="start" alt="Icon" width="24" height="24" />
-    
-  </ion-input>
+</ion-input> -->
+<ion-input labelPlacement="stacked" [label]="label" [(ngModel)]="value" [type]="type" [placeholder]="placeholder"
+  [class]="inputClass" (ionChange)="onEmailChange()">
+  <img [src]="icon" slot="start" alt="Icon" width="24" height="24" />
 
+</ion-input>

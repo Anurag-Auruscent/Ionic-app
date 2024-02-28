@@ -1,4 +1,4 @@
-<ion-content fullscreen>
+<!-- <ion-content fullscreen>
   <ion-card>
     <ion-card-header>
       <ion-card-title>Welcome to Sphagetti Head</ion-card-title>
@@ -9,12 +9,12 @@
       <form (ngSubmit)="login()">
         <ion-item>
           <ion-label position="floating">Username</ion-label>
-          <ion-input type="text" [(ngModel)]="username" name="username" required></ion-input>
+          <ion-input type="text" [(ngModel)]="useremail" name="useremail" required></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label position="floating">Password</ion-label>
-          <ion-input type="password" [(ngModel)]="password" name="password" required></ion-input>
+          <ion-input type="password" [(ngModel)]="userpassword" name="userpassword" required></ion-input>
         </ion-item>
 
         <ion-button expand="full" type="submit">Login</ion-button>
@@ -23,9 +23,9 @@
     <ion-button expand="full" (click)="signIn()" *ngIf="!user">
       <ion-icon name="logo-google" slot="start"></ion-icon>Sign in with Google</ion-button>
     <ion-button expand="full" (click)="signOut()" *ngIf="!user"> Sign Out</ion-button>
-    <ion-button expand="full" (click)="signOut()" *ngIf="!user"> Refresh token</ion-button>
+    <ion-button expand="full" (click)="signOut()" *ngIf="!user"> Refresh token</ion-button> -->
 
-    <!-- <ion-item *ngIf="user">
+<!-- <ion-item *ngIf="user">
       <ion-avatar slot="start">
         <img [src]="user.imageUrl" alt="">
       </ion-avatar>
@@ -34,5 +34,82 @@
         <p>{{user.email}}</p>
       </ion-label>
     </ion-item> -->
-  </ion-card>
+<!-- </ion-card>
+</ion-content> -->
+
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content [fullscreen]="true">
+  <!-- <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">login</ion-title>
+    </ion-toolbar>
+  </ion-header> -->
+
+  <!-- <app-email-input
+    [label]="'email'"
+    [value]="'abc@gmail.com'"
+    [labelClass]="'custom-label-class'"
+    [inputClass]="'custom-input-class'"
+    [inputStyle]="{ 'background-color': 'lightgray', 'border': '1px solid black' }"
+  ></app-email-input> -->
+  <div class="ParetDiv">
+    <h1>welcome back!</h1>
+    <h6>Enter your email to start exploring!</h6>
+    <ion-segment [(ngModel)]="selectedSegment">
+      <ion-segment-button value="email">
+        <ion-label class="segmentLabel">email</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="phone">
+        <ion-label class="segmentLabel">phone</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <ion-segment *ngIf="selectedSegment === 'email'">
+      <ion-item class="userEmailItem" lines="none">
+        <app-email-input [value]="useremail" (emailChange)="onEmailChange($event)" name="useremail"
+          [placeholder]="'Enter email id'" [icon]="'/assets/Images/mail-icon.svg'"></app-email-input>
+      </ion-item>
+      <ion-item class="userPasswordItem" lines="none">
+        <app-password-input [label]="" [value]="userpassword" (passwordChange)="onPasswordChange($event)"
+          name="userpassword" [placeholder]="'Enter Password'"
+          [icon]="'/assets/Images/lock-icon.svg'"></app-password-input>
+      </ion-item>
+    </ion-segment>
+    <ion-segment *ngIf="selectedSegment === 'phone'">
+      <ion-item class="userNumberItem" lines="none">
+        <app-mobile-input [value]="usernumber" [placeholder]="'Enter phone number'"
+          [icon]="'/assets/Images/mail-icon.svg'" (numberChange)="onNumberChange($event)"></app-mobile-input>
+      </ion-item>
+    </ion-segment>
+
+
+    <p class="forgetPassword">
+      <span (click)="goToForgotPasswordPage()" class="forgotPasswordLink">Forgot your password?</span>
+    </p>
+    <!-- <app-clickable-text>
+      Forgot your password?
+    </app-clickable-text> -->
+
+    <app-button label="log in" (clickEvent)="login()"></app-button>
+    <div class="orDiv">
+      <p class="orLabel"><span> or </span></p>
+      <p class="orLine"></p>
+    </div>
+
+    <app-button-social label="Log In with Google" [src]="'flat-color-icons_google.svg'"></app-button-social>
+
+    <app-button-social label="Log In with Facebook" [src]="'cib_facebook-f.svg'"></app-button-social>
+    <p class="haveAccountLabel">
+      don't have an account?
+      <span (click)="goToRegisterPage()" class="registerLink">register</span>
+    </p>
+
+  </div>
 </ion-content>
+
+<!-- this.router.navigate(['/registerPage']); -->
