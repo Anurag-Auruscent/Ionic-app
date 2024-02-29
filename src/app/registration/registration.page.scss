@@ -1,0 +1,114 @@
+.container {
+    padding: 15px;
+
+    h1 {
+        font-size: 32px;
+        font-weight: 800;
+        color: #000;
+        margin-top: 2rem;
+        letter-spacing: 0em;
+    }
+
+    h6 {
+        font-size: 16px;
+        color: #757575;
+        margin-top: 0;
+    }
+}
+
+.userEmailItem,
+.userPasswordItem,
+.firstNameItem,
+.lastNameItem {
+    margin: 10px 0;
+    --border-radius: 5px;
+    --background: #ffffff80;
+    border-radius: 8px;
+    color: #404040;
+}
+
+input#ion-input-0 {
+    font-family: Poppins;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14px;
+    letter-spacing: 0em;
+    text-align: left;
+    background: #404040;
+}
+
+.tabContainer,
+.emailSegment {
+    --background: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0);
+}
+
+ion-segment-button {
+    // background-color: ;
+    --indicator-color: transparent;
+    --border-radius: 0;
+}
+
+
+
+.segmentLabel {
+    font-size: 18px;
+    border-bottom: 2px solid transparent;
+    --indicator-box-shadow: transparent;
+    transition: border-bottom-color  0.7s ease-out;
+}
+
+.segmentLabel.active{
+    border-bottom-color: #ff6891;
+}
+
+.input-wrapper {
+    font-size: 20px;
+}
+
+.acknowledgeText {
+    font-size: 14px;
+    font-weight: 400;
+    color: #404040;
+    line-height: 16.8px;
+}
+
+.policyLink, .loginLink {
+    color: #FF6891;
+    text-decoration: none;
+}
+
+.orDiv {
+    margin: 30px 0;
+}
+
+.orLabel {
+    font-size: 12px;
+    color: #404040;
+    text-align: center;
+
+    span {
+        background: #f0d6bd;
+        padding: 5px 10px;
+    }
+}
+
+.orLine {
+    border-bottom: 1px solid #c2c2c2;
+    position: relative;
+    top: -22px;
+    z-index: -1;
+}
+
+.haveAccountLabel {
+    text-align: center;
+    font-size: 16px;
+    color: #404040;
+
+    span {
+        color: #ff6891;
+    }
+}
+
+.btns{
+    border-radius: 8px;
+}

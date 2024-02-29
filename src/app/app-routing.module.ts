@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'figma-login',
+    redirectTo: 'registration',
     pathMatch: 'full'
   },
   {
@@ -35,6 +35,11 @@ const routes: Routes = [
     path: 'figma-login',
     loadChildren: () => import('./figma-login/figma-login.module').then(m => m.FigmaLoginPageModule)
   },
+  {
+    path: 'registration',
+    loadChildren: () => import('./registration/registration.module').then( m => m.RegistrationPageModule)
+  },
+
 ];
 
 @NgModule({

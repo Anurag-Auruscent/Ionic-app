@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FigmaLoginPageRoutingModule } from './figma-login-routing.module';
+import { RegistrationPageRoutingModule } from './registration-routing.module';
 
-import { FigmaLoginPage } from './figma-login.page';
+import { RegistrationPage } from './registration.page';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    FigmaLoginPageRoutingModule,
+    RegistrationPageRoutingModule,
     SharedModule
   ],
-  declarations: [FigmaLoginPage]
+  declarations: [RegistrationPage]
 })
-export class FigmaLoginPageModule { }
+export class RegistrationPageModule {}
