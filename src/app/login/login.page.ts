@@ -14,6 +14,7 @@ import { jwtDecode } from 'jwt-decode';
 import { ToastService } from '../shared/services/toast.service';
 import OneSignal from 'onesignal-cordova-plugin';
 import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
+import { FormGroup } from '@angular/forms';
 
 // use hook after platform dom ready
 // GoogleAuth.initialize({
@@ -29,16 +30,19 @@ import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage {
-  username: string = '';
-  password: string = '';
+  useremail: string = '';
+  userpassword: string = '';
   user = null
+  selectedSegment: any = 'email';
+  loginForm!: FormGroup;
+  usernumber: string = ''
 
   constructor(
     private router: Router,
     private inAppBrowser: InAppBrowser, // Inject InAppBrowser
     private toastController: ToastController,
     private tokenService: TokenService,
-    private ts: ToastService
+    private ts: ToastService,
   ) {
     this.initializeApp();
   }
@@ -52,7 +56,7 @@ export class LoginPage {
       console.log('user', user);
     } catch (error) {
       if (error === "popup_closed_by_user") {
-        this.presentErrorToast(error); return
+        this.ts.presentToast(error, 2000); return
       }
     }
   }
@@ -67,80 +71,91 @@ export class LoginPage {
     this.user = null;
   }
 
-  async presentToast(message: string) {
-    const toast = await this.toastController.create({
-      message: message,
-      duration: 3000, // Duration in milliseconds
-      position: 'bottom',
-      color: 'success', // You can customize the color
-    });
-    toast.present();
+  onEmailChange(newEmail: string) {
+    this.useremail = newEmail
   }
 
-  async presentErrorToast(message: string) {
-    const toast = await this.toastController.create({
-      message: message,
-      duration: 2000,
-      position: 'bottom',
-      color: 'danger', // Customize the color for error
-    });
-    toast.present();
+  onPasswordChange(newPassword: string) {
+    this.userpassword = newPassword
+  }
+
+  onNumberChange(newNumber: string) {
+    this.usernumber = newNumber
+  }
+
+  goToRegisterPage() {
+    this.router.navigate(['/register-user']);
+  }
+
+  goToForgotPasswordPage() {
+    this.router.navigate(['/forgot-password']);
   }
 
   login() {
-    // console.log('Username:', this.username);
-    // console.log('Password:', this.password);
 
-    if (!this.username || !this.password) {
-      console.error('Username and password are required');
-      this.presentErrorToast('Username and password are required');
-      return;
+    if (this.selectedSegment === "phone") {
+      this.useremail = '';
+      this.userpassword = '';
+      if (!this.usernumber) {
+        console.error('Username number is required');
+        this.ts.presentToast('User Phone number is required', 2000);
+        return;
+      }
+      console.log("This is a phone number", this.usernumber);
     }
 
-    const keycloakCredentials = {
-      client_id: environment.clientId,
-      // client_id: '',
-      grant_type: 'password',
-      username: this.username,
-      password: this.password,
-      client_secret: environment.clientSecret,
-      // client_secret: '',
-    };
+    if (this.selectedSegment === "email") {
+      this.usernumber = '';
+      if (!this.useremail || !this.userpassword) {
+        console.error('Username and password are required');
+        this.ts.presentToast('Username and password are required', 2000);
+        return;
+      }
+      const keycloakCredentials = {
+        client_id: environment.clientId,
+        // client_id: '',
+        grant_type: 'password',
+        username: this.useremail,
+        password: this.userpassword,
+        client_secret: environment.clientSecret,
+        // client_secret: '',
+      };
 
-    // Replace 'your-keycloak-server' with the actual URL of your Keycloak server
-    const keycloakUrl = environment.keycloakUrl;
-    // const keycloakUrl = '';
+      // Replace 'your-keycloak-server' with the actual URL of your Keycloak server
+      const keycloakUrl = environment.keycloakUrl;
+      // const keycloakUrl = '';
 
-    const headers = {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    };
+      const headers = {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      };
 
-    console.log(keycloakCredentials, keycloakUrl, headers);
-    axios.post(keycloakUrl, this.toFormUrlEncoded(keycloakCredentials), { headers: headers })
-      .then((response) => {
-        // Authentication successful
-        console.log('Authentication successful', response.data);
-        this.presentToast('Authentication successful');
-        const token = response.data.access_token;
-        this.tokenService.setToken(token);
-        const decodedToken = jwtDecode(response.data.access_token);
-        if (decodedToken.sub !== undefined) {
-          const externalId = decodedToken.sub;
-          // OneSignal.login(externalId);
-        } else {
-          // Handle the case where decodedToken.sub is undefined
-          console.error('Decoded token sub is undefined');
-        }
-        // Navigate to a different page after successful login
-        this.router.navigate(['/login', { skipLocationChange: true }]);
-        this.router.navigate(['/home']);
-      })
-      .catch((error) => {
-        // Handle authentication failure
-        console.error('Authentication failed', error);
-        this.presentErrorToast('Authentication failed');
-        // Display an error message or perform other actions as needed
-      });
+      console.log(keycloakCredentials, keycloakUrl, headers);
+      axios.post(keycloakUrl, this.toFormUrlEncoded(keycloakCredentials), { headers: headers })
+        .then((response) => {
+          // Authentication successful
+          console.log('Authentication successful', response.data);
+          this.ts.presentToast('Authentication successful', 2000, 'success');
+          const token = response.data.access_token;
+          this.tokenService.setToken(token);
+          const decodedToken = jwtDecode(response.data.access_token);
+          if (decodedToken.sub !== undefined) {
+            const externalId = decodedToken.sub;
+            // OneSignal.login(externalId);
+          } else {
+            // Handle the case where decodedToken.sub is undefined
+            console.error('Decoded token sub is undefined');
+          }
+          // Navigate to a different page after successful login
+          this.router.navigate(['/login', { skipLocationChange: true }]);
+          this.router.navigate(['/home']);
+        })
+        .catch((error) => {
+          // Handle authentication failure
+          console.error('Authentication failed', error);
+          this.ts.presentToast('Authentication failed', 2000);
+          // Display an error message or perform other actions as needed
+        });
+    }
   }
 
   // Helper function to convert an object to x-www-form-urlencoded format

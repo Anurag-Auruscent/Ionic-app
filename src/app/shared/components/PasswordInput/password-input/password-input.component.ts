@@ -1,11 +1,11 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-password-input',
   templateUrl: './password-input.component.html',
   styleUrls: ['./password-input.component.scss'],
 })
-export class PasswordInputComponent  implements OnInit {
+export class PasswordInputComponent implements OnInit {
   @Input() label: any = '';
   @Input() type: any = 'password';
   @Input() value: any = '';
@@ -14,8 +14,18 @@ export class PasswordInputComponent  implements OnInit {
   @Input() inputClass: any = '';
   @Input() inputStyle: any = {};
   @Input() icon: any = '';
+  @Output() passwordChange = new EventEmitter();
+  isPasswordVisible: boolean = false;
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
+
+  togglePasswordVisibility() {
+    this.isPasswordVisible = !this.isPasswordVisible;
+  }
+
+  onPasswordChange() {
+    this.passwordChange.emit(this.value);
+  }
 
 }

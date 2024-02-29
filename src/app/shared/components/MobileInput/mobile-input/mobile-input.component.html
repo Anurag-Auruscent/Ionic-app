@@ -1,3 +1,5 @@
-<p>
-  mobile-input works!
-</p>
+<ion-input labelPlacement="stacked" [label]="label" [(ngModel)]="value" [type]="type" [placeholder]="placeholder"
+  [class]="inputClass" (ionChange)="onNumberChange()">
+  <img [src]="icon" slot="start" alt="Icon" width="24" height="24" />
+
+</ion-input>
