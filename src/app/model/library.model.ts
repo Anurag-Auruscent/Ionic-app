@@ -32,3 +32,15 @@ export interface LibraryListServerResponse {
     numberOfElements: number;
     empty: boolean;
 }
+
+
+export interface UserModelResponse {
+    username: string;
+    email: string;
+    password: string;
+    role: string;
+    gender: string;
+    dob: string;
+    firstName: string;
+    lastName: string;
+}

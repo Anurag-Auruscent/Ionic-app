@@ -30,12 +30,13 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage {
-  useremail: string = '';
-  userpassword: string = '';
+  userEmail: string = '';
+  userPassword: string = '';
   user = null
   selectedSegment: any = 'email';
   loginForm!: FormGroup;
-  usernumber: string = ''
+  userNumber: string = ''
+  areCredentialsWrong: boolean = false;
 
   constructor(
     private router: Router,
@@ -72,19 +73,19 @@ export class LoginPage {
   }
 
   onEmailChange(newEmail: string) {
-    this.useremail = newEmail
+    this.userEmail = newEmail
   }
 
   onPasswordChange(newPassword: string) {
-    this.userpassword = newPassword
+    this.userPassword = newPassword
   }
 
   onNumberChange(newNumber: string) {
-    this.usernumber = newNumber
+    this.userNumber = newNumber
   }
 
   goToRegisterPage() {
-    this.router.navigate(['/register-user']);
+    this.router.navigate(['/registration']);
   }
 
   goToForgotPasswordPage() {
@@ -94,19 +95,19 @@ export class LoginPage {
   login() {
 
     if (this.selectedSegment === "phone") {
-      this.useremail = '';
-      this.userpassword = '';
-      if (!this.usernumber) {
+      this.userEmail = '';
+      this.userPassword = '';
+      if (!this.userNumber) {
         console.error('Username number is required');
         this.ts.presentToast('User Phone number is required', 2000);
         return;
       }
-      console.log("This is a phone number", this.usernumber);
+      console.log("This is a phone number", this.userNumber);
     }
 
     if (this.selectedSegment === "email") {
-      this.usernumber = '';
-      if (!this.useremail || !this.userpassword) {
+      this.userNumber = '';
+      if (!this.userEmail || !this.userPassword) {
         console.error('Username and password are required');
         this.ts.presentToast('Username and password are required', 2000);
         return;
@@ -115,8 +116,8 @@ export class LoginPage {
         client_id: environment.clientId,
         // client_id: '',
         grant_type: 'password',
-        username: this.useremail,
-        password: this.userpassword,
+        username: this.userEmail,
+        password: this.userPassword,
         client_secret: environment.clientSecret,
         // client_secret: '',
       };
@@ -133,6 +134,7 @@ export class LoginPage {
       axios.post(keycloakUrl, this.toFormUrlEncoded(keycloakCredentials), { headers: headers })
         .then((response) => {
           // Authentication successful
+          this.areCredentialsWrong = false;
           console.log('Authentication successful', response.data);
           this.ts.presentToast('Authentication successful', 2000, 'success');
           const token = response.data.access_token;
@@ -153,6 +155,11 @@ export class LoginPage {
           // Handle authentication failure
           console.error('Authentication failed', error);
           this.ts.presentToast('Authentication failed', 2000);
+          if (error.response && error.response.status === 401) {
+            this.areCredentialsWrong = true; // Set the flag only on incorrect credentials
+          } else {
+            this.areCredentialsWrong = false; // Reset the flag for other errors
+          }
           // Display an error message or perform other actions as needed
         });
     }

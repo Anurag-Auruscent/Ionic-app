@@ -7,6 +7,7 @@ import { ButtonComponent } from './components/button/button/button.component';
 import { ButtonSocialComponent } from './components/buttonSocial/button-social/button-social.component';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { MobileInputComponent } from './components/MobileInput/mobile-input/mobile-input.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { IonicModule } from '@ionic/angular';
     EmailInputComponent,
     PasswordInputComponent,
     ButtonComponent,
-    ButtonSocialComponent
+    ButtonSocialComponent,
+    MobileInputComponent
   ],
   imports: [
     CommonModule,
@@ -30,6 +32,7 @@ import { IonicModule } from '@ionic/angular';
     PasswordInputComponent,
     ButtonComponent,
     ButtonSocialComponent,
+    MobileInputComponent,
     FormsModule
   ]
 })

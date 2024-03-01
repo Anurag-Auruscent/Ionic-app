@@ -12,4 +12,6 @@ export class ForgotPasswordPage implements OnInit {
   ngOnInit() {
   }
 
+  selectedSegment!: string
+
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-name-input',
@@ -16,9 +16,13 @@ export class NameInputComponent implements OnInit {
   @Input() inputClass: any = '';
   @Input() inputStyle: any = {};
   @Input() icon: any = '';
-
+  @Output() nameChange = new EventEmitter<string>
   constructor() { }
 
   ngOnInit() { }
+
+  onNameChange() {
+    this.nameChange.emit(this.value);
+  }
 
 }

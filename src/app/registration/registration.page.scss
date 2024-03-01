@@ -17,6 +17,7 @@
 }
 
 .userEmailItem,
+.userNumberItem,
 .userPasswordItem,
 .firstNameItem,
 .lastNameItem {
@@ -41,9 +42,14 @@ input#ion-input-0 {
 .emailSegment {
     --background: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0);
 }
+ion-segment {
+    --indicator-box-background: transparent !important;
+    --background: transparent;
+}
 
 ion-segment-button {
     // background-color: ;
+    // --background: transparent;
     --indicator-color: transparent;
     --border-radius: 0;
 }

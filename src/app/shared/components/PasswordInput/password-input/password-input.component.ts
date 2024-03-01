@@ -16,6 +16,7 @@ export class PasswordInputComponent implements OnInit {
   @Input() icon: any = '';
   @Output() passwordChange = new EventEmitter();
   isPasswordVisible: boolean = false;
+  areCredentialsWrong: any;
   constructor() { }
 
   ngOnInit() { }

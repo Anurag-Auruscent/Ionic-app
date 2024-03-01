@@ -6,12 +6,12 @@
     </ion-grid>
     <ion-grid>
       <ion-item class="firstNameItem" lines="none">
-        <app-name-input [value]="firstName" [placeholder]="'first name'"
-          [icon]="'/assets/Images/user-icon.svg'"></app-name-input>
+        <app-name-input [value]="firstName" [placeholder]="'first name'" [icon]="'/assets/Images/user-icon.svg'"
+          (nameChange)="onFirstNameChange($event)"></app-name-input>
       </ion-item>
       <ion-item class="lastNameItem" lines="none">
-        <app-name-input [value]="lastName" [placeholder]="'last name'"
-          [icon]="'/assets/Images/user-icon.svg'"></app-name-input>
+        <app-name-input [value]="lastName" [placeholder]="'last name'" [icon]="'/assets/Images/user-icon.svg'"
+          (nameChange)="onLastNameChange($event)"></app-name-input>
       </ion-item>
     </ion-grid>
     <ion-grid>
@@ -25,35 +25,42 @@
       </ion-segment>
       <ion-segment class="emailSegment" *ngIf="selectedSegment === 'email'">
         <ion-item class="userEmailItem" lines="none">
-          <app-email-input [value]="userEmail" [placeholder]="'Enter email id'"
-            [icon]="'/assets/Images/mail-icon.svg'"></app-email-input>
+          <app-email-input [value]="userEmail" [placeholder]="'Enter email id'" [icon]="'/assets/Images/mail-icon.svg'"
+            (emailChange)="onEmailChange($event)"></app-email-input>
+        </ion-item>
+        <ion-item class="userPasswordItem" lines="none">
+          <app-password-input [label]="" [value]="userPassword" [placeholder]="'Enter Password'"
+            [icon]="'/assets/Images/lock-icon.svg'" (passwordChange)="onPasswordChange($event)"></app-password-input>
         </ion-item>
       </ion-segment>
       <ion-segment *ngIf="selectedSegment === 'phone'">
-        <!-- Content for 'favorites' segment -->
+        <ion-item class="userNumberItem" lines="none">
+          <app-mobile-input [value]="userNumber" [placeholder]="'Enter phone number'"
+            [icon]="'/assets/Images/mail-icon.svg'" (numberChange)="onNumberChange($event)"></app-mobile-input>
+        </ion-item>
       </ion-segment>
-      <ion-item class="userPasswordItem" lines="none">
-        <app-password-input [label]="" [value]="userPassword" [placeholder]="'Enter Password'"
-          [icon]="'/assets/Images/lock-icon.svg'"></app-password-input>
-      </ion-item>
       <div>
-        <p class="acknowledgeText">By clicking Create Account, you acknowledge you have read and agreed to our <a href="http://#"
-            class="policyLink" target="_blank">Terms of Use and Privacy Policy</a></p>
+        <p class="acknowledgeText">By clicking Create Account, you acknowledge you have read and agreed to our <a
+            href="http://#" class="policyLink" target="_blank">Terms of Use and Privacy Policy</a></p>
       </div>
-      <app-button class="btns" label="create account" (clickEvent)="register()"></app-button>
+      <app-button class="btns" label="create account" (clickEvent)="registerUser()"></app-button>
       <div class="orDiv">
-        <p class="orLabel"><span> or </span></p>
         <p class="orLabel"><span> or </span></p>
         <p class="orLine"></p>
       </div>
     </ion-grid>
     <ion-grid>
-      <app-button-social class="btns" label="continue with google" [src]="'flat-color-icons_google.svg'"></app-button-social>
+      <app-button-social class="btns" label="continue with google"
+        [src]="'flat-color-icons_google.svg'"></app-button-social>
       <app-button-social class="btns" label="continue with facebook" [src]="'cib_facebook-f.svg'"></app-button-social>
     </ion-grid>
     <ion-grid>
-      <p class="haveAccountLabel">Already have an account? <a href="http://localhost://8100/figma-login" class="loginLink" target="_blank"
-          rel="noopener noreferrer">Login</a></p>
+      <p class="haveAccountLabel">Already have an account? <span (click)="goToLoginPage()"
+          class="loginLink">Login</span>
     </ion-grid>
+    <!-- <p class="haveAccountLabel">
+      don't have an account?
+      <span (click)="goToRegisterPage()" class="registerLink">register</span>
+    </p> -->
   </div>
 </ion-content>

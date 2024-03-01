@@ -1,0 +1,39 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { UserModelResponse } from 'src/app/model/library.model';
+import { environment } from 'src/environments/environment';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class RegisterationService {
+
+  keyCloakURL = environment.keycloakUrl
+  addUserURL = environment.addUserURL
+
+  constructor(
+    private http: HttpClient
+  ) { }
+
+  getAccessToken(payload: any = {}): Observable<any[]> {
+    console.log(payload, '/n', this.keyCloakURL);
+    return this.http.post<any[]>(this.keyCloakURL, payload);
+  }
+
+  addUser(payload: any = {}): Observable<UserModelResponse> {
+    console.log(payload, '/n', this.addUserURL);
+    console.log(environment.token)
+    // const headers = new HttpHeaders().set('Authorization', `Bearer ${environment.token}`);
+    return this.http.post<UserModelResponse>(this.addUserURL, payload);
+  }
+
+  createNewLibrary(apiURL: string, payload: any = {}): Observable<any[]> {
+    console.log(payload, '/n', apiURL);
+    return this.http.post<any[]>(apiURL, payload);
+  }
+
+  fetchAllLibrary(apiURL: string, payload: any = {}): Observable<any[]> {
+    return this.http.put<any[]>(apiURL, payload);
+  }
+}

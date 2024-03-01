@@ -28,6 +28,8 @@
     margin: 10px 0;
     --border-radius: 5px;
     --background: #ffffff80;
+    border-radius: 8px;
+    color: #404040;
 }
 .orDiv {
     margin: 30px 0;
@@ -92,4 +94,16 @@ ion-segment {
 
 .forgotPasswordLink:hover {
   color: #FF0F00; /* Change color on hover */
+}
+
+/* your-login-page.component.scss */
+.userEmailItem,
+.userEmailItem-wrong {
+  // Common styles for the ion-item wrapper
+  border: 0px solid transparent; // Set a transparent border initially
+}
+
+.userEmailItem-wrong {
+  // Additional styles for the ion-item wrapper when credentials are wrong
+  border-color: red; // Set the border color to red for wrong state
 }

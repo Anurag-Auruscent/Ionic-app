@@ -70,19 +70,28 @@
     </ion-segment>
 
     <ion-segment *ngIf="selectedSegment === 'email'">
-      <ion-item class="userEmailItem" lines="none">
+      <!-- <ion-item *ngIf="areCredentialsWrong" class="userEmailItem-wrong" lines="none">
         <app-email-input [value]="useremail" (emailChange)="onEmailChange($event)" name="useremail"
           [placeholder]="'Enter email id'" [icon]="'/assets/Images/mail-icon.svg'"></app-email-input>
       </ion-item>
+      <ion-item *ngIf="!areCredentialsWrong" class="userEmailItem" lines="none">
+        <app-email-input [value]="useremail" (emailChange)="onEmailChange($event)" name="useremail"
+          [placeholder]="'Enter email id'" [icon]="'/assets/Images/mail-icon.svg'"></app-email-input>
+      </ion-item> -->
+      <ion-item class="userEmailItem" lines="none">
+        <app-email-input [value]="userEmail" (emailChange)="onEmailChange($event)" name="useremail"
+          [placeholder]="'Enter email id'" [icon]="'/assets/Images/mail-icon.svg'"></app-email-input>
+      </ion-item>
+      <!-- <p>{{areCredentialsWrong}}</p> -->
       <ion-item class="userPasswordItem" lines="none">
-        <app-password-input [label]="" [value]="userpassword" (passwordChange)="onPasswordChange($event)"
+        <app-password-input [label]="" [value]="userPassword" (passwordChange)="onPasswordChange($event)"
           name="userpassword" [placeholder]="'Enter Password'"
           [icon]="'/assets/Images/lock-icon.svg'"></app-password-input>
       </ion-item>
     </ion-segment>
     <ion-segment *ngIf="selectedSegment === 'phone'">
       <ion-item class="userNumberItem" lines="none">
-        <app-mobile-input [value]="usernumber" [placeholder]="'Enter phone number'"
+        <app-mobile-input [value]="userNumber" [placeholder]="'Enter phone number'"
           [icon]="'/assets/Images/mail-icon.svg'" (numberChange)="onNumberChange($event)"></app-mobile-input>
       </ion-item>
     </ion-segment>
