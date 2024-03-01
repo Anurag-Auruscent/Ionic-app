@@ -108,7 +108,6 @@ export class RegistrationPage implements OnInit {
 
     if (token) {
       console.log("Token is set");
-      this.ts.presentToast("Token is already there", 3000);
     } else {
       console.error("Failed to fetch token");
       this.ts.presentToast("Failed to fetch token", 3000);
@@ -150,7 +149,8 @@ export class RegistrationPage implements OnInit {
           console.log(email);
           const navigationExtras: NavigationExtras = {
             state: {
-              email: email
+              email: email,
+              token: environment.token
             }
           };
           this.router.navigate(['/user-verification'], navigationExtras);

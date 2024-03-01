@@ -3,6 +3,7 @@ import { UserModelResponse, VerifyOtpRequest } from '../model/library.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastService } from '../shared/services/toast.service';
 import { RegisterationService } from '../shared/services/registeration.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-user-verification',
@@ -30,14 +31,21 @@ export class UserVerificationPage implements OnInit {
     //   }
     // )
 
-    const navigation = this.router.getCurrentNavigation();
-    const state = navigation?.extras.state as { email: string };
-    this.receiverEmail = state.email;
+    const navigation = this.router.getCurrentNavigation()?.extras.state as { email: string, token: string };
+    this.receiverEmail = navigation.email;
+    environment.token = navigation.token;
     console.log("Email : ", this.receiverEmail);
+    console.log(environment.token);
   }
 
   onTextChange(text: string) {
     this.otp = text;
+  }
+
+  blockOtp(otp: string) {
+    // Implement your OTP verification logic here
+    this.otp = otp;
+    console.log(this.otp);
   }
 
   verifyOtp() {

@@ -1,0 +1,11 @@
+.otp-container {
+  display: flex;
+
+  .otp-digit {
+    width: 2em;
+    height: 2em;
+    margin: 0 0.5em;
+    text-align: center;
+    font-size: 1.5em;
+  }
+}

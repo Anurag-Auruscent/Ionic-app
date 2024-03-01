@@ -35,12 +35,4 @@ export class RegisterationService {
     return this.http.post<any[]>(this.verifyOtpUrl, payload);
   }
 
-  createNewLibrary(apiURL: string, payload: any = {}): Observable<any[]> {
-    console.log(payload, '/n', apiURL);
-    return this.http.post<any[]>(apiURL, payload);
-  }
-
-  fetchAllLibrary(apiURL: string, payload: any = {}): Observable<any[]> {
-    return this.http.put<any[]>(apiURL, payload);
-  }
 }

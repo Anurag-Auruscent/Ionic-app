@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { MobileInputComponent } from './components/MobileInput/mobile-input/mobile-input.component';
 import { TextInputComponent } from './components/textInput/text-input/text-input.component';
+import { OtpInputComponent } from './components/otp-input/otp-input.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { TextInputComponent } from './components/textInput/text-input/text-input
     ButtonComponent,
     ButtonSocialComponent,
     MobileInputComponent,
-    TextInputComponent
+    TextInputComponent,
+    OtpInputComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +39,8 @@ import { TextInputComponent } from './components/textInput/text-input/text-input
     MobileInputComponent,
     FormsModule,
     MobileInputComponent,
-    TextInputComponent
+    TextInputComponent,
+    OtpInputComponent
   ]
 })
 export class SharedModule { }
