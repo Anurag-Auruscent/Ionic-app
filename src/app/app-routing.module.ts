@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'user-verification',
     pathMatch: 'full'
   },
   {
@@ -33,12 +33,20 @@ const routes: Routes = [
   },
   {
     path: 'forgot-password',
-    loadChildren: () => import('./forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
+    loadChildren: () => import('./forgot-password/forgot-password.module').then(m => m.ForgotPasswordPageModule)
   },
   {
     path: 'register-user',
-    loadChildren: () => import('./register-user/register-user.module').then( m => m.RegisterUserPageModule)
+    loadChildren: () => import('./register-user/register-user.module').then(m => m.RegisterUserPageModule)
   },
+  {
+    path: 'registration',
+    loadChildren: () => import('./registration/registration.module').then(m => m.RegistrationPageModule)
+  },
+  {
+    path: 'user-verification',
+    loadChildren: () => import('./user-verification/user-verification.module').then( m => m.UserVerificationPageModule)
+  }
 
 ];
 

@@ -1,0 +1,15 @@
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <ion-grid>
+      <h1>verify account</h1>
+      <h6>enter the otp received on your email!</h6>
+    </ion-grid>
+    <ion-grid class="form-fields">
+      <ion-item class="otpItem" lines="none">
+        <app-text-input [value]="otp" [placeholder]="'enter otp'"
+          [icon]="'/assets/Images/otp.svg'"></app-text-input>
+      </ion-item>
+      <app-button class="btns" label="verify account" (clickEvent)="verifyOtp()"></app-button>
+    </ion-grid>
+    </div>
+</ion-content>
