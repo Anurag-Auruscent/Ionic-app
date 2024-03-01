@@ -14,7 +14,7 @@ export class SHInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // Check if the request URL is the one for addUser
-        if (req.url === environment.addUserURL) {
+        if (req.url === environment.addUserURL || req.url === environment.verifyOtpUrl) {
             // Clone the request with the 'Authorization' header
             const clonedReq = req.clone({
                 setHeaders: {

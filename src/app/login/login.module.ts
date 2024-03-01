@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicModule } from '@ionic/angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
@@ -11,6 +11,7 @@ import { LoginPageRoutingModule } from './login-routing.module';
 import { LoginPage } from './login.page';
 import { SharedModule } from '../shared/shared.module';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -18,6 +19,7 @@ import { SharedModule } from '../shared/shared.module';
     IonicModule,
     LoginPageRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
     SharedModule
   ],
   declarations: [LoginPage]

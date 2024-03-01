@@ -8,6 +8,7 @@ import { ButtonSocialComponent } from './components/buttonSocial/button-social/b
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { MobileInputComponent } from './components/MobileInput/mobile-input/mobile-input.component';
+import { TextInputComponent } from './components/textInput/text-input/text-input.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { MobileInputComponent } from './components/MobileInput/mobile-input/mobi
     PasswordInputComponent,
     ButtonComponent,
     ButtonSocialComponent,
-    MobileInputComponent
+    MobileInputComponent,
+    TextInputComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +35,9 @@ import { MobileInputComponent } from './components/MobileInput/mobile-input/mobi
     ButtonComponent,
     ButtonSocialComponent,
     MobileInputComponent,
-    FormsModule
+    FormsModule,
+    MobileInputComponent,
+    TextInputComponent
   ]
 })
 export class SharedModule { }

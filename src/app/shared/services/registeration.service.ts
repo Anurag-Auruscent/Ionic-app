@@ -11,6 +11,7 @@ export class RegisterationService {
 
   keyCloakURL = environment.keycloakUrl
   addUserURL = environment.addUserURL
+  verifyOtpUrl = environment.verifyOtpUrl
 
   constructor(
     private http: HttpClient
@@ -26,6 +27,12 @@ export class RegisterationService {
     console.log(environment.token)
     // const headers = new HttpHeaders().set('Authorization', `Bearer ${environment.token}`);
     return this.http.post<UserModelResponse>(this.addUserURL, payload);
+  }
+
+  verifyOtp(payload: any = {}): Observable<any[]> {
+    console.log(payload, '/n', this.verifyOtpUrl);
+    console.log(environment.token)
+    return this.http.post<any[]>(this.verifyOtpUrl, payload);
   }
 
   createNewLibrary(apiURL: string, payload: any = {}): Observable<any[]> {

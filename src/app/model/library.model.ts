@@ -44,3 +44,8 @@ export interface UserModelResponse {
     firstName: string;
     lastName: string;
 }
+
+export interface VerifyOtpRequest {
+    recevierEmail: string;
+    enteredOtp: string;
+}

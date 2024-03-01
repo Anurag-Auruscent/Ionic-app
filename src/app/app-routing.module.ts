@@ -43,6 +43,10 @@ const routes: Routes = [
     path: 'registration',
     loadChildren: () => import('./registration/registration.module').then(m => m.RegistrationPageModule)
   },
+  {
+    path: 'user-verification',
+    loadChildren: () => import('./user-verification/user-verification.module').then(m => m.UserVerificationPageModule)
+  }
 
 ];
 

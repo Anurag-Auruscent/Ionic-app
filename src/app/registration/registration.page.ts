@@ -145,7 +145,7 @@ export class RegistrationPage implements OnInit {
       this.registrationService.addUser(addUserPayload).subscribe({
         next: (responseData) => {
           console.log(responseData);
-          this.ts.presentToast('User added successfully and email sent', 2000, "primary");
+          this.ts.presentToast('User added successfully and OTP sent', 2000, "primary");
           const email = responseData.email;
           console.log(email);
           const navigationExtras: NavigationExtras = {
@@ -153,11 +153,15 @@ export class RegistrationPage implements OnInit {
               email: email
             }
           };
-          this.router.navigate(['/verify-otp'], navigationExtras);
+          this.router.navigate(['/user-verification'], navigationExtras);
         },
         error: (error) => {
-          console.error('Error', error);
-          this.ts.presentToast('Failed to add user', 2000);
+          console.error('Error', error.status);
+          if (error.status === 409) {
+            this.ts.presentToast('User already registered', 5000);
+          } else {
+            this.ts.presentToast('Failed to add user', 2000);
+          }
         }
       });
     } else if (this.selectedSegment === 'phone') {
