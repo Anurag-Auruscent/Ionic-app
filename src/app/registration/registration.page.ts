@@ -13,7 +13,7 @@ import axios from 'axios';
 export class RegistrationPage implements OnInit {
   firstName: string = "Anurag";
   lastName: string = "Rawat";
-  userEmail: string = "anuragrawat@gmail.com";
+  userEmail: string = "anuragrawat469@gmail.com";
   userPassword: string = "anurag@123";
   userNumber!: string
   selectedSegment: string = 'email';

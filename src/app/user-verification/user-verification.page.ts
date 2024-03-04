@@ -50,8 +50,8 @@ export class UserVerificationPage implements OnInit {
 
   verifyOtp() {
     const verifyOtpPayload: VerifyOtpRequest = {
-      recevierEmail: this.receiverEmail,
-      enteredOtp: this.otp
+      receiverEmail: this.receiverEmail,
+      enteredOTP: this.otp
     }
     this.registrationService.verifyOtp(verifyOtpPayload).subscribe({
       next: (responseData) => {
