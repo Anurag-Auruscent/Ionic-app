@@ -47,6 +47,38 @@ export class LoginPage {
   ) {
     this.initializeApp();
   }
+
+  ionViewWillEnter() {
+    const button = document.querySelector('.segmentLabel');
+    button?.classList.add('active');
+  }
+
+  ionViewWillLeave() {
+    const buttons = document.querySelectorAll('.segmentLabel');
+    buttons.forEach(button => {
+      const segmentButton = button as HTMLIonSegmentButtonElement;
+      segmentButton.classList.remove('active');
+    });
+    this.selectedSegment = "email"
+    this.userEmail = ""
+    this.userPassword = ""
+    this.userNumber = ""
+  }
+
+  handleFieldClick(buttonValue: string) {
+    console.log(`${buttonValue} clicked`);
+
+    const buttons = document.querySelectorAll('.segmentLabel');
+    buttons.forEach(button => {
+      const segmentButton = button as HTMLIonSegmentButtonElement;
+      if (segmentButton.value === buttonValue) {
+        segmentButton.classList.add('active');
+      } else {
+        segmentButton.classList.remove('active');
+      }
+    })
+  }
+
   initializeApp() {
     GoogleAuth.initialize()
   }

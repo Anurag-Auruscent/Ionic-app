@@ -60,12 +60,21 @@
   <div class="ParetDiv">
     <h1>welcome back!</h1>
     <h6>Enter your email to start exploring!</h6>
-    <ion-segment [(ngModel)]="selectedSegment">
+    <!-- <ion-segment [(ngModel)]="selectedSegment">
       <ion-segment-button value="email">
         <ion-label class="segmentLabel">email</ion-label>
       </ion-segment-button>
       <ion-segment-button value="phone">
         <ion-label class="segmentLabel">phone</ion-label>
+      </ion-segment-button>
+    </ion-segment> -->
+
+    <ion-segment class="tabContainer" [(ngModel)]="selectedSegment">
+      <ion-segment-button class="segmentLabel" (click)="handleFieldClick('email')" value="email">
+        <ion-label>email</ion-label>
+      </ion-segment-button>
+      <ion-segment-button class="segmentLabel" (click)="handleFieldClick('phone')" value="phone">
+        <ion-label>phone</ion-label>
       </ion-segment-button>
     </ion-segment>
 

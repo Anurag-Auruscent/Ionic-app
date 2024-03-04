@@ -314,4 +314,10 @@ export class LibraryDetailsPage implements OnInit {
   goBack() {
     this.router.navigate(['/libraries']); // Adjust the route accordingly
   }
+
+  // share link
+  handleShare(id: string){
+    console.log(id);
+    
+  }
 }
