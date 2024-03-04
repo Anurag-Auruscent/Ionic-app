@@ -1,5 +1,25 @@
 ion-card-content a {
-  text-decoration: none;  /* Remove underline */
-  color: inherit;         /* Inherit the color from the parent */
-  display: block;         /* Make the anchor a block element */
+  text-decoration: none;
+  /* Remove underline */
+  color: inherit;
+  /* Inherit the color from the parent */
+  display: block;
+  /* Make the anchor a block element */
+}
+
+
+.shareField {
+  height: 50px;
+  width: 50px;
+}
+
+.libraryList{
+  margin-top: 40px;
+}
+
+.shareIcon {
+  position: absolute;
+  margin-bottom: 13px;
+  top: 5px;
+  right: 10px;
 }

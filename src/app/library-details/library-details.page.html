@@ -30,7 +30,10 @@
 
   <ion-card *ngIf="libraryData">
     <ion-card-content>
-      <ion-list>
+      <div class="shareIcon">
+        <ion-icon name="share-outline" class="shareField" (click)="handleShare(libraryData.library.id)"></ion-icon>
+      </div>
+      <ion-list class="libraryList">
         <ion-item *ngFor="let contentItem of libraryData.content">
           <!-- Make the entire card clickable and navigate to the external link -->
           <a [href]="contentItem.link" target="_blank" rel="noopener noreferrer">
