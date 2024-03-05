@@ -316,8 +316,16 @@ export class LibraryDetailsPage implements OnInit {
   }
 
   // share link
-  handleShare(id: string){
+  handleShare(id: string) {
     console.log(id);
-    
+    this.libraryService.getLibraryLink(id).subscribe({
+      next: (responseData) => {
+        console.log(responseData); //TODO : the API call was unavailable for me, please check the response data and pick out the link accordingly
+        const link = responseData.link // @TODO : according to this data, show the link int the library details page
+      },
+      error: (error) => {
+        console.error('Error', error);
+      }
+    })
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Library, LibraryListServerResponse } from '../../model/library.model';
 import { environment } from 'src/environments/environment';
@@ -47,6 +47,11 @@ export class LibraryService {
   createNewLibrary(apiURL: string, payload: any = {}): Observable<any[]> {
     console.log(payload, '/n', apiURL);
     return this.http.post<any[]>(apiURL, payload);
+  }
+
+  getLibraryLink(libraryId: string): Observable<any> {
+    const apiUrlLibraryLink = `http://localhost:9000/library/request/generate-link?id=${libraryId}`;
+    return this.http.get<any>(apiUrlLibraryLink);
   }
 
   // access request for library read
