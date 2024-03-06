@@ -32,6 +32,7 @@
     <ion-card-content>
       <div class="shareIcon">
         <ion-icon name="share-outline" class="shareField" (click)="handleShare(libraryData.library.id)"></ion-icon>
+        <ion-textarea class="linkText" aria-label="link" *ngIf="linkMsg">sphaghettihead://home/{{link}}</ion-textarea>
       </div>
       <ion-list class="libraryList">
         <ion-item *ngFor="let contentItem of libraryData.content">
@@ -56,9 +57,6 @@
       </ion-list>
     </ion-card-content>
   </ion-card>
-
-
-  <p>{{link}}</p> <!-- @TODO I have added the link here, check if it's visible or not-->
 
   <!-- Render ion-select dynamically -->
   <ion-select *ngIf="showEditOptions" #editSelect (ionChange)="editOptionSelected($event)"
