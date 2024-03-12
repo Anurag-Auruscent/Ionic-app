@@ -119,9 +119,11 @@
       <p class="orLine"></p>
     </div>
 
-    <app-button-social label="Log In with Google" [src]="'flat-color-icons_google.svg'"></app-button-social>
+    <app-button-social label="Log In with Google" [src]="'flat-color-icons_google.svg'"
+      (clickEvent)="handleGoogleLogin()"></app-button-social>
 
-    <app-button-social label="Log In with Facebook" [src]="'cib_facebook-f.svg'"></app-button-social>
+    <app-button-social label="Log In with Facebook" [src]="'cib_facebook-f.svg'"
+      (clickEvent)="handleFacebookLogin()"></app-button-social>
     <p class="haveAccountLabel">
       don't have an account?
       <span (click)="goToRegisterPage()" class="registerLink">register</span>
