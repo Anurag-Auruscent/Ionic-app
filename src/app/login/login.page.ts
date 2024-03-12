@@ -14,6 +14,8 @@ import { jwtDecode } from 'jwt-decode';
 import { ToastService } from '../shared/services/toast.service';
 import OneSignal from 'onesignal-cordova-plugin';
 import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
+import { OAuthService } from 'angular-oauth2-oidc';
+// import { KeycloakService } from '../keycloakservice.service';
 
 // use hook after platform dom ready
 // GoogleAuth.initialize({
@@ -38,13 +40,21 @@ export class LoginPage {
     private inAppBrowser: InAppBrowser, // Inject InAppBrowser
     private toastController: ToastController,
     private tokenService: TokenService,
-    private ts: ToastService
+    private ts: ToastService,
+    private oauthService: OAuthService
+    // private keycloakService: KeycloakService
   ) {
     this.initializeApp();
   }
   initializeApp() {
     GoogleAuth.initialize()
   }
+
+  loginWithGoogle() {
+    // Redirect to Keycloak for Google login
+    // this.keycloakService.login({ idpHint: 'google' });
+  }
+
 
   async signIn() {
     try {
@@ -85,6 +95,30 @@ export class LoginPage {
       color: 'danger', // Customize the color for error
     });
     toast.present();
+  }
+
+  configureOAuth(): void {
+    // Set your Keycloak configuration here
+    this.oauthService.configure({
+      clientId: 'ionic-angular-gateway',
+      issuer: 'http://localhost:8080/realms/angular-oauth',
+      redirectUri: window.location.origin + '/login', // Adjust as needed
+      postLogoutRedirectUri: window.location.origin + '/login',
+      scope: 'openid profile email',
+      customQueryParams: { 'kc_idp_hint': 'google' },
+    });
+
+    this.oauthService.loadDiscoveryDocumentAndLogin().then(() => {
+      // Check if the user is authenticated after loading discovery document
+      if (this.oauthService.hasValidAccessToken()) {
+        this.router.navigate(['/home']); // Redirect to home if authenticated
+      }
+    });
+  }
+
+  googleLogin(): void {
+    console.log('googleLogin clicked')
+    this.oauthService.initCodeFlow();
   }
 
   login() {

@@ -25,6 +25,10 @@
     <ion-button expand="full" (click)="signOut()" *ngIf="!user"> Sign Out</ion-button>
     <ion-button expand="full" (click)="signOut()" *ngIf="!user"> Refresh token</ion-button>
 
+    <!-- login.page.html -->
+    <ion-button (click)="googleLogin()">Login with Google</ion-button>
+
+
     <!-- <ion-item *ngIf="user">
       <ion-avatar slot="start">
         <img [src]="user.imageUrl" alt="">

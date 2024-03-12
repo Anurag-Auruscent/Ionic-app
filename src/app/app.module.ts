@@ -12,10 +12,12 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SHInterceptor } from './shared/interceptor/sh.interceptor';
 import { TokenService } from './shared/services/token.service';
+import { OAuthModule } from 'angular-oauth2-oidc';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), IonicStorageModule.forRoot(), AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [BrowserModule, IonicModule.forRoot(), IonicStorageModule.forRoot(), AppRoutingModule, FormsModule, HttpClientModule,
+    OAuthModule.forRoot()],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy, }, InAppBrowser, TokenService, {
     provide: HTTP_INTERCEPTORS,
     useClass: SHInterceptor,
