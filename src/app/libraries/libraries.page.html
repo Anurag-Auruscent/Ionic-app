@@ -8,19 +8,19 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
+  <app-searchfilternav></app-searchfilternav>
+  <!-- Search and Filter Nav -->
+  <ion-label class="page-title">All libraries</ion-label>
   <!-- Display libraries in a grid -->
-  <ion-grid>
-    <ion-row *ngFor="let library of allLibraries">
-      <ion-col size="12" size-md="6">
-        <ion-card (click)="viewLibraryDetails(library)">
-          <ion-card-header>
-            {{ library.name }}
-          </ion-card-header>
-          <ion-card-content>
-            {{ library.description }}
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
+  <ion-grid class="library-container">
+    <div class="card-wrapper" *ngFor="let library of allLibraries">
+      <ion-card class="library-item" (click)="viewLibraryDetails(library)">
+        <img src="https://cdn.pixabay.com/photo/2021/12/17/17/00/butterfly-6876992_1280.jpg" alt="Triangles Polygon" />
+      </ion-card>
+      <h6 class="library-title">{{ library.name }}</h6>
+    </div>
   </ion-grid>
+
+  <!-- menu nav -->
+  <app-menu-nav></app-menu-nav>
 </ion-content>

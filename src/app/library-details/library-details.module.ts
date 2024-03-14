@@ -8,13 +8,15 @@ import { LibraryDetailsPageRoutingModule } from './library-details-routing.modul
 
 import { LibraryDetailsPage } from './library-details.page';
 import { LibraryService } from '../shared/services/library.service';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    LibraryDetailsPageRoutingModule
+    LibraryDetailsPageRoutingModule,
+    SharedModule
   ],
   declarations: [LibraryDetailsPage],
   providers: [LibraryService]

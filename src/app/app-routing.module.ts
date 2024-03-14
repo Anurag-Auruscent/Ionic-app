@@ -48,6 +48,7 @@ const routes: Routes = [
     loadChildren: () => import('./user-verification/user-verification.module').then(m => m.UserVerificationPageModule)
   }
 
+
 ];
 
 @NgModule({
