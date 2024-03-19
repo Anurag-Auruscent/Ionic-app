@@ -19,10 +19,6 @@ export class LibrariesPage {
 
   }
 
-  ngOnInit() {
-    this.seeAllLibraries();
-  }
-
   ionViewWillEnter() {
     // This method will be called every time the page is about to enter.
     this.seeAllLibraries();

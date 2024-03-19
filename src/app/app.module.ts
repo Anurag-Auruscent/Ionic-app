@@ -12,10 +12,14 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SHInterceptor } from './shared/interceptor/sh.interceptor';
 import { TokenService } from './shared/services/token.service';
+import * as cordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), IonicStorageModule.forRoot(), AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [BrowserModule, IonicModule.forRoot(), IonicStorageModule.forRoot(), AppRoutingModule, FormsModule, HttpClientModule,
+    IonicStorageModule.forRoot({
+      driverOrder: [cordovaSQLiteDriver._driver,]
+    })],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy, }, InAppBrowser, TokenService, {
     provide: HTTP_INTERCEPTORS,
     useClass: SHInterceptor,

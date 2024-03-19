@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
-import { Observable, from } from "rxjs";
-import { switchMap } from "rxjs/operators";
+import { Observable, from, of } from "rxjs";
+import { mergeMap } from "rxjs/operators";
 import { TokenService } from "../services/token.service";
 import { environment } from "src/environments/environment";
 
@@ -27,7 +27,14 @@ export class SHInterceptor implements HttpInterceptor {
         } else {
             // For other requests, use the interceptor logic
             return from(this.tokenService.getToken()).pipe(
-                switchMap((token: string) => {
+                mergeMap((token: string | null) => {
+                    if (!token) {
+                        // Handle case where token is null
+                        // For example, you might want to redirect to login page or handle the error
+                        // For now, we'll just return an empty observable
+                        return of(); // Return an empty observable that immediately completes
+                    }
+
                     // Clone the request with the 'Authorization' header
                     const clonedReq = req.clone({
                         setHeaders: {

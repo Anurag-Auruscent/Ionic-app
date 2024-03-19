@@ -9,6 +9,7 @@ import { HomeService } from '../shared/services/home.service';
 import { Library, LibraryListServerResponse } from '../model/library.model';
 import { LibraryService } from '../shared/services/library.service';
 import { TokenService } from '../shared/services/token.service';
+import { ToastService } from '../shared/services/toast.service';
 
 
 @Component({
@@ -32,7 +33,9 @@ export class HomePage implements OnInit {
     private toastController: ToastController,
     private alertController: AlertController,
     private homeService: HomeService,
-    private libraryService: LibraryService
+    private libraryService: LibraryService,
+    private tokenService: TokenService,
+    private toastService: ToastService
   ) {
     this.allLibraries = [...this.libraries];  // Copy of libraries for "See All Libraries" button
   }
@@ -52,7 +55,6 @@ export class HomePage implements OnInit {
         console.log(data);
         console.log(data.content[0].name);
         this.allLibraries = data.content;
-        console.log(this.selectedLibrary);
       },
       error: (error) => {
         console.error('Error fetching libraries:', error);
@@ -242,8 +244,15 @@ export class HomePage implements OnInit {
     }
   }
 
-  goBack() {
-    this.router.navigate(['/login']);
+  async goBack() {
+    // Check if the authentication token exists
+    if (await this.tokenService.getToken()) {
+      this.router.navigate(['/home']);
+      this.toastService.presentToast("can't go back with an active auth_token", 3000)
+    } else {
+      // If token doesn't exist, navigate to the login page
+      this.router.navigate(['/login']);
+    }
   }
 
   // Navigating to LibraryDetailsPage when a library is clicked

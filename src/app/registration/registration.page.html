@@ -50,9 +50,10 @@
       </div>
     </ion-grid>
     <ion-grid>
-      <app-button-social class="btns" label="continue with google"
-        [src]="'flat-color-icons_google.svg'"></app-button-social>
-      <app-button-social class="btns" label="continue with facebook" [src]="'cib_facebook-f.svg'"></app-button-social>
+      <app-button-social class="btns" label="continue with google" [src]="'flat-color-icons_google.svg'"
+        (clickEvent)="handleSocialLogin('google')"></app-button-social>
+      <app-button-social class=" btns" label="continue with facebook" [src]="'cib_facebook-f.svg'"
+        (clickEvent)="handleSocialLogin('facebook')"></app-button-social>
     </ion-grid>
     <ion-grid>
       <p class="haveAccountLabel">Already have an account? <span (click)="goToLoginPage()"
