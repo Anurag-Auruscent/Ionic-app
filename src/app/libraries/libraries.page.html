@@ -1,14 +1,16 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button (click)="goBack()"></ion-back-button>
     </ion-buttons>
     <ion-title>Libraries</ion-title>
   </ion-toolbar>
+</ion-header> -->
+<ion-header class="ion-no-border">
+  <app-searchfilternav></app-searchfilternav>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-  <app-searchfilternav></app-searchfilternav>
   <!-- Search and Filter Nav -->
   <ion-label class="page-title">All libraries</ion-label>
   <!-- Display libraries in a grid -->
@@ -22,5 +24,7 @@
   </ion-grid>
 
   <!-- menu nav -->
-  <app-menu-nav></app-menu-nav>
 </ion-content>
+<ion-footer class="ion-no-border">
+  <app-menu-nav></app-menu-nav>
+</ion-footer>

@@ -42,3 +42,18 @@
 .library-row {
     display: flex;
 }
+
+ion-footer{
+    position: fixed;
+    bottom: 0;
+}
+
+ion-header{
+    background: #f0d6bd;
+    height: 67px;
+    padding-bottom: 1px;
+}
+
+ion-footer{
+    margin-bottom: 5px;
+}

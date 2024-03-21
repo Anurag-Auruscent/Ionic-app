@@ -23,7 +23,7 @@
     position: absolute;
     width: 66px;
     height: 55.1px;
-    left: 37.5px;
+    left: 37.83px;
     top: 10px;
     transform: translateX(-50%);
 }
@@ -61,23 +61,33 @@
 
 #homeIcon{
     top: 7px;
-    right: 92px;
+    right: 100px;
 }
 
 #homeText{
     position: absolute;
     top: 21px;
-    right: 88px;
+    right: 96px;
 }
 
 #libIcon{
-    right: 67px;
+    right: 80px;
     top: 6px;
 }
 
 #libraryText{
     top: 20px;
     position: absolute;
-    right: 58px;
+    right: 67px;
 
 }
+
+.right-lib-button {
+    span {
+        left: 25px!important;
+    }
+}
+
+// .left-lib-button{
+//     left: 25px;
+// }
