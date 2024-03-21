@@ -52,8 +52,8 @@ export class HomePage implements OnInit {
   private getLibraries() {
     this.libraryService.getAllLibraries().subscribe({
       next: (data: LibraryListServerResponse) => {
-        console.log(data);
-        console.log(data.content[0].name);
+        // console.log(data);
+        // console.log(data.content[0].name);
         this.allLibraries = data.content;
       },
       error: (error) => {

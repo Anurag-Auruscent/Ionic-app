@@ -12,11 +12,7 @@ export class StorageService {
 
   private async init(): Promise<void> {
     try {
-      const store = new Storage({
-        driverOrder: [cordovaSQLiteDriver._driver, Drivers.IndexedDB, Drivers.LocalStorage]
-      });
       this.storage = await this.storage.create();
-      await this.storage.defineDriver(cordovaSQLiteDriver);
       // You can perform additional initialization here if needed
     } catch (error) {
       console.error('Error initializing storage:', error);
