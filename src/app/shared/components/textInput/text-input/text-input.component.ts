@@ -24,5 +24,4 @@ export class TextInputComponent implements OnInit {
   onTextChange() {
     this.textChange.emit(this.value);
   }
-
 }
