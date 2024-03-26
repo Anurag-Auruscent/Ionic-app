@@ -1,0 +1,4 @@
+// const string = "http://localhost:8080/auth/realms/angular-oauth/protocol/openid-connect/auth?client_id=ionic-angular-gateway&redirect_uri=http://localhost:8100/login/&response_type=code&scope=openid&kc_action=UPDATE_PASSWORD"
+// const string2 = "http://localhost:8080/realms/angular-oauth/protocol/openid-connect/auth?client_id=ionic-angular-gateway&redirect_uri=http://localhost:8100/login/&response_type=code&scope=openid&kc_action=UPDATE_PASSWORD"
+// const string3 = "http://localhost:8080/realms/angular-oauth/login-actions/required-action?execution=UPDATE_PASSWORD&client_id=ionic-angular-gateway&tab_id=GRAEl9PF2ZN"
+// const string4 = "http://localhost:8080/realms/angular-oauth/login-actions/required-action?execution=UPDATE_PASSWORD&client_id=ionic-angular-gateway&tab_id=yuMLgDwjyLI"

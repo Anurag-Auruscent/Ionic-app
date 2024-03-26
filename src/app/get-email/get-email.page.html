@@ -1,0 +1,16 @@
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <ion-grid>
+      <h1>Enter Email</h1>
+      <h6>enter your email to get started with the reset process</h6>
+    </ion-grid>
+    <ion-grid class="form-fields">
+      <ion-item class="emailItem" lines="none">
+        <app-text-input [value]="useremail" [placeholder]="'Enter email'" [icon]="'/assets/Images/otp.svg'"
+          (textChange)="onTextChange($event)"></app-text-input>
+      </ion-item>
+      <app-button class="btns" label="send otp" (clickEvent)="sendOtp()"></app-button>
+      <!-- <app-otp-input [length]="6" (otpChange)="blockOtp($event)"></app-otp-input> -->
+    </ion-grid>
+  </div>
+</ion-content>

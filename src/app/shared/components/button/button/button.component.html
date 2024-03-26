@@ -1,1 +1,3 @@
-<ion-button  type="submit" (click)="onClick()" class="customClass">{{ label }}</ion-button>
+<!-- <ion-button  type="submit" (click)="onClick()" class="customClass">{{ label }}</ion-button> -->
+
+<ion-button type="submit" (click)="onClick()" class="customClass" [disabled]="isDisabled">{{ label }}</ion-button>

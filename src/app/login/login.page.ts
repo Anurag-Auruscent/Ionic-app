@@ -1,6 +1,6 @@
 
 import { Component, ElementRef, Inject, PLATFORM_ID, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { InAppBrowser, InAppBrowserObject, InAppBrowserOptions } from '@ionic-native/in-app-browser/ngx'; // Import InAppBrowser
 import axios from 'axios';
 import { ToastController, isPlatform } from '@ionic/angular';
@@ -316,30 +316,6 @@ export class LoginPage {
 
   goToForgotPasswordPage() {
 
-    const tab_id = generateRandomState(10);
-
-    const forgotPassWordURL2 = `http://localhost:8080/realms/angular-oauth/login-actions/required-action?execution=UPDATE_PASSWORD&client_id=ionic-angular-gateway&tab_id=${tab_id}`;
-
-    const forgotPassWordURL = `http://localhost:8080/realms/angular-oauth/protocol/openid-connect/auth?client_id=ionic-angular-gateway&redirect_uri=http://localhost:8100/login&response_type=code&scope=openid&kc_action=UPDATE_PASSWORD`;
-
-    //@TODO: Apps are suppose to open the link in the default system browser 
-
-    if (isPlatform('cordova')) {
-      // If the app is running on a mobile device
-      const browserOptions: InAppBrowserOptions = {
-        location: 'no',
-        zoom: 'no'
-      };
-      const browser: InAppBrowserObject = this.inAppBrowser.create(forgotPassWordURL, '_blank', browserOptions);
-      browser.on('exit').subscribe(() => {
-        console.log('In-app browser closed');
-        // Handle the case when the in-app browser is closed
-      });
-    } else {
-      // If the app is running on a non-mobile device (e.g., desktop web browser)
-      window.open(forgotPassWordURL, '_blank');
-    }
-
-    // this.router.navigate(['/forgot-password']);
+    this.router.navigate(['/get-email'],);
   }
 }
