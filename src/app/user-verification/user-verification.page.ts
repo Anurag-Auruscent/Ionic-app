@@ -36,6 +36,7 @@ export class UserVerificationPage implements OnInit {
     environment.token = navigation.token;
     console.log("Email : ", this.receiverEmail);
     console.log(environment.token);
+    // 
   }
 
   onTextChange(text: string) {

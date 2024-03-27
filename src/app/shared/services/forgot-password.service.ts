@@ -11,6 +11,7 @@ export class ForgotPasswordService {
   keyCloakURL = environment.keycloakUrl
   addUserURL = environment.addUserURL
   forgotPasswordOtpUrl = environment.forgotPasswordUrl
+  sendEmailOtpUrl = environment.sendEmailOtpUrl
 
   constructor(
     private http: HttpClient
@@ -24,5 +25,10 @@ export class ForgotPasswordService {
   verifyOtp(payload: any = {}): Observable<any[]> {
     console.log(payload, '/n', this.forgotPasswordOtpUrl);
     return this.http.post<any[]>(this.forgotPasswordOtpUrl, payload);
+  }
+
+  sendEmail(email: string): Observable<any[]> {
+    console.log(email);
+    return this.http.post<any[]>(this.sendEmailOtpUrl, email);
   }
 }

@@ -19,7 +19,7 @@ import { Drivers } from '@ionic/storage';
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), IonicStorageModule.forRoot(), AppRoutingModule, FormsModule, HttpClientModule,
     IonicStorageModule.forRoot({
-      driverOrder: [cordovaSQLiteDriver._driver, Drivers.IndexedDB]
+      driverOrder: [cordovaSQLiteDriver._driver, Drivers.IndexedDB, Drivers.LocalStorage]
     })
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy, }, InAppBrowser, TokenService, {

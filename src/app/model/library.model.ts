@@ -58,3 +58,9 @@ export interface TokenRequestBody {
     code: string;
     code_verifier: string;
 }
+
+export interface resetPasswordRequest {
+    password: string;
+    confirmPassword: string;
+    email: string;
+}

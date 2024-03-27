@@ -18,6 +18,7 @@ import { TokenRequestBody } from '../model/library.model';
 import { StorageService } from '../shared/services/storage.service';
 
 import { generateRandomState, getParameterByName, toFormUrlEncoded } from '../shared/helper/helper';
+import { Capacitor } from '@capacitor/core';
 
 // use hook after platform dom ready
 GoogleAuth.initialize({
@@ -205,7 +206,8 @@ export class LoginPage {
     const keycloakAuthUrl = `http://localhost:8080/realms/angular-oauth/protocol/openid-connect/auth?client_id=ionic-angular-gateway&redirect_uri=http%3A%2F%2Flocalhost%3A8100%2Flogin&state=${state}&response_mode=fragment&response_type=code&scope=openid&kc_idp_hint=${kcIdpHint}&nonce=2d7a33fe-6fd3-42d7-8026-94521453f323&code_challenge=${this.code_challenge}&code_challenge_method=S256`;
 
     //@TODO: Apps are suppose to open the link in the default system browser 
-
+    console.log(Capacitor.getPlatform());
+    console.log(Capacitor.isNativePlatform());
     if (isPlatform('cordova')) {
       // If the app is running on a mobile device
       const browserOptions: InAppBrowserOptions = {
