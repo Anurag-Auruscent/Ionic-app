@@ -5,12 +5,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ToastController, AlertController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 import { HomeService } from '../shared/services/home.service';
+import { TranslateConfigService } from '../shared/services/translate-config.service';
+import { TranslateService } from '@ngx-translate/core';
 
 import { Library, LibraryListServerResponse } from '../model/library.model';
 import { LibraryService } from '../shared/services/library.service';
 import { TokenService } from '../shared/services/token.service';
 import { ToastService } from '../shared/services/toast.service';
-
 
 @Component({
   selector: 'app-home',
@@ -18,14 +19,15 @@ import { ToastService } from '../shared/services/toast.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-
   token: any;
   libraryId!: number;
   urlInput: string = '';
   responseData: any;
   libraries: any[] = [];
-  selectedLibrary: any;  // Property to store the selected library in the dropdown
-  allLibraries: Library[] = [];   // Property to store all libraries for "See All Libraries" button
+  selectedLibrary: any; // Property to store the selected library in the dropdown
+  allLibraries: Library[] = []; // Property to store all libraries for "See All Libraries" button
+
+  language: any;
 
   constructor(
     private router: Router,
@@ -35,9 +37,13 @@ export class HomePage implements OnInit {
     private homeService: HomeService,
     private libraryService: LibraryService,
     private tokenService: TokenService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private translateConfigService: TranslateConfigService,
+    private translateService: TranslateService
   ) {
-    this.allLibraries = [...this.libraries];  // Copy of libraries for "See All Libraries" button
+    this.allLibraries = [...this.libraries]; // Copy of libraries for "See All Libraries" button
+    this.translateConfigService.getDefaultLanguage();
+    this.language = this.translateConfigService.getCurrentLanguage();
   }
 
   ngOnInit() {
@@ -63,7 +69,6 @@ export class HomePage implements OnInit {
     });
   }
 
-
   librarySelected() {
     // Handle the selected library, you can display details or perform any action
   }
@@ -76,7 +81,7 @@ export class HomePage implements OnInit {
   submitUrl() {
     // Check if the URL is entered
 
-    console.log("This is the selected library ", this.selectedLibrary)
+    console.log('This is the selected library ', this.selectedLibrary);
     if (!this.urlInput) {
       this.presentErrorToast('Please enter a URL before submitting');
       return;
@@ -84,20 +89,22 @@ export class HomePage implements OnInit {
 
     // Check if a library is selected
     if (!this.selectedLibrary) {
-      this.presentErrorToast('Please select a library before submitting the URL');
+      this.presentErrorToast(
+        'Please select a library before submitting the URL'
+      );
       return;
     }
 
     // Continue with the URL submission logic
     const libraryId = this.selectedLibrary.id; // Assuming 'id' is the property representing the libraryId
     const payload = {
-      name: this.selectedLibrary.name,  // Assuming 'name' is the property representing the library name
-      description: this.selectedLibrary.description,  // Assuming 'description' is the property representing the library description
-      isPrivate: this.selectedLibrary.isPrivate,  // Assuming 'isPrivate' is the property representing the library privacy status
-      webLinks: [this.urlInput]  // Add the URL to the webLinks array
+      name: this.selectedLibrary.name, // Assuming 'name' is the property representing the library name
+      description: this.selectedLibrary.description, // Assuming 'description' is the property representing the library description
+      isPrivate: this.selectedLibrary.isPrivate, // Assuming 'isPrivate' is the property representing the library privacy status
+      webLinks: [this.urlInput], // Add the URL to the webLinks array
     };
     // console.log("This is the library id : ", this.selectedLibrary.id);
-    const apiURL = `http://localhost:9000/library/update?id=${libraryId}`
+    const apiURL = `http://localhost:9000/library/update?id=${libraryId}`;
 
     this.homeService.fetchAllLibrary(apiURL, payload).subscribe({
       next: (responseData) => {
@@ -113,9 +120,6 @@ export class HomePage implements OnInit {
         this.presentErrorToast('Failed to add link to library');
       },
     });
-
-
-
 
     // const jwtToken = this.authService.getAccessToken();
     // axios.put(`http://localhost:9000/library/update?id=${libraryId}`, payload,
@@ -170,13 +174,13 @@ export class HomePage implements OnInit {
         {
           name: 'name',
           type: 'text',
-          placeholder: 'Library Name'
+          placeholder: 'Library Name',
         },
         {
           name: 'description',
           type: 'text',
-          placeholder: 'Library Description'
-        }
+          placeholder: 'Library Description',
+        },
       ],
       buttons: [
         {
@@ -184,7 +188,7 @@ export class HomePage implements OnInit {
           role: 'cancel',
           handler: () => {
             console.log('Library creation canceled');
-          }
+          },
         },
         {
           text: 'Create',
@@ -197,20 +201,28 @@ export class HomePage implements OnInit {
                   this.presentToast('Library created successfully');
                 })
                 .catch((error) => {
-                  console.error('Failed to save library to the database:', error);
+                  console.error(
+                    'Failed to save library to the database:',
+                    error
+                  );
                   this.presentErrorToast('Failed to create library');
                 });
             } else {
-              this.presentErrorToast('Please provide both name and description');
+              this.presentErrorToast(
+                'Please provide both name and description'
+              );
             }
-          }
-        }
-      ]
+          },
+        },
+      ],
     });
     await alert.present();
   }
 
-  async saveLibraryToDatabase(name: string, description: string): Promise<void> {
+  async saveLibraryToDatabase(
+    name: string,
+    description: string
+  ): Promise<void> {
     // Step 1: Change the API URL
     const apiUrl = environment.saveLibraryToDatabaseApiUrl;
     // const apiUrl = '';
@@ -220,7 +232,7 @@ export class HomePage implements OnInit {
       name: name,
       description: description,
       isPrivate: false,
-      webLinks: []
+      webLinks: [],
       // Include other properties as needed
     };
 
@@ -248,7 +260,10 @@ export class HomePage implements OnInit {
     // Check if the authentication token exists
     if (await this.tokenService.getToken()) {
       this.router.navigate(['/home']);
-      this.toastService.presentToast("can't go back with an active auth_token", 3000)
+      this.toastService.presentToast(
+        "can't go back with an active auth_token",
+        3000
+      );
     } else {
       // If token doesn't exist, navigate to the login page
       this.router.navigate(['/login']);
@@ -288,6 +303,4 @@ export class HomePage implements OnInit {
       },
     });
   }
-
-
 }
