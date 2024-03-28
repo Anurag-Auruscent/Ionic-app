@@ -36,7 +36,10 @@ export class GetEmailPage implements OnInit {
     if (this.useremail) {
       try {
         // Step 3: Call the service method to save the library to the database
-        this.forgotPasswordService.sendEmail(this.useremail).subscribe({
+        const payload = {
+          email: this.useremail
+        }
+        this.forgotPasswordService.sendEmail(payload).subscribe({
           next: (responseData: any) => {
             console.log(responseData);
             const navigationExtras: NavigationExtras = {

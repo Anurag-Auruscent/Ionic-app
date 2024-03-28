@@ -27,8 +27,8 @@ export class ForgotPasswordService {
     return this.http.post<verifyOtpResponse>(this.forgotPasswordOtpUrl, payload);
   }
 
-  sendEmail(email: string): Observable<any[]> {
-    console.log(email);
-    return this.http.post<any[]>(this.sendEmailOtpUrl, email);
+  sendEmail(payload: any = {}): Observable<any[]> {
+    console.log(payload);
+    return this.http.post<any[]>(this.sendEmailOtpUrl, payload);
   }
 }
