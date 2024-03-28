@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { resetPasswordRequest } from 'src/app/model/library.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -20,9 +21,8 @@ export class ResetPasswordService {
     return this.http.post<any[]>(this.keyCloakURL, payload);
   }
 
-  resetPassword(password: string): Observable<any[]> {
-    console.log(password);
-    return this.http.post<any[]>(this.resetPasswordUrl, password)
+  resetPassword(payload: resetPasswordRequest): Observable<any[]> {
+    console.log(payload);
+    return this.http.post<any[]>(this.resetPasswordUrl, payload)
   }
-
 }

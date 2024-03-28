@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { RegisterationService } from '../shared/services/registeration.service';
 import { ToastService } from '../shared/services/toast.service';
 import { environment } from 'src/environments/environment';
@@ -28,7 +28,6 @@ export class ForgotPasswordPage implements OnInit {
     const navigation = this.router.getCurrentNavigation()?.extras.state as { email: string };
     this.receiverEmail = navigation.email;
     console.log("Email : ", this.receiverEmail);
-    console.log(environment.token);
   }
 
   onTextChange(text: string) {
@@ -44,7 +43,12 @@ export class ForgotPasswordPage implements OnInit {
       next: (responseData) => {
         console.log(responseData);
         this.ts.presentToast('Verified succesfully', 2000, "primary");
-        this.router.navigate(['/login']);
+        const navigationExtras: NavigationExtras = {
+          state: {
+            email: this.receiverEmail,
+          }
+        };
+        this.router.navigate(['/reset-password'], navigationExtras);
       },
       error: (error) => {
         console.error('Error', error.status);

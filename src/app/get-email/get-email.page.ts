@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { VerifyOtpRequest } from '../model/library.model';
 import { RegisterationService } from '../shared/services/registeration.service';
 import { ToastService } from '../shared/services/toast.service';
+import { ForgotPasswordService } from '../shared/services/forgot-password.service';
 
 @Component({
   selector: 'app-get-email',
@@ -20,7 +21,8 @@ export class GetEmailPage implements OnInit {
     private router: Router,
     private ts: ToastService,
     private activatedRoute: ActivatedRoute,
-    private registrationService: RegisterationService
+    private registrationService: RegisterationService,
+    private forgotPasswordService: ForgotPasswordService
   ) { }
 
   ngOnInit() {
@@ -32,13 +34,26 @@ export class GetEmailPage implements OnInit {
 
   sendOtp() {
     if (this.useremail) {
-      const navigationExtras: NavigationExtras = {
-        state: {
-          email: this.useremail,
-          token: environment.token
-        }
-      };
-      this.router.navigate(['/reset-password'], navigationExtras);
+      try {
+        // Step 3: Call the service method to save the library to the database
+        this.forgotPasswordService.sendEmail(this.useremail).subscribe({
+          next: (responseData: any) => {
+            console.log(responseData);
+            const navigationExtras: NavigationExtras = {
+              state: {
+                email: this.useremail,
+              }
+            };
+            this.router.navigate(['/forgot-password'], navigationExtras);
+          },
+          error: (error: any) => {
+            console.log(error);
+          }
+        });
+      } catch (error) {
+        // Step 4: Handle errors
+        console.error('Failed to save library to the database:', error);
+      }
     } else {
       this.ts.presentToast('User email is required', 2000);
     }
@@ -46,3 +61,4 @@ export class GetEmailPage implements OnInit {
   }
 
 }
+

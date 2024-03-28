@@ -24,7 +24,15 @@ export class SHInterceptor implements HttpInterceptor {
             });
 
             return next.handle(clonedReq);
-        } else {
+        } else if (req.url === environment.sendEmailOtpUrl) {
+            const clonedReq = req.clone({
+                setHeaders: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            return next.handle(clonedReq);
+        }
+        else {
             // For other requests, use the interceptor logic
             return from(this.tokenService.getToken()).pipe(
                 mergeMap((token: string | null) => {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RegisterationService } from '../shared/services/registeration.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { VerifyOtpRequest } from '../model/library.model';
+import { VerifyOtpRequest, resetPasswordRequest } from '../model/library.model';
 import { ToastService } from '../shared/services/toast.service';
 import { ResetPasswordService } from '../shared/services/reset-password.service';
 
@@ -12,15 +12,22 @@ import { ResetPasswordService } from '../shared/services/reset-password.service'
 })
 export class ResetPasswordPage implements OnInit {
 
+  receiverEmail: string = '';
+
   constructor(
     private router: Router,
     private ts: ToastService,
     private activatedRoute: ActivatedRoute,
     private registrationService: RegisterationService,
     private resetPasswordService: ResetPasswordService
-  ) { }
+  ) {
+
+  }
 
   ngOnInit() {
+    const navigation = this.router.getCurrentNavigation()?.extras.state as { email: string };
+    this.receiverEmail = navigation.email;
+    console.log("Email : ", this.receiverEmail);
   }
 
   passwordNew!: string
@@ -49,9 +56,15 @@ export class ResetPasswordPage implements OnInit {
 
   resetPassword() {
     //call reset password service here
-    this.resetPasswordService.resetPassword(this.passwordNew).subscribe({
+    const payload: resetPasswordRequest = {
+      password: this.passwordNew,
+      confirmPassword: this.passwordConfirm,
+      email: this.receiverEmail
+    }
+    this.resetPasswordService.resetPassword(payload).subscribe({
       next: (responseData: any) => {
         console.log(responseData);
+        this.router.navigate(['/login']);
       },
       error: (error: any) => {
         console.log(error);
