@@ -7,6 +7,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class PasswordInputComponent implements OnInit {
   @Input() label: any = '';
+  @Input() name: any = '';
   @Input() type: any = 'password';
   @Input() value: any = '';
   @Input() placeholder: any = '';

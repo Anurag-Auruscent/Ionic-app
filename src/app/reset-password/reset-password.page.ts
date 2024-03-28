@@ -35,7 +35,7 @@ export class ResetPasswordPage implements OnInit {
 
   passwordNew!: string
   passwordConfirm!: string
-  passwordsMatch: boolean = false
+  // passwordsMatch: boolean = false
 
   // onTextChange(event: any, field: string) {
   //   // Extract value from the event's target
@@ -56,6 +56,11 @@ export class ResetPasswordPage implements OnInit {
     this.passwordNew = text;
     console.log(this.passwordNew);
   }
+  // checkPasswords() {
+  //   this.passwordsMatch = this.passwordNew === this.passwordConfirm;
+  //   console.log(this.passwordsMatch);
+
+  // }
 
   onTextChangeTwo(text: string) {
     this.passwordConfirm = text;
