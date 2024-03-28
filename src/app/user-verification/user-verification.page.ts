@@ -44,6 +44,10 @@ export class UserVerificationPage implements OnInit {
     // console.log(environment.token);
   }
 
+  ionViewWillEnter(){
+    this. startTimer()
+  }
+
   onTextChange(text: string) {
     this.otp = text;
   }
@@ -74,9 +78,11 @@ export class UserVerificationPage implements OnInit {
 
   // resend otp api call
   resendOtp() {
-    console.log('calling api');
-    
-    this.registrationService.resendOtp(this.receiverEmail).subscribe({
+    const payload = {
+      email : this.receiverEmail
+    }
+
+    this.registrationService.resendOtp(payload).subscribe({
       next: (responseData) => {
         console.log(responseData);
       },

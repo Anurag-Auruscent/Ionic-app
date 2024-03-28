@@ -38,7 +38,6 @@ export class RegisterationService {
   
   resendOtp(payload: any = {}): Observable<any[]> {
     console.log(payload, '/n', this.resendOtpUrl);
-    console.log(environment.token)
     return this.http.post<any[]>(this.resendOtpUrl, payload);
   }
 
