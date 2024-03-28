@@ -39,7 +39,7 @@ export class ForgotPasswordPage implements OnInit {
       receiverEmail: this.receiverEmail,
       enteredOTP: this.otp
     }
-    this.forgotPasswordService.verifyOtp(verifyOtpPayload).subscribe({
+    this.registrationService.verifyOtp(verifyOtpPayload).subscribe({
       next: (responseData) => {
         console.log(responseData);
         this.ts.presentToast('Verified succesfully', 2000, "primary");
