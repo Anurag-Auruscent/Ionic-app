@@ -12,7 +12,7 @@ export class RegisterationService {
   keyCloakURL = environment.keycloakUrl
   addUserURL = environment.addUserURL
   verifyOtpUrl = environment.verifyOtpUrl
-  // resendOtpUrl = environment.resendOtpUrl
+  resendOtpUrl = environment.resendOtpUrl
 
   constructor(
     private http: HttpClient
@@ -36,10 +36,10 @@ export class RegisterationService {
     return this.http.post<any[]>(this.verifyOtpUrl, payload);
   }
   
-  // resendOtp(payload: any): Observable<any[]> {
-  //   console.log(payload, '/n', this.resendOtpUrl);
-  //   console.log(environment.token)
-  //   return this.http.post<any[]>(this.resendOtpUrl, payload);
-  // }
+  resendOtp(payload: any = {}): Observable<any[]> {
+    console.log(payload, '/n', this.resendOtpUrl);
+    console.log(environment.token)
+    return this.http.post<any[]>(this.resendOtpUrl, payload);
+  }
 
 }

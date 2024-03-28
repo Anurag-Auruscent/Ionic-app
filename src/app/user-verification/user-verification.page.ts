@@ -40,8 +40,8 @@ export class UserVerificationPage implements OnInit {
     };
     this.receiverEmail = navigation.email;
     environment.token = navigation.token;
-    console.log('Email : ', this.receiverEmail);
-    console.log(environment.token);
+    // console.log('Email : ', this.receiverEmail);
+    // console.log(environment.token);
   }
 
   onTextChange(text: string) {
@@ -74,14 +74,16 @@ export class UserVerificationPage implements OnInit {
 
   // resend otp api call
   resendOtp() {
-    // this.registrationService.resendOtp(this.receiverEmail).subscribe({
-    //   next: (responseData) => {
-    //     console.log(responseData);
-    //   },
-    //   error: (error) => {
-    //     console.error('Error', error.status);
-    //   },
-    // });
+    console.log('calling api');
+    
+    this.registrationService.resendOtp(this.receiverEmail).subscribe({
+      next: (responseData) => {
+        console.log(responseData);
+      },
+      error: (error) => {
+        console.error('Error', error.status);
+      },
+    });
 
     this.startTimer();
   }
