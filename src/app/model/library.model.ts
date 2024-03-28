@@ -33,6 +33,11 @@ export interface LibraryListServerResponse {
     empty: boolean;
 }
 
+export interface verifyOtpResponse {
+    message: string;
+    code: string;
+}
+
 
 export interface UserModelResponse {
     username: string;
@@ -63,4 +68,5 @@ export interface resetPasswordRequest {
     password: string;
     confirmPassword: string;
     email: string;
+    secretKey: string;
 }

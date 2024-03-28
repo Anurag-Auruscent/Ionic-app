@@ -46,6 +46,7 @@ export class ForgotPasswordPage implements OnInit {
         const navigationExtras: NavigationExtras = {
           state: {
             email: this.receiverEmail,
+            secretCode: responseData.code
           }
         };
         this.router.navigate(['/reset-password'], navigationExtras);

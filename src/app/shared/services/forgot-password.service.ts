@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UserModelResponse } from 'src/app/model/library.model';
+import { UserModelResponse, verifyOtpResponse } from 'src/app/model/library.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -22,9 +22,9 @@ export class ForgotPasswordService {
     return this.http.post<any[]>(this.keyCloakURL, payload);
   }
 
-  verifyOtp(payload: any = {}): Observable<any[]> {
+  verifyOtp(payload: any = {}): Observable<verifyOtpResponse> {
     console.log(payload, '/n', this.forgotPasswordOtpUrl);
-    return this.http.post<any[]>(this.forgotPasswordOtpUrl, payload);
+    return this.http.post<verifyOtpResponse>(this.forgotPasswordOtpUrl, payload);
   }
 
   sendEmail(email: string): Observable<any[]> {

@@ -13,6 +13,7 @@ import { ResetPasswordService } from '../shared/services/reset-password.service'
 export class ResetPasswordPage implements OnInit {
 
   receiverEmail: string = '';
+  secretCode: string = '';
 
   constructor(
     private router: Router,
@@ -25,36 +26,50 @@ export class ResetPasswordPage implements OnInit {
   }
 
   ngOnInit() {
-    const navigation = this.router.getCurrentNavigation()?.extras.state as { email: string };
+    const navigation = this.router.getCurrentNavigation()?.extras.state as { email: string, secretCode: string };
     this.receiverEmail = navigation.email;
+    this.secretCode = navigation.secretCode;
     console.log("Email : ", this.receiverEmail);
+    console.log("Code : ", this.secretCode);
   }
 
   passwordNew!: string
   passwordConfirm!: string
   passwordsMatch: boolean = false
 
-  onTextChange(event: any, field: string) {
-    // Extract value from the event's target
-    const value = event.target.value;
+  // onTextChange(event: any, field: string) {
+  //   // Extract value from the event's target
+  //   const value = event.target.value;
 
-    // Update the corresponding field based on the argument passed
-    if (field === 'new') {
-      this.passwordNew = value;
-    } else if (field === 'confirm') {
-      this.passwordConfirm = value;
-    }
+  //   // Update the corresponding field based on the argument passed
+  //   if (field === 'new') {
+  //     this.passwordNew = value;
+  //   } else if (field === 'confirm') {
+  //     this.passwordConfirm = value;
+  //   }
 
-    // Check if passwords match
-    this.passwordsMatch = this.passwordNew === this.passwordConfirm;
+  //   // Check if passwords match
+  //   this.passwordsMatch = this.passwordNew === this.passwordConfirm;
+  // }
+
+  onTextChange(text: string) {
+    this.passwordNew = text;
+    console.log(this.passwordNew);
   }
+
+  onTextChangeTwo(text: string) {
+    this.passwordConfirm = text;
+    console.log(this.passwordConfirm);
+  }
+
 
   resetPassword() {
     //call reset password service here
     const payload: resetPasswordRequest = {
       password: this.passwordNew,
       confirmPassword: this.passwordConfirm,
-      email: this.receiverEmail
+      email: this.receiverEmail,
+      secretKey: this.secretCode
     }
     this.resetPasswordService.resetPassword(payload).subscribe({
       next: (responseData: any) => {
