@@ -16,14 +16,22 @@
     }
 }
 
-.otpItem {
-    margin: 10px 0 38px 0;
-    --border-radius: 8px;
-    --background: #ffffff80;
-    border-radius: 8px;
-    color: #404040;
-}
+// .otpItem {
+//     margin: 10px 0 38px 0;
+//     --border-radius: 8px;
+//     --background: #ffffff80;
+//     border-radius: 8px;
+//     color: #404040;
+// }
 
 .form-fields{
     margin-top: 89px;
+}
+
+.emailItem{
+    margin: 10px 0 38px 0;
+    --border-radius: 5px;
+    --background: #ffffff80;
+    border-radius: 8px;
+    color: #404040;
 }

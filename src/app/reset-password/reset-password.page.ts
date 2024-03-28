@@ -25,22 +25,27 @@ export class ResetPasswordPage implements OnInit {
 
   passwordNew!: string
   passwordConfirm!: string
-  passwordsMatch: boolean = false
+  // passwordsMatch: boolean = false
 
-  onTextChange(event: any, field: string) {
-    // Extract value from the event's target
-    const value = event.target.value;
+  // onTextChange(event: any, field: string) {
+  //   // Extract value from the event's target
+  //   const value = event.target.value;
 
-    // Update the corresponding field based on the argument passed
-    if (field === 'new') {
-      this.passwordNew = value;
-    } else if (field === 'confirm') {
-      this.passwordConfirm = value;
-    }
+  //   // Update the corresponding field based on the argument passed
+  //   if (field === 'new') {
+  //     this.passwordNew = value;
+  //   } else if (field === 'confirm') {
+  //     this.passwordConfirm = value;
+  //   }
 
-    // Check if passwords match
-    this.passwordsMatch = this.passwordNew === this.passwordConfirm;
-  }
+  //   // Check if passwords match
+  //   this.passwordsMatch = this.passwordNew === this.passwordConfirm;
+  // }
+  // checkPasswords() {
+  //   this.passwordsMatch = this.passwordNew === this.passwordConfirm;
+  //   console.log(this.passwordsMatch);
+    
+  // }
 
   resetPassword() {
     //call reset password service here
