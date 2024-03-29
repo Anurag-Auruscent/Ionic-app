@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastService } from '../shared/services/toast.service';
 import { RegisterationService } from '../shared/services/registeration.service';
 import { environment } from 'src/environments/environment';
+import { OtpService } from '../shared/services/otp.service';
 
 @Component({
   selector: 'app-user-verification',
@@ -19,7 +20,8 @@ export class UserVerificationPage implements OnInit {
     private router: Router,
     private ts: ToastService,
     private activatedRoute: ActivatedRoute,
-    private registrationService: RegisterationService
+    private registrationService: RegisterationService,
+    public otpService: OtpService
   ) { }
 
   ngOnInit() {
@@ -66,5 +68,22 @@ export class UserVerificationPage implements OnInit {
       }
     });
 
+  }
+
+  resendOtp() {
+    const payload = {
+      email : this.receiverEmail
+    }
+
+    this.otpService.resendOtp(payload).subscribe({
+      next: (responseData) => {
+        console.log(responseData);
+      },
+      error: (error) => {
+        console.error('Error', error.status);
+      },
+    });
+
+    this.otpService.startTimer(60);
   }
 }
