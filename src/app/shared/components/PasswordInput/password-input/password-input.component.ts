@@ -15,7 +15,7 @@ export class PasswordInputComponent implements OnInit {
   @Input() inputClass: any = '';
   @Input() inputStyle: any = {};
   @Input() icon: any = '';
-  @Output() passwordChange = new EventEmitter();
+  @Output() passwordChange = new EventEmitter<string>();
   isPasswordVisible: boolean = false;
   areCredentialsWrong: any;
   constructor() { }

@@ -9,7 +9,7 @@
         <app-text-input [value]="useremail" [placeholder]="'Enter email'" [icon]="'/assets/Images/otp.svg'"
           (textChange)="onTextChange($event)"></app-text-input>
       </ion-item>
-      <app-button class="btns" label="send otp" (clickEvent)="sendOtp()"></app-button>
+      <app-button [customClass]="'sentOtpBtn'" label="send otp" (clickEvent)="sendOtp()"></app-button>
       <!-- <app-otp-input [length]="6" (otpChange)="blockOtp($event)"></app-otp-input> -->
     </ion-grid>
   </div>

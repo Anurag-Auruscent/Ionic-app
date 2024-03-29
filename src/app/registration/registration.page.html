@@ -43,7 +43,7 @@
         <p class="acknowledgeText">By clicking Create Account, you acknowledge you have read and agreed to our <a
             href="http://#" class="policyLink" target="_blank">Terms of Use and Privacy Policy</a></p>
       </div>
-      <app-button class="btns" label="create account" (clickEvent)="registerUser()"></app-button>
+      <app-button [customClass]="'registerBtn'" label="create account" (clickEvent)="registerUser()"></app-button>
       <div class="orDiv">
         <p class="orLabel"><span> or </span></p>
         <p class="orLine"></p>

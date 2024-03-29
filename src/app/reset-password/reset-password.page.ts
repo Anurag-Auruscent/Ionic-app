@@ -11,9 +11,9 @@ import { ResetPasswordService } from '../shared/services/reset-password.service'
   styleUrls: ['./reset-password.page.scss'],
 })
 export class ResetPasswordPage implements OnInit {
-
   receiverEmail: string = '';
   secretCode: string = '';
+  passwordsMatch: boolean = false;
 
   constructor(
     private router: Router,
@@ -21,52 +21,35 @@ export class ResetPasswordPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private registrationService: RegisterationService,
     private resetPasswordService: ResetPasswordService
-  ) {
-
-  }
+  ) {}
 
   ngOnInit() {
-    const navigation = this.router.getCurrentNavigation()?.extras.state as { email: string, secretCode: string };
+    const navigation = this.router.getCurrentNavigation()?.extras.state as {
+      email: string;
+      secretCode: string;
+    };
     this.receiverEmail = navigation.email;
     this.secretCode = navigation.secretCode;
-    console.log("Email : ", this.receiverEmail);
-    console.log("Code : ", this.secretCode);
+    console.log('Email : ', this.receiverEmail);
+    console.log('Code : ', this.secretCode);
   }
 
-  passwordNew!: string
-  passwordConfirm!: string
-  // passwordsMatch: boolean = false
+  passwordNew!: string;
+  passwordConfirm!: string;
 
-  // onTextChange(event: any, field: string) {
-  //   // Extract value from the event's target
-  //   const value = event.target.value;
-
-  //   // Update the corresponding field based on the argument passed
-  //   if (field === 'new') {
-  //     this.passwordNew = value;
-  //   } else if (field === 'confirm') {
-  //     this.passwordConfirm = value;
-  //   }
-
-  //   // Check if passwords match
-  //   this.passwordsMatch = this.passwordNew === this.passwordConfirm;
-  // }
-
-  onTextChange(text: string) {
+  onPasswordChange(text: string) {
     this.passwordNew = text;
     console.log(this.passwordNew);
   }
-  // checkPasswords() {
-  //   this.passwordsMatch = this.passwordNew === this.passwordConfirm;
-  //   console.log(this.passwordsMatch);
 
-  // }
-
-  onTextChangeTwo(text: string) {
+  onPasswordConfirmChange(text: string) {
     this.passwordConfirm = text;
     console.log(this.passwordConfirm);
   }
 
+  checkPasswordMatch() {
+    this.passwordsMatch = this.passwordNew === this.passwordConfirm;
+  }
 
   resetPassword() {
     //call reset password service here
@@ -74,8 +57,10 @@ export class ResetPasswordPage implements OnInit {
       password: this.passwordNew,
       confirmPassword: this.passwordConfirm,
       email: this.receiverEmail,
-      secretKey: this.secretCode
-    }
+      secretKey: this.secretCode,
+    };
+    console.log(payload);
+
     this.resetPasswordService.resetPassword(payload).subscribe({
       next: (responseData: any) => {
         console.log(responseData);
@@ -83,11 +68,11 @@ export class ResetPasswordPage implements OnInit {
       },
       error: (error: any) => {
         console.log(error);
-      }
-    })
+      },
+    });
   }
 
-  cancel(){
+  cancel() {
     this.router.navigate(['/login']);
   }
 
@@ -108,5 +93,4 @@ export class ResetPasswordPage implements OnInit {
   //     }
   //   });
   // }
-
 }
