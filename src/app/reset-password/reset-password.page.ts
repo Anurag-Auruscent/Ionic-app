@@ -87,6 +87,10 @@ export class ResetPasswordPage implements OnInit {
     })
   }
 
+  cancel(){
+    this.router.navigate(['/login']);
+  }
+
   // verifyOtp() {
   //   const verifyOtpPayload: VerifyOtpRequest = {
   //     receiverEmail: this.receiverEmail,
