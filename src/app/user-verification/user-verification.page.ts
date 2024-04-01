@@ -41,6 +41,10 @@ export class UserVerificationPage implements OnInit {
     // 
   }
 
+  ionViewWillEnter(){
+    this.otpService.startTimer(60);
+  }
+
   onTextChange(text: string) {
     this.otp = text;
   }

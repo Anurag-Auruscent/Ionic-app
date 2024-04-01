@@ -5,6 +5,7 @@ import { ToastService } from '../shared/services/toast.service';
 import { environment } from 'src/environments/environment';
 import { VerifyOtpRequest } from '../model/library.model';
 import { ForgotPasswordService } from '../shared/services/forgot-password.service';
+import { OtpService } from '../shared/services/otp.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -21,13 +22,18 @@ export class ForgotPasswordPage implements OnInit {
     private ts: ToastService,
     private activatedRoute: ActivatedRoute,
     private registrationService: RegisterationService,
-    private forgotPasswordService: ForgotPasswordService
+    private forgotPasswordService: ForgotPasswordService,
+    public otpService: OtpService
   ) { }
 
   ngOnInit() {
     const navigation = this.router.getCurrentNavigation()?.extras.state as { email: string };
     this.receiverEmail = navigation.email;
     console.log("Email : ", this.receiverEmail);
+  }
+
+  ionViewWillEnter(){
+    this.otpService.startTimer(60);
   }
 
   onTextChange(text: string) {
@@ -57,6 +63,23 @@ export class ForgotPasswordPage implements OnInit {
       }
     });
 
+  }
+
+  resendOtp() {
+    const payload = {
+      email : this.receiverEmail
+    }
+
+    this.otpService.resendOtp(payload).subscribe({
+      next: (responseData) => {
+        console.log(responseData);
+      },
+      error: (error) => {
+        console.error('Error', error.status);
+      },
+    });
+
+    this.otpService.startTimer(60);
   }
 
 }
