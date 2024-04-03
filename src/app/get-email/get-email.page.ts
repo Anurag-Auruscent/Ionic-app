@@ -15,7 +15,7 @@ export class GetEmailPage implements OnInit {
 
   otp!: string;
   receiverEmail!: any;
-  useremail: string = "anurag@auruscent.com";
+  useremail: string = "";
 
   constructor(
     private router: Router,
