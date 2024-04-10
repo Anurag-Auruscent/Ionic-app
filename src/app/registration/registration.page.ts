@@ -115,6 +115,39 @@ export class RegistrationPage implements OnInit {
         this.ts.presentToast('Phone Number is required', 2000);
         return;
       }
+      const addPhonePayload = {
+        username: this.userNumber,
+        firstName: this.firstName,
+        lastName: this.lastName,
+        attributes: {
+          phone_no: this.userNumber,
+        }
+      }
+      const URL = 'http://localhost:8080/admin/realms/angular-oauth/users'
+      this.registrationService.addUserByPhone(addPhonePayload).subscribe({
+        next: (responseData) => {
+          console.log(responseData);
+          this.ts.presentToast('User added successfully and OTP sent', 2000, "primary");
+          const phoneNumber = "";
+          console.log(phoneNumber);
+          const navigationnExtras: NavigationExtras = {
+            state: {
+              phoneNumber: phoneNumber,
+              token: environment.token
+            }
+          }
+          this.router.navigate(['/user-verification'], navigationnExtras);
+        },
+        error: (error) => {
+          console.error('Error', error.status);
+          if (error.status === 409) {
+            this.ts.presentToast('User already registered', 5000);
+          } else {
+            this.ts.presentToast('Failed to add user', 2000);
+          }
+        }
+
+      })
     } else {
       this.ts.presentToast('Invalid registration segment', 2000);
       return;

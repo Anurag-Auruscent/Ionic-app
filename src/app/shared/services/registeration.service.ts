@@ -12,6 +12,7 @@ export class RegisterationService {
   keyCloakURL = environment.keycloakUrl
   addUserURL = environment.addUserURL
   verifyOtpUrl = environment.verifyOtpUrl
+  addUserByPhoneUrl = environment.addUserByPhoneUrl
 
   constructor(
     private http: HttpClient
@@ -33,6 +34,12 @@ export class RegisterationService {
     console.log(payload, '/n', this.verifyOtpUrl);
     console.log(environment.token)
     return this.http.post<any[]>(this.verifyOtpUrl, payload);
+  }
+
+  addUserByPhone(payload: any = {}): Observable<any[]> {
+    console.log(payload, '/n', this.addUserByPhoneUrl);
+    console.log(environment.token);
+    return this.http.post<any[]>(this.addUserByPhoneUrl, payload);
   }
 
 }
