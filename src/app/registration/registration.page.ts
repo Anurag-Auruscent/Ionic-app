@@ -117,11 +117,13 @@ export class RegistrationPage implements OnInit {
       }
       const addPhonePayload = {
         username: this.userNumber,
+        role: 'admin',
+        password: '',
+        dob: "01-09-1994",
+        gender: "male",
         firstName: this.firstName,
         lastName: this.lastName,
-        attributes: {
-          phone_no: this.userNumber,
-        }
+        phone_no: this.userNumber,
       }
       const URL = 'http://localhost:8080/admin/realms/angular-oauth/users'
       this.registrationService.addUserByPhone(addPhonePayload).subscribe({

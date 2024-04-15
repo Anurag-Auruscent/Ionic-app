@@ -37,9 +37,9 @@ export class RegisterationService {
   }
 
   addUserByPhone(payload: any = {}): Observable<any[]> {
-    console.log(payload, '/n', this.addUserByPhoneUrl);
+    console.log(payload, '/n', this.addUserURL);
     console.log(environment.token);
-    return this.http.post<any[]>(this.addUserByPhoneUrl, payload);
+    return this.http.post<any[]>(this.addUserURL, payload);
   }
 
 }
