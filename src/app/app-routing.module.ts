@@ -46,7 +46,11 @@ const routes: Routes = [
   {
     path: 'user-verification',
     loadChildren: () => import('./user-verification/user-verification.module').then(m => m.UserVerificationPageModule)
+  },  {
+    path: 'content-details',
+    loadChildren: () => import('./content-details/content-details.module').then( m => m.ContentDetailsPageModule)
   }
+
 
 
 ];
