@@ -123,9 +123,9 @@ export class RegistrationPage implements OnInit {
         gender: "male",
         firstName: this.firstName,
         lastName: this.lastName,
-        phone_no: this.userNumber,
+        phoneNumber: this.userNumber,
+        email: ""
       }
-      const URL = 'http://localhost:8080/admin/realms/angular-oauth/users'
       this.registrationService.addUserByPhone(addPhonePayload).subscribe({
         next: (responseData) => {
           console.log(responseData);
@@ -179,6 +179,7 @@ export class RegistrationPage implements OnInit {
         gender: "male",
         firstName: this.firstName,
         lastName: this.lastName,
+        phoneNumber: ""
       };
 
       // const headers = {
