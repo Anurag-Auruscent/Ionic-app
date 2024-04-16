@@ -84,3 +84,9 @@ p.caption {
   grid-row: span 2 / auto;
   grid-column: span 1;
 }
+
+.tags {
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.4rem;
+}

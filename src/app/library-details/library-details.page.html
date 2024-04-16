@@ -18,10 +18,14 @@
   <div class="libraryList" *ngIf="libraryData">
     <div class="img-item" *ngFor="let contentItem of libraryData.content">
       <!-- Make the entire card clickable and navigate to the external link  -->
-      <a [href]="contentItem.link" target="_blank" rel="noopener noreferrer">
+      <!-- <a [href]="contentItem.link" target="_blank" rel="noopener noreferrer">
         <ion-img [src]="contentItem.fileData" alt="Image"></ion-img>
         <p class="caption">{{contentItem.title | slice:0:20}}</p>
-      </a>
+      </a> -->
+      <ion-card class="library-item" (click)="viewLibraryDetails(contentItem)">
+        <ion-img [src]="contentItem.fileData" alt="Image"></ion-img>
+        <p class="caption">{{contentItem.title | slice:0:20}}</p>
+      </ion-card>
     </div>
   </div>
   <!-- menu nav -->

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Library } from '../model/library.model';
+import { ActivatedRoute, NavigationExtras } from '@angular/router';
+import { Content, Library } from '../model/library.model';
 import { LibraryService } from '../shared/services/library.service';
 import { Router } from '@angular/router';
 import { AlertController, IonSelect, PopoverController } from '@ionic/angular';
@@ -20,7 +20,7 @@ export class LibraryDetailsPage implements OnInit {
   showEditOptions = false;
   link!: string;
   linkMsg: boolean = false;
-  
+
   constructor(
     private route: ActivatedRoute,
     private libraryService: LibraryService,
@@ -328,5 +328,19 @@ export class LibraryDetailsPage implements OnInit {
         console.error('Error', error);
       }
     })
+  }
+
+  viewLibraryDetails(content: Content) {
+    console.log(content);
+    const navigationExtras: NavigationExtras = {
+      state: {
+        libraryId: content.id,
+        libraryImg: content.fileData,
+        libraryImgContentType: content.contentType,
+        libraryTitle: content.title
+      }
+    };
+    console.log(navigationExtras);
+    this.router.navigate(['/content-details'], navigationExtras); // Adjust the route and parameter accordingly
   }
 }

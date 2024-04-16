@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PopoverController, AlertController } from '@ionic/angular';
+import { LibraryService } from '../shared/services/library.service';
 
 @Component({
   selector: 'app-content-details',
@@ -8,15 +10,32 @@ import { Router } from '@angular/router';
 })
 export class ContentDetailsPage implements OnInit {
 
+  libraryId!: string;
+  libraryImg!: string;
+  libraryImgContentType!: string;
+  libraryTitle!: string;
+  libraryPayload!: any;
+
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
+    private libraryService: LibraryService,
+    private alertController: AlertController,
   ) { }
 
   ngOnInit() {
+    const navigation = this.router.getCurrentNavigation()?.extras.state as {
+      libraryId: string;
+      libraryImg: string;
+      libraryImgContentType: string;
+      libraryTitle: string;
+    };
+    this.libraryPayload = navigation
+    console.log(this.libraryPayload);
   }
 
   goBack() {
-    this.router.navigate(['/library-details']); // Adjust the route accordingly
+    this.router.navigate(['/home']); // Adjust the route accordingly
   }
 
 }
