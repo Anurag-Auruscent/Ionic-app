@@ -8,6 +8,8 @@ export interface Library {
     contents: Content[];
     isOwner: boolean;
     permissionType: string;
+    color: string;
+    showImage: boolean;
 }
 
 export interface Content {

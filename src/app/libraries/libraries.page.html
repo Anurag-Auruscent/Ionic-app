@@ -12,17 +12,55 @@
 
 <ion-content [fullscreen]="true" class="ion-padding">
   <!-- Search and Filter Nav -->
-  <ion-label class="page-title">All libraries</ion-label>
+  <ion-label class="page-title">libraries</ion-label>
   <!-- Display libraries in a grid -->
-  <ion-grid class="library-container">
+  <!-- <ion-grid class="library-container">
     <div class="card-wrapper" *ngFor="let library of allLibraries">
       <ion-card class="library-item" (click)="viewLibraryDetails(library)">
         <img src="https://cdn.pixabay.com/photo/2021/12/17/17/00/butterfly-6876992_1280.jpg" alt="Triangles Polygon" />
       </ion-card>
       <h6 class="library-title">{{ library.name }}</h6>
     </div>
-  </ion-grid>
+  </ion-grid> -->
 
+  <div class="cards">
+    <div
+      class="card"
+      [ngStyle]="{'background': library.color}"
+      *ngFor="let library of allLibraries"
+      (click)="toggleImage(library)"
+    >
+      <div class="card-item">
+        <div class="header_section">
+          <div class="card-title">{{library.name}}</div>
+          <div class="shareLink">
+            <img src="/assets/Images/user-icon.svg" alt="Owner Icon" />
+            <img src="/assets/Images/share.png" alt="Share Icon" />
+          </div>
+        </div>
+        <div class="data-content" *ngIf="library.showImage">
+          <ng-container class="no-image-align" *ngIf="library.contents.length === 0">
+            <ion-img
+            class="content-img"  
+              [src]="'/assets/Images/default-placeholder.svg'" alt="default-placeholder"
+            ></ion-img>
+          </ng-container>
+          <ng-container *ngFor="let item of library.contents.slice(0, 4)">
+          <ion-img
+            class="content-img"
+            [src]="item.fileData"
+            (error)="handleImageError($event, item)"
+            (click)="viewLibraryDetails(library)"
+          ></ion-img>
+        </ng-container>
+        <ng-container *ngIf="library.contents.length > 4">
+          <!-- Calculate the count of remaining images -->
+          <div class="more-images">+ {{ library.contents.length - 4 }} more</div>
+      </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- menu nav -->
 </ion-content>
 <ion-footer class="ion-no-border">

@@ -1,6 +1,6 @@
 .search-nav{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     margin-bottom: 28px;
     position: sticky;
@@ -16,4 +16,13 @@
 .searchItem{
     width: 85%;
     border-radius: 8px;
+    color: #666666;
+}
+
+ion-item::part(native){
+    border-radius: 12px;
+    // box-shadow: inset -8px -8px 15px #ffffff, inset 5px 5px 9px rgba(94,104,121,0.3);   
+    box-shadow: inset -7px -5px 12px 0px #ffffff, inset 1px 5px 16px rgba(94, 104, 121, 0.3);     
+    background: linear-gradient(129deg, rgba(228, 240, 250, 1) 0%, rgba(228, 240, 250, 1) 97%);
+    border: 2px double #CFDBE7;
 }

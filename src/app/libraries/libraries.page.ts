@@ -11,55 +11,66 @@ import { LibraryService } from '../shared/services/library.service';
   styleUrls: ['./libraries.page.scss'],
 })
 export class LibrariesPage {
-  allLibraries: Library[] = []; // Fetch your library data here
+  allLibraries: Library[] = []; 
   selectedLibrary: any;
 
-  constructor(private router: Router, private libraryService: LibraryService) {
-    // For example:
-
-  }
+  constructor(private router: Router, private libraryService: LibraryService,) { }
 
   ngOnInit() {
     this.seeAllLibraries();
   }
 
   ionViewWillEnter() {
-    // This method will be called every time the page is about to enter.
     this.seeAllLibraries();
   }
 
   goBack() {
-    this.router.navigate(['/home']); // Adjust the route accordingly
-  }
-
-
-
-  // Define your functions here
-
-  // Example isEvenIndex function
-  isEvenIndex(index: number): boolean {
-    return index % 2 === 0;
+    this.router.navigate(['/home']);
   }
 
   viewLibraryDetails(library: Library) {
-    this.router.navigate(['/library-details', library.id]); // Adjust the route and parameter accordingly
+    this.router.navigate(['/library-details', library.id]); 
   }
 
-  librarySelected() {
-    // Implement the logic for when a library is selected
-    console.log('Library Selected:', this.selectedLibrary);
-  }
+  // librarySelected() {
+  //   // Implement the logic for when a library is selected
+  //   console.log('Library Selected:', this.selectedLibrary);
+  // }
 
-  // Add this function to fix the compilation error
   seeAllLibraries() {
-    // Implement the logic to navigate to a page displaying all libraries
-    console.log('See All Libraries Clicked');
     this.libraryService.getAllLibraries().subscribe(
       (data: LibraryListServerResponse) => {
-        console.log(data);
-        this.allLibraries = data.content;
+       
+        this.allLibraries = data.content.map((library: any) => ({
+          ...library,
+          color: this.getRandomColor() ,
+          showImage: false
+        }));
+        console.log(this.allLibraries);
       }
     );
   }
+
+  getRandomColor() {
+    var r = Math.floor(150 + Math.random() * 100); // Red component between 200 and 255
+    var g = Math.floor(160 + Math.random() * 100); // Green component between 200 and 255
+    var b = Math.floor(150 + Math.random() * 100); // Blue component between 200 and 255
+
+    return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+  }
+
+  toggleImage(library: Library): void {
+    library.showImage = !library.showImage;
+
+    this.allLibraries.forEach(lib => {
+      if (lib !== library) {
+        lib.showImage = false;
+      }
+    });
+  }
+
+  handleImageError(event: any, item: any) {
+    event.target.src = '/assets/Images/default-placeholder.svg';
+}
 
 }
