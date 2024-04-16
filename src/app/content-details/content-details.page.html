@@ -1,53 +1,60 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button (click)="goBack()"></ion-back-button>
-    </ion-buttons>
-    <ion-label>{{libraryPayload.libraryTitle}}</ion-label>
-  </ion-toolbar>
-</ion-header>
+<div class="header-section">
+  <img (click)="goBack()" src="/assets/Images/left-arrow.svg" alt="back page" />
 
-<ion-content>
-  <ion-img src="{{libraryPayload.libraryImg}}"></ion-img>
+  <h4>{{libraryPayload.libraryTitle.split(' ').slice(0,2).join(' ')}}</h4>
+</div>
+  <ion-content>
+    <ion-card>
+      <ion-img [src]="libraryPayload.libraryImg" alt="Content Image"></ion-img>
+    </ion-card>
+    <ion-label>Tags</ion-label>
+    <div class="tags">
+      <ion-button> Add Tag </ion-button>
+      <div class="tag-list">
+        <ul>
+          <li *ngFor="let tag of generatedTags">{{ tag }}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="section-btns">
+      <div class="content-lib">
+        <img
+          class="filter-icon"
+          src="/assets/Images/lib.svg"
+          alt="library content"
+        />
+      </div>
+      <div class="content-share">
+        <img
+          class="filter-icon"
+          src="/assets/Images/share.svg"
+          alt="share content"
+        />
+      </div>
+      <div class="content-delete">
+        <img
+          class="filter-icon"
+          src="/assets/Images/delete.svg"
+          alt="delete content"
+        />
+      </div>
+    </div>
+    
 
-  <!-- Image name -->
-
-  <!-- Tags descriptor -->
-  <ion-label>Tags:</ion-label>
-  <div class="tags">
-    <ion-button> Add Tag </ion-button>
-    <ion-button> Lipstick </ion-button>
-  </div>
-
-  <!-- Buttons for adding tags -->
-
-  <!-- Buttons with icons -->
-  <div>
-    <ion-button>
-      <ion-icon name="bookmark-outline"></ion-icon>
-    </ion-button>
-    <ion-button>
-      <ion-icon name="share-outline"></ion-icon>
-    </ion-button>
-    <ion-button>
-      <ion-icon name="trash-outline"></ion-icon>
-    </ion-button>
-  </div>
-  <!-- menu nav -->
-  <app-menu-nav></app-menu-nav>
-
-  <!-- Render ion-select dynamically -->
-  <!-- <ion-select *ngIf="showEditOptions" #editSelect (ionChange)="editOptionSelected($event)"
+    <!-- Render ion-select dynamically -->
+    <!-- <ion-select *ngIf="showEditOptions" #editSelect (ionChange)="editOptionSelected($event)"
     placeholder="Select an option">
     <ion-select-option value="Name">Edit Name</ion-select-option>
     <ion-select-option value="Description">Edit Description</ion-select-option> -->
-  <!-- <ion-select-option value="deleteLibrary">Delete Library</ion-select-option> -->
-  <!-- </ion-select>
+    <!-- <ion-select-option value="deleteLibrary">Delete Library</ion-select-option> -->
+    <!-- </ion-select>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed"
     style="margin-bottom: 16px; margin-right: 16px; z-index: 100">
     <ion-fab-button color="danger" (click)="promptDeleteConfirmation()">
       <ion-icon name="trash"></ion-icon>
     </ion-fab-button>
   </ion-fab> -->
-  <!-- <app-menu-nav></app-menu-nav> -->
-  <!-- </ion-content> -->
+    <!-- <app-menu-nav></app-menu-nav> -->
+    <!-- </ion-content></ion-content -->
+  
+

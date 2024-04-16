@@ -15,6 +15,7 @@ export class ContentDetailsPage implements OnInit {
   libraryImgContentType!: string;
   libraryTitle!: string;
   libraryPayload!: any;
+  generatedTags: string[] = [];
 
   constructor(
     private router: Router,
@@ -30,8 +31,21 @@ export class ContentDetailsPage implements OnInit {
       libraryImgContentType: string;
       libraryTitle: string;
     };
+    this.generateTag()
     this.libraryPayload = navigation
     console.log(this.libraryPayload);
+  }
+
+  generateTag(): void {
+    const adjectives = ['Amazing', 'Future', 'Fantastic', 'Awesome', 'Marvelous', 'Wonderful'];
+    const nouns = ['Sports', 'Network', 'cors', 'technology', 'Solution', 'Service'];
+
+    const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+    const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];
+
+    const tag = randomAdjective + ' ' + randomNoun;
+
+    this.generatedTags.push(tag);
   }
 
   goBack() {
