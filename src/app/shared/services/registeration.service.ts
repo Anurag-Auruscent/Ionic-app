@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UserModelResponse } from 'src/app/model/library.model';
+import { PhoneLoginTokenResponse, PhoneModelResponse, UserModelResponse } from 'src/app/model/library.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -11,8 +11,10 @@ export class RegisterationService {
 
   keyCloakURL = environment.keycloakUrl
   addUserURL = environment.addUserURL
-  verifyOtpUrl = environment.verifyOtpUrl
+  verifyOtpUrlEmail = environment.verifyOtpUrlEmail
+  verifyOtpUrlPhone = environment.verifyOtpUrlPhone
   addUserByPhoneUrl = environment.addUserByPhoneUrl
+  // verifyOtpUrlPhoneLogin = environment.verifyOtpUrlPhoneLogin
 
   constructor(
     private http: HttpClient
@@ -31,15 +33,27 @@ export class RegisterationService {
   }
 
   verifyOtp(payload: any = {}): Observable<any[]> {
-    console.log(payload, '/n', this.verifyOtpUrl);
-    console.log(environment.token)
-    return this.http.post<any[]>(this.verifyOtpUrl, payload);
+    if (payload.receiverEmail) {
+      console.log(payload, '/n', this.verifyOtpUrlEmail);
+      console.log(environment.token)
+      return this.http.post<any[]>(this.verifyOtpUrlEmail, payload);
+    } else {
+      console.log(payload, '/n', this.verifyOtpUrlPhone);
+      console.log(environment.token)
+      return this.http.post<any[]>(this.verifyOtpUrlPhone, payload);
+    }
   }
 
-  addUserByPhone(payload: any = {}): Observable<any[]> {
+  addUserByPhone(payload: any = {}): Observable<PhoneModelResponse> {
     console.log(payload, '/n', this.addUserURL);
     console.log(environment.token);
-    return this.http.post<any[]>(this.addUserURL, payload);
+    return this.http.post<PhoneModelResponse>(this.addUserURL, payload);
   }
+
+  // verifyPhoneOTPLogin(payload: any = {}): Observable<PhoneLoginTokenResponse> {
+  //   console.log(payload, '/n', this.addUserURL);
+  //   // console.log(environment.token);
+  //   return this.http.post<PhoneLoginTokenResponse>(this.verifyOtpUrlPhoneLogin, payload);
+  // }
 
 }

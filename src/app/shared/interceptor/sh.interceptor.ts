@@ -14,17 +14,18 @@ export class SHInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // Check if the request URL is the one for addUser
-        if (req.url === environment.addUserURL || req.url === environment.verifyOtpUrl) {
-            // Clone the request with the 'Authorization' header
-            const clonedReq = req.clone({
-                setHeaders: {
-                    Authorization: `Bearer ${environment.token}`,
-                    'Content-Type': 'application/json'
-                }
-            });
+        // if (req.url === environment.verifyOtpUrlEmail || re) {
+        //     // Clone the request with the 'Authorization' header
+        //     const clonedReq = req.clone({
+        //         setHeaders: {
+        //             Authorization: `Bearer ${environment.token}`,
+        //             'Content-Type': 'application/json'
+        //         }
+        //     });
 
-            return next.handle(clonedReq);
-        } else if (req.url === environment.sendEmailOtpUrl) {
+        //     return next.handle(clonedReq);
+        // }
+        if (req.url === environment.addUserURL || req.url === environment.sendEmailOtpUrl || req.url === environment.verifyOtpUrlEmail || req.url === environment.verifyOtpUrlPhone || req.url === environment.generateLoginOtpUrl) {
             const clonedReq = req.clone({
                 setHeaders: {
                     'Content-Type': 'application/json',
@@ -50,6 +51,7 @@ export class SHInterceptor implements HttpInterceptor {
                             'Content-Type': 'application/json'
                         }
                     });
+                    console.log("Token check : ", token);
 
                     return next.handle(clonedReq);
                 })

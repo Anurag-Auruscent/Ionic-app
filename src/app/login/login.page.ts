@@ -19,6 +19,7 @@ import { StorageService } from '../shared/services/storage.service';
 
 import { generateRandomState, getParameterByName, toFormUrlEncoded } from '../shared/helper/helper';
 import { Capacitor } from '@capacitor/core';
+import { LoginService } from '../shared/services/login.service';
 
 // use hook after platform dom ready
 GoogleAuth.initialize({
@@ -41,7 +42,7 @@ export class LoginPage {
   user = null
   selectedSegment: any = 'email';
   loginForm!: FormGroup;
-  userNumber: string = ''
+  userNumber: string = '9205656448'
   areCredentialsWrong: boolean = false;
   code!: string | null;
   code_challenge!: any;
@@ -59,6 +60,7 @@ export class LoginPage {
     private ts: ToastService,
     private route: ActivatedRoute,
     private storageService: StorageService,
+    private loginService: LoginService,
     @Inject(PLATFORM_ID) private platformId: object
   ) {
     this.generateChallengeAndLogin();
@@ -238,6 +240,26 @@ export class LoginPage {
         return;
       }
       console.log("This is a phone number", this.userNumber);
+      const payload = {
+        phoneNumber: this.userNumber,
+      }
+      this.loginService.generateLoginOtp(payload).subscribe({
+        next: (responseData: any) => {
+          console.log(responseData);
+          const navigationExtras: NavigationExtras = {
+            state: {
+              email: "",
+              phoneNumber: this.userNumber,
+              token: "",
+              flag: "phone-login"
+            }
+          };
+          this.router.navigate(['/user-verification'], navigationExtras);
+        },
+        error: (error: any) => {
+          console.error('Error', error.status);
+        }
+      })
     }
 
     if (this.selectedSegment === "email") {

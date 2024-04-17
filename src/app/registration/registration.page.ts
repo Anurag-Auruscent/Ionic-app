@@ -97,17 +97,66 @@ export class RegistrationPage implements OnInit {
   }
 
   async registerUser() {
-    if (!this.firstName || !this.lastName) {
-      this.ts.presentToast('First Name or Last Name is required', 2000);
+    const token = await this.fetchAccessToken();
+    if (token) {
+      console.log("Token is set");
+    } else {
+      console.error("Failed to fetch token");
+      this.ts.presentToast("Failed to fetch token", 3000);
       return;
     }
 
+
+
     if (this.selectedSegment === 'email') {
       this.userNumber = '';
+      if (!this.firstName || !this.lastName) {
+        this.ts.presentToast('First Name or Last Name is required', 2000);
+        return;
+      }
       if (!this.userEmail || !this.userPassword) {
         this.ts.presentToast('User email and password required', 2000);
         return;
       }
+
+      console.log(`${this.firstName} ${this.lastName}`);
+      console.log(`${this.userEmail} ${this.userPassword}`);
+      const addUserPayload = {
+        username: this.userEmail,
+        role: "admin",
+        email: this.userEmail,
+        password: this.userPassword,
+        dob: "25-08-2000",
+        gender: "male",
+        firstName: this.firstName,
+        lastName: this.lastName,
+        phoneNumber: ""
+      };
+      this.registrationService.addUser(addUserPayload).subscribe({
+        next: (responseData) => {
+          console.log(responseData);
+          this.ts.presentToast('User added successfully and OTP sent', 2000, "primary");
+          const email = responseData.email;
+          console.log(email);
+          const navigationExtras: NavigationExtras = {
+            state: {
+              email: email,
+              phoneNumber: "",
+              token: environment.token,
+              flag: "email"
+            }
+          };
+          this.router.navigate(['/user-verification'], navigationExtras);
+        },
+        error: (error) => {
+          console.error('Error', error.status);
+          if (error.status === 409) {
+            this.ts.presentToast('User already registered', 5000);
+          } else {
+            this.ts.presentToast('Failed to add user', 2000);
+          }
+        }
+      });
     } else if (this.selectedSegment === 'phone') {
       this.userEmail = '';
       this.userPassword = '';
@@ -116,9 +165,9 @@ export class RegistrationPage implements OnInit {
         return;
       }
       const addPhonePayload = {
-        username: this.userNumber,
-        role: 'admin',
-        password: '',
+        username: "James.west",
+        role: "admin",
+        password: "",
         dob: "01-09-1994",
         gender: "male",
         firstName: this.firstName,
@@ -130,12 +179,12 @@ export class RegistrationPage implements OnInit {
         next: (responseData) => {
           console.log(responseData);
           this.ts.presentToast('User added successfully and OTP sent', 2000, "primary");
-          const phoneNumber = "";
-          console.log(phoneNumber);
           const navigationnExtras: NavigationExtras = {
             state: {
-              phoneNumber: phoneNumber,
-              token: environment.token
+              email: "",
+              phoneNumber: responseData.phoneNumber,
+              token: environment.token,
+              flag: "phone"
             }
           }
           this.router.navigate(['/user-verification'], navigationnExtras);
@@ -153,72 +202,6 @@ export class RegistrationPage implements OnInit {
     } else {
       this.ts.presentToast('Invalid registration segment', 2000);
       return;
-    }
-
-    const token = await this.fetchAccessToken();
-
-
-    if (token) {
-      console.log("Token is set");
-    } else {
-      console.error("Failed to fetch token");
-      this.ts.presentToast("Failed to fetch token", 3000);
-      return;
-    }
-
-    // Your registration logic here
-    console.log(`${this.firstName} ${this.lastName}`);
-    if (this.selectedSegment === 'email') {
-      console.log(`${this.userEmail} ${this.userPassword}`);
-      const addUserPayload = {
-        username: this.userEmail,
-        // role: "admin",
-        email: this.userEmail,
-        password: this.userPassword,
-        dob: "25-08-2000",
-        gender: "male",
-        firstName: this.firstName,
-        lastName: this.lastName,
-        phoneNumber: ""
-      };
-
-      // const headers = {
-      //   'Content-Type': 'application/x-www-form-urlencoded',
-      //   'Authorization': `Bearer ${environment.token}`
-      // };
-
-      // axios.post(environment.addUserURL, addUserPayload, { headers: headers })
-      //   .then((response) => {
-      //     console.log(response.data);
-      //   }).catch((error) => {
-      //     console.error(error);
-      //   })
-
-      this.registrationService.addUser(addUserPayload).subscribe({
-        next: (responseData) => {
-          console.log(responseData);
-          this.ts.presentToast('User added successfully and OTP sent', 2000, "primary");
-          const email = responseData.email;
-          console.log(email);
-          const navigationExtras: NavigationExtras = {
-            state: {
-              email: email,
-              token: environment.token
-            }
-          };
-          this.router.navigate(['/user-verification'], navigationExtras);
-        },
-        error: (error) => {
-          console.error('Error', error.status);
-          if (error.status === 409) {
-            this.ts.presentToast('User already registered', 5000);
-          } else {
-            this.ts.presentToast('Failed to add user', 2000);
-          }
-        }
-      });
-    } else if (this.selectedSegment === 'phone') {
-      console.log(`${this.userNumber}`);
     }
   }
 

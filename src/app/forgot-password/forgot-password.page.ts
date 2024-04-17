@@ -3,8 +3,8 @@ import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { RegisterationService } from '../shared/services/registeration.service';
 import { ToastService } from '../shared/services/toast.service';
 import { environment } from 'src/environments/environment';
-import { VerifyOtpRequest } from '../model/library.model';
 import { ForgotPasswordService } from '../shared/services/forgot-password.service';
+import { VerifyOtpRequestEmail } from '../model/library.model';
 
 @Component({
   selector: 'app-forgot-password',
@@ -35,7 +35,7 @@ export class ForgotPasswordPage implements OnInit {
   }
 
   verifyOtp() {
-    const verifyOtpPayload: VerifyOtpRequest = {
+    const verifyOtpPayload: VerifyOtpRequestEmail = {
       receiverEmail: this.receiverEmail,
       enteredOTP: this.otp
     }

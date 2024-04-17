@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { VerifyOtpRequest } from '../model/library.model';
 import { RegisterationService } from '../shared/services/registeration.service';
 import { ToastService } from '../shared/services/toast.service';
 import { ForgotPasswordService } from '../shared/services/forgot-password.service';

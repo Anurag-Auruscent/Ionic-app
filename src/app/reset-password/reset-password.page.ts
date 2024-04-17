@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RegisterationService } from '../shared/services/registeration.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { VerifyOtpRequest, resetPasswordRequest } from '../model/library.model';
+import { resetPasswordRequest } from '../model/library.model';
 import { ToastService } from '../shared/services/toast.service';
 import { ResetPasswordService } from '../shared/services/reset-password.service';
 

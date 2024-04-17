@@ -48,11 +48,38 @@ export interface UserModelResponse {
     dob: string;
     firstName: string;
     lastName: string;
+    phoneNumber: string;
 }
 
-export interface VerifyOtpRequest {
+export interface PhoneModelResponse {
+    dob: string;
+    email: string;
+    firstName: string;
+    gender: string;
+    lastName: string;
+    password: string;
+    phoneNumber: string;
+    role: string;
+    username: string;
+}
+
+export interface VerifyOtpRequestEmail {
     receiverEmail: string;
     enteredOTP: string;
+}
+
+export interface VerifyOtpRequestPhone {
+    phoneNumber: string;
+    otp: string;
+}
+
+export interface VerifyOtpRequestPhoneLogin {
+    phoneNumber: string;
+    otp: string
+}
+
+export interface PhoneLoginTokenResponse {
+    accessToken: string;
 }
 
 export interface TokenRequestBody {

@@ -26,6 +26,7 @@ export class HomePage implements OnInit {
   libraries: any[] = [];
   selectedLibrary: any;  // Property to store the selected library in the dropdown
   allLibraries: Library[] = [];   // Property to store all libraries for "See All Libraries" button
+  flag!: string;
 
   constructor(
     private router: Router,
@@ -42,6 +43,13 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.getLibraryIdFromUrl();
+    const navigation = this.router.getCurrentNavigation()?.extras.state as { token: string, flag: string };
+    this.flag = navigation.flag
+    console.log("Home navigation object ", navigation);
+    if (this.flag === "phone-login") {
+      this.token = navigation.token
+      console.log("Token from phone number :", this.token);
+    }
   }
 
   ionViewWillEnter() {
