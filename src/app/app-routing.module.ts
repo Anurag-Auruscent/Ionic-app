@@ -28,6 +28,10 @@ const routes: Routes = [
     loadChildren: () => import('./library-details/library-details.module').then(m => m.LibraryDetailsPageModule)
   },
   {
+    path: 'content-details',
+    loadChildren: () => import('./content-details/content-details.module').then(m => m.ContentDetailsPageModule)
+  },
+  {
     path: 'viewallnotifications',
     loadChildren: () => import('./viewallnotifications/viewallnotifications.module').then(m => m.ViewallnotificationsPageModule)
   },
@@ -46,7 +50,9 @@ const routes: Routes = [
   {
     path: 'user-verification',
     loadChildren: () => import('./user-verification/user-verification.module').then(m => m.UserVerificationPageModule)
-  }
+  },
+
+
 
 
 ];
