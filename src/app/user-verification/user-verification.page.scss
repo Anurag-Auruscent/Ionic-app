@@ -1,0 +1,53 @@
+.container {
+    padding: 15px;
+
+    h1 {
+        font-size: 32px;
+        font-weight: 800;
+        color: #000;
+        margin-top: 2rem;
+        letter-spacing: 0em;
+    }
+
+    h6 {
+        font-size: 16px;
+        color: #757575;
+        margin-top: 0;
+    }
+}
+
+.otpItem {
+    margin: 10px 0 10px 0;
+    --border-radius: 8px;
+    --background: #ffffff80;
+    border-radius: 8px;
+    color: #404040;
+}
+
+.form-fields{
+    margin-top: 89px;
+}
+
+.resend-otp-section{
+    display: flex;
+    padding: 10px 5px;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+}
+
+.resend-button{
+    color: #000;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.resend-button:disabled{
+    color: #757575;
+}
+
+.timer{
+    margin-block: 0em;
+    display: inline;
+}

@@ -1,18 +1,23 @@
 import { Injectable } from '@angular/core';
+import { StorageService } from './storage.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TokenService {
+  private readonly TOKEN_KEY = 'auth_token';
 
-  private token: string = '';
-  constructor() { }
+  constructor(private storageService: StorageService) { }
 
-  setToken(token: string): void {
-    this.token = token;
+  async setToken(token: string): Promise<void> {
+    await this.storageService.setItem(this.TOKEN_KEY, token);
   }
 
-  getToken(): string {
-    return this.token;
+  async getToken(): Promise<string | null> {
+    return await this.storageService.getItem<string>(this.TOKEN_KEY);
+  }
+
+  async clearToken(): Promise<void> {
+    await this.storageService.removeItem(this.TOKEN_KEY);
   }
 }

@@ -1,0 +1,93 @@
+.menu-nav-container{
+    position: relative;
+}
+
+.menu-nav {
+    // position: absolute;
+    display: flex;
+    justify-content: space-around;
+    background: #fff;
+    border-radius: 9.67px;
+    margin: 0px 9px;
+}
+
+.home-icon,
+.library-icon {
+    height: 19.35px;
+    width: 19.35px;
+    margin-bottom: 9.67px;
+    position: absolute;
+}
+
+.search-icon {
+    position: absolute;
+    width: 66px;
+    height: 55.1px;
+    left: 37.83px;
+    top: 10px;
+    transform: translateX(-50%);
+}
+
+.search-cover{
+    position: absolute;
+    background: #ffffff;
+    z-index: 1;
+    height: 76.4px;
+    width: 75.45px;
+    left: 40%;
+    top: -26px;
+    border-radius: 50%;
+}
+
+.search-icon-outer{
+    border: 8.75px solid #ffa65f;
+    position: absolute;
+    top: 7px;
+    left: 7px;
+    height: 60px;
+    width: 62px;
+    border-radius: 50%;
+}
+
+.tabs-outer{
+    position: relative;
+    margin-top: 60px;
+}
+
+.tab-button-outer{
+    position: relative;
+    background: #ffffff
+}
+
+#homeIcon{
+    top: 7px;
+    right: 100px;
+}
+
+#homeText{
+    position: absolute;
+    top: 21px;
+    right: 96px;
+}
+
+#libIcon{
+    right: 80px;
+    top: 6px;
+}
+
+#libraryText{
+    top: 20px;
+    position: absolute;
+    right: 67px;
+
+}
+
+.right-lib-button {
+    span {
+        left: 25px!important;
+    }
+}
+
+// .left-lib-button{
+//     left: 25px;
+// }

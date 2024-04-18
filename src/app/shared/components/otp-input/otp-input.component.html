@@ -1,0 +1,4 @@
+<div class="otp-container" #otpInput>
+  <input *ngFor="let digit of otp; let i = index" [value]="digit" (input)="onInputKeyPress($event, i)"
+    [attr.maxlength]="1" type="text" class="otp-digit" />
+</div>

@@ -9,6 +9,9 @@
 UserInterfaceState.xcuserstate
 $RECYCLE.BIN/
 
+src/environments/environment.ts
+src/environments/environment.prod.ts
+
 *.log
 log.txt
 
@@ -16,6 +19,8 @@ log.txt
 /.sourcemaps
 /.versions
 /coverage
+/environments/environment.ts
+/environments/environment.prod.ts
 
 # Ionic
 /.ionic

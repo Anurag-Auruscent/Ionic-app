@@ -1,0 +1,20 @@
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <ion-grid>
+      <h1>verify account</h1>
+      <h6>enter the otp received on your email or phone!</h6>
+    </ion-grid>
+    <ion-grid class="form-fields">
+      <ion-item class="otpItem" lines="none">
+        <app-text-input [value]="otp" [placeholder]="'enter otp'" [icon]="'/assets/Images/otp.svg'"
+          (textChange)="onTextChange($event)"></app-text-input>
+      </ion-item>
+      <div class="resend-otp-section">
+        <button class="resend-button" [disabled]="timerRunning" (click)="resendOtp()">resend OTP</button>
+        <p class="timer" *ngIf="showTimer">Time remaining: {{ minutes }}:{{ seconds }}</p>
+      </div>
+      <app-button class="btns" label="verify account" (clickEvent)="verifyOtp()"></app-button>
+      <!-- <app-otp-input [length]="6" (otpChange)="blockOtp($event)"></app-otp-input> -->
+    </ion-grid>
+  </div>
+</ion-content>
