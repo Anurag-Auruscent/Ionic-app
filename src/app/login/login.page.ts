@@ -5,7 +5,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx'; // Import InApp
 import axios from 'axios';
 import { ToastController } from '@ionic/angular';
 import { AuthService } from '../auth.service';
-import { environment } from '../../environments/environment';
+import { environment } from 'src/environments/environment';
 
 import { TokenService } from '../shared/services/token.service';
 

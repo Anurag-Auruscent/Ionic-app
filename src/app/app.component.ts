@@ -2,7 +2,7 @@ import { Component, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { App, URLOpenListenerEvent } from '@capacitor/app';
 import OneSignal from 'onesignal-cordova-plugin';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../src/environments/environment';
 
 @Component({
   selector: 'app-root',
