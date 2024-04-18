@@ -13,11 +13,14 @@ import axios from 'axios';
   styleUrls: ['./user-verification.page.scss'],
 })
 export class UserVerificationPage implements OnInit {
-
   otp!: string;
   receiverEmail!: any;
   flag!: string;
   phoneNumber!: string;
+  timerRunning: boolean = false;
+  showTimer: boolean = false;
+  minutes: string = '01';
+  seconds: string = '00';
 
   constructor(
     private router: Router,
@@ -45,8 +48,10 @@ export class UserVerificationPage implements OnInit {
     console.log("Phone : ", this.phoneNumber);
     console.log(this.flag);
     console.log(environment.token);
+  }
 
-    // 
+  ionViewWillEnter() {
+    this.startTimer()
   }
 
   onTextChange(text: string) {
@@ -150,5 +155,44 @@ export class UserVerificationPage implements OnInit {
         }
       });
     }
+  }
+
+  // resend otp api call
+  resendOtp() {
+    const payload = {
+      email: this.receiverEmail
+    }
+
+    this.registrationService.resendOtp(payload).subscribe({
+      next: (responseData) => {
+        console.log(responseData);
+      },
+      error: (error) => {
+        console.error('Error', error.status);
+      },
+    });
+
+    this.startTimer();
+  }
+
+  // start for timer
+  startTimer() {
+    this.timerRunning = true;
+    this.showTimer = true;
+    let duration = 60;
+    let timer = duration;
+    let interval = setInterval(() => {
+      let minutes = Math.floor(timer / 60);
+      let seconds = Math.floor(timer % 60);
+
+      this.minutes = minutes < 10 ? '0' + minutes : String(minutes);
+      this.seconds = seconds < 10 ? '0' + seconds : String(seconds);
+
+      if (--timer < 0) {
+        clearInterval(interval);
+        this.timerRunning = false;
+        this.showTimer = false;
+      }
+    }, 1000);
   }
 }

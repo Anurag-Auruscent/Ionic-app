@@ -4,12 +4,13 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button (click)="goBack()"></ion-back-button>
+      <!-- <ion-button color="primary" (click)="goBack()">{{"BACK" | translate}}</ion-button> -->
     </ion-buttons>
     <ion-title>
-      Home
+      {{"HOME" | translate}}
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button color="primary" (click)="createNewLibrary()">Create New</ion-button>
+      <ion-button color="primary" (click)="createNewLibrary()">{{"CREATE NEW" | translate}}</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -20,7 +21,7 @@
     <ion-row>
       <ion-col size="12">
         <ion-item>
-          <ion-input [(ngModel)]="urlInput" placeholder="Enter URL"></ion-input>
+          <ion-input [(ngModel)]="urlInput" placeholder="{{'ENTER URL' | translate}}"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -29,7 +30,7 @@
     <ion-row>
       <ion-col size="12">
         <ion-item>
-          <ion-label>Select Library</ion-label>
+          <ion-label>{{"SELECT LIBRARY" | translate}}</ion-label>
           <ion-select [(ngModel)]="selectedLibrary">
             <ion-select-option *ngFor="let library of allLibraries" [value]="library">
               {{ library.name }}
@@ -44,7 +45,7 @@
     <!-- Row 3: Submit Button -->
     <ion-row>
       <ion-col size="12">
-        <ion-button expand="full" (click)="submitUrl()">Submit URL</ion-button>
+        <ion-button expand="full" (click)="submitUrl()">{{"SUBMIT URL" | translate}}</ion-button>
       </ion-col>
     </ion-row>
 
@@ -68,13 +69,13 @@
 
     <ion-row>
       <ion-col size="12">
-        <ion-button expand="full" (click)="seeAllLibraries()">See All Libraries</ion-button>
+        <ion-button expand="full" (click)="seeAllLibraries()">{{"SEE ALL LIBRARIRES" | translate}}</ion-button>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col size-md="3" size-xs="12">
         <ion-item>
-          <ion-button (click)="gotoNotification()">Notifications</ion-button>
+          <ion-button (click)="gotoNotification()">{{"NOTIFICATIONS" | translate}}</ion-button>
         </ion-item>
       </ion-col>
     </ion-row>

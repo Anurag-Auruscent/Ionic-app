@@ -15,6 +15,8 @@ export class RegisterationService {
   verifyOtpUrlPhone = environment.verifyOtpUrlPhone
   addUserByPhoneUrl = environment.addUserByPhoneUrl
   // verifyOtpUrlPhoneLogin = environment.verifyOtpUrlPhoneLogin
+  // verifyOtpUrl = environment.verifyOtpUrl
+  resendOtpUrl = environment.resendOtpUrl
 
   constructor(
     private http: HttpClient
@@ -42,6 +44,11 @@ export class RegisterationService {
       console.log(environment.token)
       return this.http.post<any[]>(this.verifyOtpUrlPhone, payload);
     }
+  }
+
+  resendOtp(payload: any = {}): Observable<any[]> {
+    console.log(payload, '/n', this.resendOtpUrl);
+    return this.http.post<any[]>(this.resendOtpUrl, payload);
   }
 
   addUserByPhone(payload: any = {}): Observable<PhoneModelResponse> {

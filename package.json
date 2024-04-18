@@ -35,6 +35,8 @@
     "@ionic-native/in-app-browser": "^5.36.0",
     "@ionic/angular": "^7.0.0",
     "@ionic/storage-angular": "^4.0.0",
+    "@ngx-translate/core": "^15.0.0",
+    "@ngx-translate/http-loader": "^8.0.0",
     "axios": "^1.6.5",
     "cordova-plugin-inappbrowser": "^6.0.0",
     "cordova-sqlite-storage": "^6.1.0",
