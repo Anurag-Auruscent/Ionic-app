@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button (click)="goBack()"></ion-back-button>
@@ -8,23 +8,27 @@
       <ion-button (click)="editLibrary()"> Edit </ion-button>
     </ion-buttons>
   </ion-toolbar>
+</ion-header> -->
+
+<ion-header class="ion-no-border">
+  <app-searchfilternav></app-searchfilternav>
 </ion-header>
+<div class="header-section">
+  <img (click)="goBack()" src="/assets/Images/left-arrow.svg" alt="back page" />
 
-
-
+  <h4>{{libraryName}}</h4>
+</div>
 <ion-content [fullscreen]="true" class="ion-padding">
-
-
-  <div class="library-list" *ngIf="libraryData">
+  <div class="libraryList" *ngIf="libraryData">
     <div class="img-item" *ngFor="let contentItem of libraryData.content">
-      <ion-card class="library-item" (click)="viewLibraryDetails(contentItem)">
+      <a class="library-item" (click)="viewContentDetails(contentItem)">
         <ion-img [src]="contentItem.fileData" alt="Image"></ion-img>
         <p class="caption">{{contentItem.title | slice:0:20}}</p>
-      </ion-card>
+      </a>
     </div>
   </div>
   <!-- menu nav -->
-  <app-menu-nav></app-menu-nav>
+  
 
   <!-- Render ion-select dynamically -->
   <ion-select *ngIf="showEditOptions" #editSelect (ionChange)="editOptionSelected($event)"
@@ -34,7 +38,7 @@
     <!-- <ion-select-option value="deleteLibrary">Delete Library</ion-select-option> -->
   </ion-select>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed"
-    style="margin-bottom: 16px; margin-right: 16px; z-index: 100">
+    style="display: none;margin-bottom: 16px; margin-right: 16px; z-index: 100">
     <ion-fab-button color="danger" (click)="promptDeleteConfirmation()">
       <ion-icon name="trash"></ion-icon>
     </ion-fab-button>
@@ -42,9 +46,9 @@
   <!-- <app-menu-nav></app-menu-nav> -->
 </ion-content>
 
-<!-- <div class="page-footer">
+<ion-footer class="ion-no-border">
   <app-menu-nav></app-menu-nav>
-</div> -->
+</ion-footer>
 
 
 <!-- grid layout for contents -->

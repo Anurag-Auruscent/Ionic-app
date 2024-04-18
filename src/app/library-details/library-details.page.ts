@@ -330,7 +330,7 @@ export class LibraryDetailsPage implements OnInit {
     })
   }
 
-  viewLibraryDetails(content: Content) {
+  viewContentDetails(content: Content) {
     console.log(content);
     const navigationExtras: NavigationExtras = {
       state: {

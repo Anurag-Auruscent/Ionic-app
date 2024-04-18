@@ -38,7 +38,7 @@ export class ContentDetailsPage implements OnInit {
 
   generateTag(): void {
     const adjectives = ['Amazing', 'Future', 'Fantastic', 'Awesome', 'Marvelous', 'Wonderful'];
-    const nouns = ['Sports', 'Network', 'cors', 'technology', 'Solution', 'Service'];
+    const nouns = ['Movie', 'Network', 'cors', 'technology', 'Solution', 'Service'];
 
     const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
     const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];
