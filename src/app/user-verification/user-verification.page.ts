@@ -159,20 +159,34 @@ export class UserVerificationPage implements OnInit {
 
   // resend otp api call
   resendOtp() {
-    const payload = {
-      email: this.receiverEmail
+    console.log(this.flag);
+    if (this.flag === "phone-login") {
+      const payload = {
+        phoneNo: this.phoneNumber
+      }
+      this.registrationService.resendOtpForPhone(payload).subscribe({
+        next: (responseData) => {
+          console.log(responseData);
+        },
+        error: (error) => {
+          console.error("Error", error);
+        }
+      })
+    } else if (this.flag === "email-login") {
+      const payload = {
+        email: this.receiverEmail
+      }
+      this.registrationService.resendOtp(payload).subscribe({
+        next: (responseData) => {
+          console.log(responseData);
+        },
+        error: (error) => {
+          console.error('Error', error.status);
+        },
+      });
+
+      this.startTimer();
     }
-
-    this.registrationService.resendOtp(payload).subscribe({
-      next: (responseData) => {
-        console.log(responseData);
-      },
-      error: (error) => {
-        console.error('Error', error.status);
-      },
-    });
-
-    this.startTimer();
   }
 
   // start for timer

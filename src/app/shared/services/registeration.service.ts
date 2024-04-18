@@ -51,6 +51,11 @@ export class RegisterationService {
     return this.http.post<any[]>(this.resendOtpUrl, payload);
   }
 
+  resendOtpForPhone(payload: any = {}): Observable<any[]> {
+    console.log(payload, '/n', this.resendOtpUrl);
+    return this.http.post<any[]>(this.resendOtpUrl, payload);
+  }
+
   addUserByPhone(payload: any = {}): Observable<PhoneModelResponse> {
     console.log(payload, '/n', this.addUserURL);
     console.log(environment.token);
