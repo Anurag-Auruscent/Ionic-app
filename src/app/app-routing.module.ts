@@ -46,13 +46,14 @@ const routes: Routes = [
   {
     path: 'user-verification',
     loadChildren: () => import('./user-verification/user-verification.module').then(m => m.UserVerificationPageModule)
-  },  {
+  },
+  {
     path: 'get-email',
-    loadChildren: () => import('./get-email/get-email.module').then( m => m.GetEmailPageModule)
+    loadChildren: () => import('./get-email/get-email.module').then(m => m.GetEmailPageModule)
   },
   {
     path: 'reset-password',
-    loadChildren: () => import('./reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
+    loadChildren: () => import('./reset-password/reset-password.module').then(m => m.ResetPasswordPageModule)
   }
 
 

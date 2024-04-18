@@ -1,0 +1,19 @@
+.search-nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.filter-icon{
+    width: 30px;
+    height: 30px;
+}
+
+.searchItem{
+    width: 85%;
+    border-radius: 8px;
+}

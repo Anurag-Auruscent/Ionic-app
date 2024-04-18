@@ -10,6 +10,8 @@ import { IonicModule } from '@ionic/angular';
 import { MobileInputComponent } from './components/MobileInput/mobile-input/mobile-input.component';
 import { TextInputComponent } from './components/textInput/text-input/text-input.component';
 import { OtpInputComponent } from './components/otp-input/otp-input.component';
+import { SearchfilternavPage } from './components/searchfilternav/searchfilternav.page';
+import { MenuNavComponent } from './components/menu-nav/menu-nav.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { OtpInputComponent } from './components/otp-input/otp-input.component';
     ButtonSocialComponent,
     MobileInputComponent,
     TextInputComponent,
-    OtpInputComponent
+    OtpInputComponent,
+    SearchfilternavPage,
+    MenuNavComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +44,9 @@ import { OtpInputComponent } from './components/otp-input/otp-input.component';
     FormsModule,
     MobileInputComponent,
     TextInputComponent,
-    OtpInputComponent
+    OtpInputComponent,
+    SearchfilternavPage,
+    MenuNavComponent
   ]
 })
 export class SharedModule { }

@@ -18,7 +18,9 @@ export class LibraryDetailsPage implements OnInit {
   editOption: string = '';
   editedValue: string = '';
   showEditOptions = false;
-
+  link!: string;
+  linkMsg: boolean = false;
+  
   constructor(
     private route: ActivatedRoute,
     private libraryService: LibraryService,
@@ -317,11 +319,10 @@ export class LibraryDetailsPage implements OnInit {
 
   // share link
   handleShare(id: string) {
-    console.log(id);
     this.libraryService.getLibraryLink(id).subscribe({
       next: (responseData) => {
-        console.log(responseData); //TODO : the API call was unavailable for me, please check the response data and pick out the link accordingly
-        const link = responseData.link // @TODO : according to this data, show the link int the library details page
+        this.link = responseData.message;
+        this.linkMsg = !this.linkMsg;
       },
       error: (error) => {
         console.error('Error', error);

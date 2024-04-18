@@ -19,10 +19,10 @@ import { TokenService } from '../shared/services/token.service';
   styleUrls: ['./registration.page.scss'],
 })
 export class RegistrationPage implements OnInit {
-  firstName: string = "Anurag";
-  lastName: string = "Rawat";
-  userEmail: string = "anuragrawat469@gmail.com";
-  userPassword: string = "anurag@123";
+  firstName: string = "";
+  lastName: string = "";
+  userEmail: string = "";
+  userPassword: string = "";
   userNumber!: string
   selectedSegment: string = 'email';
   code_challenge!: any;

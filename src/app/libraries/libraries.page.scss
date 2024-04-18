@@ -1,0 +1,59 @@
+.page-title {
+    font-family: Inter;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 14px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #FF8727;
+    position: absolute;
+    left: 22px;
+}
+
+.library-container {
+    display: grid;
+    grid-template-columns: 50% auto;
+    justify-content: center;
+}
+
+.library-item {
+    width: 185px;
+    height: 88px;
+    position: relative;
+    border-radius: 4.49px;
+    box-shadow: 0px 6px 10px 0px #00000021;
+}
+
+.card-wrapper {
+    position: relative;
+    height: 105px;
+}
+
+.library-title {
+    position: absolute;
+    top: 97px;
+    left: 18px;
+    font-size: 8px;
+    font-weight: 400;
+    letter-spacing: 0em;
+    color: #AD8865;
+}
+
+.library-row {
+    display: flex;
+}
+
+ion-footer{
+    position: fixed;
+    bottom: 0;
+}
+
+ion-header{
+    background: #f0d6bd;
+    height: 67px;
+    padding-bottom: 1px;
+}
+
+ion-footer{
+    margin-bottom: 5px;
+}
