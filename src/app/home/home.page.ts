@@ -48,7 +48,10 @@ export class HomePage implements OnInit {
     console.log("Home navigation object ", navigation);
     if (this.flag === "phone-login") {
       this.token = navigation.token
+      this.tokenService.setToken(this.token);
       console.log("Token from phone number :", this.token);
+    } else {
+      console.log("Token is already set");
     }
   }
 
@@ -255,8 +258,8 @@ export class HomePage implements OnInit {
   async goBack() {
     // Check if the authentication token exists
     if (await this.tokenService.getToken()) {
-      this.router.navigate(['/home']);
       this.toastService.presentToast("can't go back with an active auth_token", 3000)
+      this.router.navigate(['home']);
     } else {
       // If token doesn't exist, navigate to the login page
       this.router.navigate(['/login']);

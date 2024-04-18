@@ -97,18 +97,15 @@ export class RegistrationPage implements OnInit {
   }
 
   async registerUser() {
-    const token = await this.fetchAccessToken();
-    if (token) {
-      console.log("Token is set");
-    } else {
-      console.error("Failed to fetch token");
-      this.ts.presentToast("Failed to fetch token", 3000);
-      return;
-    }
-
-
-
     if (this.selectedSegment === 'email') {
+      const token = await this.fetchAccessToken();
+      if (token) {
+        console.log("Token is set");
+      } else {
+        console.error("Failed to fetch token");
+        this.ts.presentToast("Failed to fetch token", 3000);
+        return;
+      }
       this.userNumber = '';
       if (!this.firstName || !this.lastName) {
         this.ts.presentToast('First Name or Last Name is required', 2000);

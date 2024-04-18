@@ -42,7 +42,7 @@ export class LoginPage {
   user = null
   selectedSegment: any = 'email';
   loginForm!: FormGroup;
-  userNumber: string = '9205656448'
+  userNumber: string = '';
   areCredentialsWrong: boolean = false;
   code!: string | null;
   code_challenge!: any;
@@ -305,8 +305,16 @@ export class LoginPage {
             console.error('Decoded token sub is undefined');
           }
           // Navigate to a different page after successful login
+          const navigationExtras: NavigationExtras = {
+            state: {
+              email: this.userEmail,
+              phoneNumber: "",
+              token: "",
+              flag: "email-login"
+            }
+          };
           this.router.navigate(['/login', { skipLocationChange: true }]);
-          this.router.navigate(['/home']);
+          this.router.navigate(['/home'], navigationExtras);
         })
         .catch((error) => {
           // Handle authentication failure

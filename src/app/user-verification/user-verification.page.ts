@@ -111,10 +111,12 @@ export class UserVerificationPage implements OnInit {
           // const decodedToken = jwtDecode(response.data.access_token);
           const navigationExtras: NavigationExtras = {
             state: {
-              token: response.data.access_token,
+              token: response.data.accessToken,
               flag: "phone-login"
             }
           };
+          console.log("Beofre calling home ", navigationExtras);
+
           this.router.navigate(['/home'], navigationExtras);
         })
         .catch((error) => {
